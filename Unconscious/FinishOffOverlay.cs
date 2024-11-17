@@ -8,6 +8,9 @@ namespace Unconscious
     public class FinishOffOverlay : GuiDialog
     {
         private readonly ShowPlayerFinishOffScreenPacket packet;
+        private bool isButtonEnabled = false;
+        private long callbackId;
+        private GuiComposer composer;
         public FinishOffOverlay(ICoreClientAPI capi, ShowPlayerFinishOffScreenPacket packet) : base(capi)
         {
             this.packet = packet;
@@ -46,7 +49,7 @@ namespace Unconscious
 
             string randomQuote = GetRandomQuote(finishingQuotes);
 
-            SingleComposer = capi.Gui
+            composer = SingleComposer = capi.Gui
              .CreateCompo("blackscreen", bounds)
              .AddStaticText(
                 $"\"{randomQuote}\"",
@@ -55,9 +58,8 @@ namespace Unconscious
                 "quoteText"
             )
               .AddButton("Spare him", SpareHim, buttonSpareBound)
-              .AddButton("Finish it", KillHim, buttonKillBound)
-
-             .Compose();
+              .AddButton("Finish it", KillHim, buttonKillBound, EnumButtonStyle.Normal, "killButton")
+              .Compose();
         }
 
         public bool KillHim()
@@ -87,6 +89,28 @@ namespace Unconscious
         public override bool TryClose()
         {
             return base.TryClose();
+        }
+
+        public override bool TryOpen()
+        {
+            if (base.TryOpen())
+            {
+                isButtonEnabled = false;
+                composer.GetButton("killButton").Enabled = false;
+                composer.ReCompose();
+                // Start a timer to enable the button after 3 seconds
+                callbackId = capi.World.RegisterCallback((dt) =>
+                {
+                    isButtonEnabled = true;
+                    composer.GetButton("killButton").Enabled = true;
+                    composer.ReCompose();
+
+                    capi.World.UnregisterCallback(callbackId);
+                }, 3000);
+
+                return true;
+            }
+            return false;
         }
     }
 }

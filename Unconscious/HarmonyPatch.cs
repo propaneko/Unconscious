@@ -23,6 +23,15 @@ namespace Unconscious
 
                     float currentHealth = health.GetFloat("currenthealth");
                     float resultingHealth = currentHealth - damage;
+                   
+                    ShowPlayerFinishOffScreenPacket closeWindowPacket = new()
+                    {
+                        attackerPlayerUUID = serverPlayer.PlayerUID,
+                        victimPlayerUUID = serverPlayer.PlayerUID,
+                        damageType = damageSource.Type,
+                        shouldShow = false
+                    };
+                    sapi.Network.GetChannel("unconscious").SendPacket(closeWindowPacket, serverPlayer);
 
                     if (resultingHealth <= 1 && !unconscious && serverPlayer.Entity.Alive)
                     {
@@ -32,8 +41,6 @@ namespace Unconscious
                             damageSource.Type == EnumDamageType.SlashingAttack ||
                             damageSource.Type == EnumDamageType.Crushing)
                         {
-                            sapi.Logger.Event("Unconscious!");
-
                             ShowUnconciousScreen responsePacket = new()
                             {
                                 shouldShow = true,
@@ -48,7 +55,7 @@ namespace Unconscious
 
                             serverPlayer.Entity.TryStopHandAction(forceStop: true, EnumItemUseCancelReason.Death);
                             serverPlayer.Entity.AnimManager.StartAnimation("sleep");
-
+                            //serverPlayer.Entity.AnimManager.StartAnimation("sitflooridle");
                             return false;
                         }
                     }
@@ -69,7 +76,8 @@ namespace Unconscious
                                 {
                                     attackerPlayerUUID = attackingServerPlayer.PlayerUID,
                                     victimPlayerUUID = serverPlayer.PlayerUID,
-                                    damageType = damageSource.Type
+                                    damageType = damageSource.Type,
+                                    shouldShow = true
                                 };
                                 sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, attackingServerPlayer);
 

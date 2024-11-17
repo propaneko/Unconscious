@@ -1,17 +1,12 @@
-﻿using CompactExifLib;
-using HarmonyLib;
+﻿using HarmonyLib;
 using NoticeBoard.Packets;
 using System.Linq;
-using System.Numerics;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
-using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.API.Util;
-using Vintagestory.GameContent;
-using Vintagestory.Server;
 
 namespace Unconscious
 {
@@ -23,7 +18,6 @@ namespace Unconscious
         static ICoreClientAPI capi;
         private BlackScreenOverlay dialog = null;
         private FinishOffOverlay dialogFinishOff = null;
-
 
         public UnconsciousModSystem()
         {
@@ -40,8 +34,6 @@ namespace Unconscious
             return capi;
         }
 
-        // Called on server and client
-        // Useful for registering block/entity classes on both sides
         public override void Start(ICoreAPI api)
         {
             harmony = new Harmony("unconscious");
@@ -87,6 +79,7 @@ namespace Unconscious
             {
                 if (entity.Entity is EntityPlayer player)
                 {
+                    ApplyUnconsciousOnJoin(player);
                     if (!player.HasBehavior("reviveBehavior"))
                     {
                         UnconsciousModSystem.getSAPI().Logger.Event("player got revive behavior");
@@ -191,6 +184,7 @@ namespace Unconscious
                        StatusMessage = Lang.Get($"Something went wrong. Maybe player doesnt exist?"),
                    };
                });
+
         }
 
         public override void StartClientSide(ICoreClientAPI api)
@@ -200,19 +194,21 @@ namespace Unconscious
 
             capi.Network.GetChannel("unconscious").SetMessageHandler<ShowUnconciousScreen>(OnClientMessagesReceived);
             capi.Network.GetChannel("unconscious").SetMessageHandler<ShowPlayerFinishOffScreenPacket>(OnClientFinishedOffScreenReceived);
-
-            capi.Event.PlayerEntitySpawn += ApplyUnconsciousOnJoin;
         }
 
-        private void ApplyUnconsciousOnJoin(IClientPlayer byPlayer)
+        private void ApplyUnconsciousOnJoin(EntityPlayer player)
         {
-            dialog = new BlackScreenOverlay(capi, 300);
-            var isUnconscious = byPlayer.Entity.IsUnconscious();
-            UnconsciousModSystem.getCAPI().Logger.Event(isUnconscious.ToString());
-            if (isUnconscious)
+
+            IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
+
+            if (player.IsUnconscious())
             {
-                dialog.TryOpen();
-                dialog.StartTimer();
+                ShowUnconciousScreen responsePacket = new()
+                {
+                    shouldShow = true,
+                };
+
+                sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, serverPlayer);
             }
         }
 
@@ -239,24 +235,27 @@ namespace Unconscious
             IServerPlayer attackingServerPlayer = sapi.World.PlayerByUid(packet.attackerPlayerUUID) as IServerPlayer;
             IServerPlayer victimServerPlayer = sapi.World.PlayerByUid(packet.victimPlayerUUID) as IServerPlayer;
 
-
-            victimServerPlayer.Entity.SetUnconscious(false);
-            victimServerPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
-
-            ShowUnconciousScreen responsePacket = new()
+            if (victimServerPlayer.Entity.IsUnconscious())
             {
-                shouldShow = false,
-            };
+                victimServerPlayer.Entity.SetUnconscious(false);
+                victimServerPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
 
-            sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, victimServerPlayer);
 
-            victimServerPlayer.Entity.Die(EnumDespawnReason.Death, new DamageSource
-            {
-                Type = packet.damageType, // Set damage type
-                Source = EnumDamageSource.Entity,
-                SourceEntity = attackingServerPlayer.Entity,
-                CauseEntity = attackingServerPlayer.Entity
-            });
+                ShowUnconciousScreen responsePacket = new()
+                {
+                    shouldShow = false,
+                };
+
+                sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, victimServerPlayer);
+
+                victimServerPlayer.Entity.Die(EnumDespawnReason.Death, new DamageSource
+                {
+                    Type = packet.damageType, // Set damage type
+                    Source = EnumDamageSource.Entity,
+                    SourceEntity = attackingServerPlayer.Entity,
+                    CauseEntity = attackingServerPlayer.Entity
+                });
+            }
         }
 
         private void HandleUnsconscious(bool isUnconscious)
@@ -290,10 +289,17 @@ namespace Unconscious
 
         private void OnClientFinishedOffScreenReceived(ShowPlayerFinishOffScreenPacket packet)
         {
-            if (dialogFinishOff == null || !dialogFinishOff.IsOpened())
+            if (packet.shouldShow)
             {
-                dialogFinishOff = new FinishOffOverlay(capi, sapi, packet);
+                dialogFinishOff = new FinishOffOverlay(capi, packet);
                 dialogFinishOff.TryOpen();
+                return;
+            }
+
+            if (!packet.shouldShow && dialogFinishOff != null)
+            {
+                dialogFinishOff.TryClose();
+                dialogFinishOff = null;
                 return;
             }
         }

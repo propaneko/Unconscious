@@ -22,10 +22,12 @@ namespace NoticeBoard.Packets
     public class ShowPlayerFinishOffScreenPacket
     {
         [ProtoMember(1)]
-        public string attackerPlayerUUID { get; set; }
+        public bool shouldShow { get; set; }
         [ProtoMember(2)]
-        public string victimPlayerUUID { get; set; }
+        public string attackerPlayerUUID { get; set; }
         [ProtoMember(3)]
+        public string victimPlayerUUID { get; set; }
+        [ProtoMember(4)]
         public EnumDamageType damageType { get; set; }
     }
 

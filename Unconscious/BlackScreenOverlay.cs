@@ -39,14 +39,14 @@ namespace Unconscious
 
             string[] quotes = new string[]
             {
-                "\"Your vision fades to black, the world spinning into a distant hum. You feel the cold embrace of the earth beneath you and the weight of your own weakness. Time slips away, and you are left adrift in the void—helpless, yet not entirely lost. Will you rise again, or remain a shadow in this unforgiving land?\"",
-                "\"Darkness wraps around you like a heavy shroud. The sounds of the world grow distant, muffled as if submerged in deep waters. Your body feels heavy, unresponsive, yet faint whispers of life linger within. Is this the end... or merely a fleeting pause in your journey?\"",
-                "\"A numb stillness overtakes you, as though the world itself has turned its back. Shadows dance at the edge of your awareness, teasing you with glimpses of light that feel just out of reach. The faint memory of warmth lingers, a bittersweet echo of life slipping further from your grasp.\"",
-                "\"The weight of the earth presses against you, pinning you to the cold, unyielding ground. Time drifts, disjointed, as you struggle to hold onto fleeting moments of clarity. The world feels impossibly distant, its sounds muffled by the thick fog of unconsciousness.\"",
-                "\"A void envelopes you, vast and unending, swallowing every trace of your senses. You strain to grasp onto anything familiar, but all that remains is a deep, aching silence that threatens to pull you deeper into its embrace.\"",
-                "\"Your limbs are heavy, as if bound by invisible chains. The air is thick, each breath a struggle against the encroaching darkness. Yet somewhere in the abyss, a faint light flickers—a fragile beacon of hope.\"",
-                "\"The ground beneath you feels both solid and unreal, as though you are caught between two worlds. Distant echoes of life reach your ears, blurred and distorted, as the darkness teases you with its quiet, suffocating allure.\"",
-                "\"The once-familiar rhythm of your heartbeat grows faint, each beat a whisper in the silence. Shadows close in, their cold fingers brushing against your skin as your thoughts scatter like leaves in the wind.\""
+                "Your vision fades to black, the world spinning into a distant hum. You feel the cold embrace of the earth beneath you and the weight of your own weakness. Time slips away, and you are left adrift in the void—helpless, yet not entirely lost. Will you rise again, or remain a shadow in this unforgiving land?",
+                "Darkness wraps around you like a heavy shroud. The sounds of the world grow distant, muffled as if submerged in deep waters. Your body feels heavy, unresponsive, yet faint whispers of life linger within. Is this the end... or merely a fleeting pause in your journey?",
+                "A numb stillness overtakes you, as though the world itself has turned its back. Shadows dance at the edge of your awareness, teasing you with glimpses of light that feel just out of reach. The faint memory of warmth lingers, a bittersweet echo of life slipping further from your grasp.",
+                "The weight of the earth presses against you, pinning you to the cold, unyielding ground. Time drifts, disjointed, as you struggle to hold onto fleeting moments of clarity. The world feels impossibly distant, its sounds muffled by the thick fog of unconsciousness.",
+                "A void envelopes you, vast and unending, swallowing every trace of your senses. You strain to grasp onto anything familiar, but all that remains is a deep, aching silence that threatens to pull you deeper into its embrace.",
+                "Your limbs are heavy, as if bound by invisible chains. The air is thick, each breath a struggle against the encroaching darkness. Yet somewhere in the abyss, a faint light flickers—a fragile beacon of hope.",
+                "The ground beneath you feels both solid and unreal, as though you are caught between two worlds. Distant echoes of life reach your ears, blurred and distorted, as the darkness teases you with its quiet, suffocating allure.",
+                "The once-familiar rhythm of your heartbeat grows faint, each beat a whisper in the silence. Shadows close in, their cold fingers brushing against your skin as your thoughts scatter like leaves in the wind."
             };
 
             string randomQuote = GetRandomQuote(quotes);
@@ -66,7 +66,7 @@ namespace Unconscious
                 textBounds,
                 "timerText"
             )
-              .AddButton("Commit sudoku", CommitSudoku, buttonBound)
+              .AddButton("End the suffering", CommitSudoku, buttonBound)
              .Compose();
 
 
@@ -77,7 +77,7 @@ namespace Unconscious
         {
             isMovementDisabled = true;
             updateTimerId = capi.Event.RegisterGameTickListener(UpdateTimer, 1000); // Tick every second
-            disablePlayerMovementId = capi.Event.RegisterGameTickListener(DisablePlayerMovement, 20); // Enforce movement disable every tick
+            disablePlayerMovementId = capi.Event.RegisterGameTickListener(DisablePlayerMovement, 1); // Enforce movement disable every tick
         }
 
         public bool CommitSudoku()
@@ -152,18 +152,25 @@ namespace Unconscious
                 controls.Right = false;
                 controls.Jump = false;
                 controls.Sneak = false;
+                controls.Up = false;
+                controls.Down = false;
+
 
                 // Completely halt motion
                 player.Entity.Pos.Motion.Set(0, 0, 0);
                 player.Entity.ServerPos.Motion.Set(0, 0, 0);
-
+                player.Entity.LocalEyePos.Set(0, 0.5, 0);
+                player.Entity.StopAnimation("walk");
+                player.Entity.StopAnimation("walkright");
+                player.Entity.StopAnimation("walkleft");
+                player.Entity.StopAnimation("walk");
+                player.Entity.StopAnimation("sneakwalk");
             }
         }
 
 
         public override bool TryClose()
         {
-            // Prevent closing with Esc while unconscious
             if (remainingTime > 0) return false;
 
             return base.TryClose();

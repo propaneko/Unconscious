@@ -17,19 +17,5 @@ namespace Unconscious
             // Retrieve the "unconscious" attribute
             return player.WatchedAttributes.GetBool("unconscious", false);
         }
-
-        public static void PickUpPlayer(this EntityPlayer player)
-        {
-            // Retrieve the "unconscious" attribute
-           
-            player.WatchedAttributes.SetBool("unconscious", false);
-            player.WatchedAttributes.MarkPathDirty("unconscious");
-
-            var health = player.WatchedAttributes.GetTreeAttribute("health");
-            var maxHealth = health.GetFloat("maxHealth");
-            health.SetFloat("currenthealth", 5);
-
-            PacketMethods.SendShowUnconciousScreenPacket(false, player as IServerPlayer);
-        }
     }
 }
