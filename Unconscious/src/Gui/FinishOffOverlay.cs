@@ -1,6 +1,7 @@
 ﻿using System;
 using Unconscious.src.Packets;
 using Vintagestory.API.Client;
+using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
 namespace Unconscious.src.Gui
@@ -40,11 +41,11 @@ namespace Unconscious.src.Gui
 
             string[] finishingQuotes = new string[]
             {
-                "Your opponent lies before you, battered and broken. Their breaths come in shallow gasps, eyes flickering with the last embers of defiance. The choice is yours: deliver the final blow, or let the fates decide their end.",
-                "You tower over your foe, their strength spent and their will shattered. The weight of your next action presses heavily on your soul. Mercy or finality—your decision will carve itself into the annals of this world.",
-                "The clash of battle has left your opponent at your mercy. Their blood stains the ground, their body trembling in defeat. In this fleeting moment, you hold the power of life and death in your hands.",
-                "Your adversary kneels before you, the fire in their eyes now a dying ember. Time seems to slow as the final blow hangs in the balance. Will you strike true, or leave them to their fate?",
-                "The battlefield grows silent, save for the labored breathing of the one who fell before you. The weight of the moment bears down upon you—this is the turning point where paths diverge, and destinies are written in blood."
+                 Lang.Get("unconscious:finishing-quote-1"),
+                 Lang.Get("unconscious:finishing-quote-2"),
+                 Lang.Get("unconscious:finishing-quote-3"),
+                 Lang.Get("unconscious:finishing-quote-4"),
+                 Lang.Get("unconscious:finishing-quote-5"),
             };
 
             string randomQuote = GetRandomQuote(finishingQuotes);
@@ -57,8 +58,8 @@ namespace Unconscious.src.Gui
                 quoteTextBounds,
                 "quoteText"
             )
-              .AddButton("Spare him", SpareHim, buttonSpareBound)
-              .AddButton("Finish it", KillHim, buttonKillBound, EnumButtonStyle.Normal, "killButton")
+              .AddButton(Lang.Get("unconscious:finishing-button-spare"), SpareHim, buttonSpareBound)
+              .AddButton(Lang.Get("unconscious:finishing-button-kill"), KillHim, buttonKillBound, EnumButtonStyle.Normal, "killButton")
               .Compose();
         }
 
@@ -107,7 +108,7 @@ namespace Unconscious.src.Gui
                     composer.ReCompose();
 
                     capi.World.UnregisterCallback(callbackId);
-                }, packet.finishTimer);
+                }, (int)(packet.finishTimer * 1000));
 
                 return true;
             }

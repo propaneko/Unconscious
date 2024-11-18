@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Unconscious.src.Packets;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
@@ -79,7 +80,8 @@ namespace Unconscious.src.Player
                 string text = "SpeedCycle";
                 EntityPlayer entityPlayer = entity as EntityPlayer;
                 DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-                defaultInterpolatedStringHandler.AppendLiteral("Pickin up... ");
+                
+                defaultInterpolatedStringHandler.AppendLiteral($"{Lang.Get("unconscious:pickingup-progress")}");
                 defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdTime * 10f));
                 defaultInterpolatedStringHandler.AppendLiteral("%");
 
@@ -101,7 +103,7 @@ namespace Unconscious.src.Player
 
             string text = "ReviveCycle";
             DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-            defaultInterpolatedStringHandler.AppendLiteral("Canceled pickin up!");
+            defaultInterpolatedStringHandler.AppendLiteral(Lang.Get("unconscious:pickingup-cancel"));
             sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
         }
 
@@ -110,7 +112,7 @@ namespace Unconscious.src.Player
             var player = entity as EntityPlayer;
             string text = "ReviveCycle";
             DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-            defaultInterpolatedStringHandler.AppendLiteral($"{player.Player.PlayerName} picked up!");
+            defaultInterpolatedStringHandler.AppendLiteral($"{player.Player.PlayerName} ${Lang.Get("unconscious:pickingup-success")}");
             sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
 
             player.Revive();

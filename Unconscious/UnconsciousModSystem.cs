@@ -98,131 +98,130 @@ namespace Unconscious
                 sapi.Network.GetChannel("unconscious").SetMessageHandler<SendUnconsciousPacket>(OnServerMessagesReceived);
                 sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerDeath>(OnPlayerDeathPacket);
                 sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerKill>(OnPlayerKill);
-            });
 
-            sapi.Event.PlayerRespawn += (entity) =>
-            {
-                if (entity.Entity is EntityPlayer player)
+                sapi.Event.PlayerRespawn += (entity) =>
                 {
-                    if (!player.HasBehavior("reviveBehavior"))
+                    if (entity.Entity is EntityPlayer player)
                     {
-                        UnconsciousModSystem.getSAPI().Logger.Event("player got revive behavior");
-                        player.AddBehavior(new PlayerBehavior(player));
+                        if (!player.HasBehavior("reviveBehavior"))
+                        {
+                            UnconsciousModSystem.getSAPI().Logger.Event("player got revive behavior");
+                            player.AddBehavior(new PlayerBehavior(player));
+                        }
                     }
-                }
-            };
+                };
 
-            sapi.Event.PlayerJoin += (entity) =>
-            {
-                if (entity.Entity is EntityPlayer player)
+                sapi.Event.PlayerJoin += (entity) =>
                 {
-                    ApplyUnconsciousOnJoin(player);
-                    if (!player.HasBehavior("reviveBehavior"))
+                    if (entity.Entity is EntityPlayer player)
                     {
-                        UnconsciousModSystem.getSAPI().Logger.Event("player got revive behavior");
-                        player.AddBehavior(new PlayerBehavior(player));
+                        ApplyUnconsciousOnJoin(player);
+                        if (!player.HasBehavior("reviveBehavior"))
+                        {
+                            UnconsciousModSystem.getSAPI().Logger.Event("player got revive behavior");
+                            player.AddBehavior(new PlayerBehavior(player));
+                        }
                     }
-                }
-            };
+                };
 
-            sapi.ChatCommands.GetOrCreate("unconscious")
-               .RequiresPrivilege("ban")
-               .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
-               .WithArgs(new StringArgParser("player", true))
-               .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
-               .HandleWith((TextCommandCallingArgs args) =>
-               {
-                   var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
-                   if (targetPlayer != null)
+                sapi.ChatCommands.GetOrCreate("unconscious")
+                   .RequiresPrivilege("ban")
+                   .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
+                   .WithArgs(new StringArgParser("player", true))
+                   .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
+                   .HandleWith((TextCommandCallingArgs args) =>
                    {
-                       if (targetPlayer.Entity.IsUnconscious())
+                       var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
+                       if (targetPlayer != null)
                        {
-                           //PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
-                           return new TextCommandResult
+                           if (targetPlayer.Entity.IsUnconscious())
                            {
-                               Status = EnumCommandStatus.Error,
-                               StatusMessage = Lang.Get($"Player is already unconscious!"),
-                           };
-                       }
+                               //PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
+                               return new TextCommandResult
+                               {
+                                   Status = EnumCommandStatus.Error,
+                                   StatusMessage = Lang.Get($"Player is already unconscious!"),
+                               };
+                           }
 
-                       targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Clear();
-                       targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Foreach((code => targetPlayer.Entity.AnimManager.StopAnimation(code.Value.ToString())));
-                       targetPlayer.Entity.AnimManager.StartAnimation("sleep");
+                           targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Clear();
+                           targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Foreach((code => targetPlayer.Entity.AnimManager.StopAnimation(code.Value.ToString())));
+                           targetPlayer.Entity.AnimManager.StartAnimation("sleep");
 
-                       targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", true);
-                       targetPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
-                       var health = targetPlayer.Entity.WatchedAttributes.GetTreeAttribute("health");
-                       health.SetFloat("currenthealth", 1);
-                       targetPlayer.Entity.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
-
-                       PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
-
-                       return new TextCommandResult
-                       {
-                           Status = EnumCommandStatus.Success,
-                           StatusMessage = Lang.Get($"{targetPlayer.PlayerName} is now unconscious."),
-                       };
-                   }
-
-                   return new TextCommandResult
-                   {
-                       Status = EnumCommandStatus.Error,
-                       StatusMessage = Lang.Get($"Something went wrong. Maybe player doesnt exist?"),
-                   };
-               });
-
-            sapi.ChatCommands.GetOrCreate("revive")
-               .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
-               .WithArgs(new StringArgParser("player", true))
-               .RequiresPrivilege(UnconsciousModSystem.getConfig().ReviveCmdPrivilege)
-               .HandleWith((TextCommandCallingArgs args) =>
-               {
-                   var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
-
-                   if( targetPlayer.PlayerUID == args.Caller.Player.PlayerUID && !targetPlayer.HasPrivilege("ban"))
-                   {
-                       return new TextCommandResult
-                       {
-                           Status = EnumCommandStatus.Success,
-                           StatusMessage = Lang.Get($"You cant revive yourself!."),
-                       };
-                   }
-
-                   if (targetPlayer != null)
-                   {
-                       var health = targetPlayer.Entity.WatchedAttributes.GetTreeAttribute("health");
-
-                       if (targetPlayer.Entity.IsUnconscious())
-                       {
-                           targetPlayer.Entity.Revive();
-                           targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", false);
+                           targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", true);
                            targetPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
-                           var maxHealth = health.GetFloat("maxhealth");
-                           health.SetFloat("currenthealth", maxHealth * UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
+                           var health = targetPlayer.Entity.WatchedAttributes.GetTreeAttribute("health");
+                           health.SetFloat("currenthealth", 1);
+                           targetPlayer.Entity.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
 
-                           PacketMethods.SendShowUnconciousScreenPacket(false, 0, targetPlayer as IServerPlayer);
+                           PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
 
                            return new TextCommandResult
                            {
                                Status = EnumCommandStatus.Success,
-                               StatusMessage = Lang.Get($"Player picked up!"),
+                               StatusMessage = Lang.Get($"{targetPlayer.PlayerName} is now unconscious."),
                            };
                        }
 
                        return new TextCommandResult
                        {
                            Status = EnumCommandStatus.Error,
-                           StatusMessage = Lang.Get($"{targetPlayer.PlayerName} is not unconscious."),
+                           StatusMessage = Lang.Get($"Something went wrong. Maybe player doesnt exist?"),
                        };
-                   }
+                   });
 
-                   return new TextCommandResult
+                sapi.ChatCommands.GetOrCreate("revive")
+                   .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
+                   .WithArgs(new StringArgParser("player", true))
+                   .RequiresPrivilege(UnconsciousModSystem.getConfig().ReviveCmdPrivilege)
+                   .HandleWith((TextCommandCallingArgs args) =>
                    {
-                       Status = EnumCommandStatus.Error,
-                       StatusMessage = Lang.Get($"Something went wrong. Maybe player doesnt exist?"),
-                   };
-               });
+                       var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
 
+                       if (targetPlayer.PlayerUID == args.Caller.Player.PlayerUID && !targetPlayer.HasPrivilege("ban"))
+                       {
+                           return new TextCommandResult
+                           {
+                               Status = EnumCommandStatus.Success,
+                               StatusMessage = Lang.Get($"You cant revive yourself!."),
+                           };
+                       }
+
+                       if (targetPlayer != null)
+                       {
+                           var health = targetPlayer.Entity.WatchedAttributes.GetTreeAttribute("health");
+
+                           if (targetPlayer.Entity.IsUnconscious())
+                           {
+                               targetPlayer.Entity.Revive();
+                               targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", false);
+                               targetPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
+                               var maxHealth = health.GetFloat("maxhealth");
+                               health.SetFloat("currenthealth", maxHealth * UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
+
+                               PacketMethods.SendShowUnconciousScreenPacket(false, 0, targetPlayer as IServerPlayer);
+
+                               return new TextCommandResult
+                               {
+                                   Status = EnumCommandStatus.Success,
+                                   StatusMessage = Lang.Get($"Player picked up!"),
+                               };
+                           }
+
+                           return new TextCommandResult
+                           {
+                               Status = EnumCommandStatus.Error,
+                               StatusMessage = Lang.Get($"{targetPlayer.PlayerName} is not unconscious."),
+                           };
+                       }
+
+                       return new TextCommandResult
+                       {
+                           Status = EnumCommandStatus.Error,
+                           StatusMessage = Lang.Get($"Something went wrong. Maybe player doesnt exist?"),
+                       };
+                   });
+            });
         }
 
         public override void StartClientSide(ICoreClientAPI api)

@@ -2,6 +2,7 @@
 using Unconscious.src.Packets;
 using Unconscious.src.Player;
 using Vintagestory.API.Client;
+using Vintagestory.API.Config;
 
 namespace Unconscious.src.Gui
 {
@@ -41,14 +42,14 @@ namespace Unconscious.src.Gui
 
             string[] quotes = new string[]
             {
-                "Your vision fades to black, the world spinning into a distant hum. You feel the cold embrace of the earth beneath you and the weight of your own weakness. Time slips away, and you are left adrift in the void—helpless, yet not entirely lost. Will you rise again, or remain a shadow in this unforgiving land?",
-                "Darkness wraps around you like a heavy shroud. The sounds of the world grow distant, muffled as if submerged in deep waters. Your body feels heavy, unresponsive, yet faint whispers of life linger within. Is this the end... or merely a fleeting pause in your journey?",
-                "A numb stillness overtakes you, as though the world itself has turned its back. Shadows dance at the edge of your awareness, teasing you with glimpses of light that feel just out of reach. The faint memory of warmth lingers, a bittersweet echo of life slipping further from your grasp.",
-                "The weight of the earth presses against you, pinning you to the cold, unyielding ground. Time drifts, disjointed, as you struggle to hold onto fleeting moments of clarity. The world feels impossibly distant, its sounds muffled by the thick fog of unconsciousness.",
-                "A void envelopes you, vast and unending, swallowing every trace of your senses. You strain to grasp onto anything familiar, but all that remains is a deep, aching silence that threatens to pull you deeper into its embrace.",
-                "Your limbs are heavy, as if bound by invisible chains. The air is thick, each breath a struggle against the encroaching darkness. Yet somewhere in the abyss, a faint light flickers—a fragile beacon of hope.",
-                "The ground beneath you feels both solid and unreal, as though you are caught between two worlds. Distant echoes of life reach your ears, blurred and distorted, as the darkness teases you with its quiet, suffocating allure.",
-                "The once-familiar rhythm of your heartbeat grows faint, each beat a whisper in the silence. Shadows close in, their cold fingers brushing against your skin as your thoughts scatter like leaves in the wind."
+                Lang.Get("unconscious:unconscious-quote-1"),
+                Lang.Get("unconscious:unconscious-quote-2"),
+                Lang.Get("unconscious:unconscious-quote-3"),
+                Lang.Get("unconscious:unconscious-quote-4"),
+                Lang.Get("unconscious:unconscious-quote-5"),
+                Lang.Get("unconscious:unconscious-quote-6"),
+                Lang.Get("unconscious:unconscious-quote-7"),
+                Lang.Get("unconscious:unconscious-quote-8"),
             };
 
             string randomQuote = GetRandomQuote(quotes);
@@ -68,7 +69,7 @@ namespace Unconscious.src.Gui
                 textBounds,
                 "timerText"
             )
-              .AddButton("End the suffering", CommitSudoku, buttonBound)
+              .AddButton(Lang.Get("unconscious:unconscious-button-suicide"), CommitSudoku, buttonBound)
              .Compose();
 
 
@@ -130,7 +131,7 @@ namespace Unconscious.src.Gui
         {
             int minutes = remainingTime / 60;
             int seconds = remainingTime % 60;
-            return $"You're going to bleed out in: {minutes:D2}:{seconds:D2}";
+            return $"{Lang.Get("unconscious:unconscious-bleed-out")}: {minutes:D2}:{seconds:D2}";
         }
 
         public override void OnRenderGUI(float deltaTime)

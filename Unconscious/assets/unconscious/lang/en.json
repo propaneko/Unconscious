@@ -1,3 +1,27 @@
 {
-    "hello": "hello world!"
+  "finishing-quote-1": "Your opponent lies before you, battered and broken. Their breaths come in shallow gasps, eyes flickering with the last embers of defiance. The choice is yours: deliver the final blow, or let the fates decide their end.",
+  "finishing-quote-2": "You tower over your foe, their strength spent and their will shattered. The weight of your next action presses heavily on your soul. Mercy or finality—your decision will carve itself into the annals of this world.",
+  "finishing-quote-3": "The clash of battle has left your opponent at your mercy. Their blood stains the ground, their body trembling in defeat. In this fleeting moment, you hold the power of life and death in your hands.",
+  "finishing-quote-4": "Your adversary kneels before you, the fire in their eyes now a dying ember. Time seems to slow as the final blow hangs in the balance. Will you strike true, or leave them to their fate?",
+  "finishing-quote-5": "The battlefield grows silent, save for the labored breathing of the one who fell before you. The weight of the moment bears down upon you—this is the turning point where paths diverge, and destinies are written in blood.",
+
+  "finishing-button-spare": "Spare him",
+  "finishing-button-kill": "Finish it",
+
+
+  "unconscious-quote-1": "Your vision fades to black, the world spinning into a distant hum. You feel the cold embrace of the earth beneath you and the weight of your own weakness. Time slips away, and you are left adrift in the void—helpless, yet not entirely lost. Will you rise again, or remain a shadow in this unforgiving land?",
+  "unconscious-quote-2": "Darkness wraps around you like a heavy shroud. The sounds of the world grow distant, muffled as if submerged in deep waters. Your body feels heavy, unresponsive, yet faint whispers of life linger within. Is this the end... or merely a fleeting pause in your journey?",
+  "unconscious-quote-3": "A void envelopes you, vast and unending, swallowing every trace of your senses. You strain to grasp onto anything familiar, but all that remains is a deep, aching silence that threatens to pull you deeper into its embrace.",
+  "unconscious-quote-4": "Your limbs are heavy, as if bound by invisible chains. The air is thick, each breath a struggle against the encroaching darkness. Yet somewhere in the abyss, a faint light flickers—a fragile beacon of hope.",
+  "unconscious-quote-5": "The ground beneath you feels both solid and unreal, as though you are caught between two worlds. Distant echoes of life reach your ears, blurred and distorted, as the darkness teases you with its quiet, suffocating allure.",
+  "unconscious-quote-6": "The once-familiar rhythm of your heartbeat grows faint, each beat a whisper in the silence. Shadows close in, their cold fingers brushing against your skin as your thoughts scatter like leaves in the wind.",
+  "unconscious-quote-7": "The weight of the earth presses against you, pinning you to the cold, unyielding ground. Time drifts, disjointed, as you struggle to hold onto fleeting moments of clarity. The world feels impossibly distant, its sounds muffled by the thick fog of unconsciousness.",
+  "unconscious-quote-8": "A numb stillness overtakes you, as though the world itself has turned its back. Shadows dance at the edge of your awareness, teasing you with glimpses of light that feel just out of reach. The faint memory of warmth lingers, a bittersweet echo of life slipping further from your grasp.",
+
+  "unconscious-button-suicide": "End the suffering",
+  "unconscious-bleed-out": "You're going to bleed out in",
+
+  "pickingup-progress": "Picking up... ",
+  "pickingup-cancel": "Canceled picking up!",
+  "pickingup-success": "picked up!"
 }

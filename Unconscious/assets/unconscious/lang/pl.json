@@ -1,0 +1,26 @@
+﻿{
+  "finishing-quote-1": "Twój przeciwnik leży przed tobą, poszarpany i złamany. Ich oddechy są płytkie, a oczy migoczą ostatnimi iskrami buntu. Wybór należy do ciebie: zadać ostateczny cios, czy pozwolić losowi zadecydować o ich końcu.",
+  "finishing-quote-2": "Górujesz nad swoim wrogiem, ich siły wyczerpane, a wola złamana. Ciężar twojej następnej decyzji spoczywa na twojej duszy. Miłosierdzie czy ostateczność — twój wybór zapisze się w annałach tego świata.",
+  "finishing-quote-3": "Starcie bitwy pozostawiło twojego przeciwnika na twojej łasce. Ich krew plami ziemię, ich ciało drży w porażce. W tej ulotnej chwili trzymasz w rękach władzę nad życiem i śmiercią.",
+  "finishing-quote-4": "Twój przeciwnik klęczy przed tobą, ogień w jego oczach to teraz gasnący żar. Czas zdaje się zwalniać, gdy ostateczny cios wisi w równowadze. Czy uderzysz celnie, czy zostawisz ich losowi?",
+  "finishing-quote-5": "Pole bitwy milknie, słychać tylko ciężki oddech tego, który upadł przed tobą. Ciężar chwili przygniata cię — to punkt zwrotny, gdzie ścieżki się rozchodzą, a losy zapisane są we krwi.",
+
+  "finishing-button-spare": "Oszczędź go",
+  "finishing-button-kill": "Dokończ dzieła",
+
+  "unconscious-quote-1": "Twoja wizja ciemnieje, świat wiruje w odległy szum. Czujesz zimny dotyk ziemi pod sobą i ciężar własnej słabości. Czas ucieka, a ty pozostajesz dryfując w pustce — bezsilny, lecz nie całkiem zagubiony. Czy powstaniesz ponownie, czy zostaniesz cieniem w tej bezlitosnej krainie?",
+  "unconscious-quote-2": "Ciemność otula cię jak ciężka zasłona. Dźwięki świata oddalają się, stają się stłumione, jakby zanurzone w głębokiej wodzie. Twoje ciało jest ciężkie, nieodpowiadające, lecz słabe echa życia wciąż w tobie tkwią. Czy to koniec... czy jedynie chwilowa przerwa w twojej podróży?",
+  "unconscious-quote-3": "Pustka cię otacza, rozległa i bez końca, pochłaniając każdy ślad twoich zmysłów. Starasz się uchwycić cokolwiek znajomego, ale pozostaje tylko głęboka, bolesna cisza, która grozi wciągnięciem cię głębiej w swoje objęcia.",
+  "unconscious-quote-4": "Twoje kończyny są ciężkie, jakby związane niewidzialnymi łańcuchami. Powietrze jest gęste, każdy oddech to walka z nadciągającą ciemnością. Jednak gdzieś w otchłani migocze słabe światło — delikatny znak nadziei.",
+  "unconscious-quote-5": "Ziemia pod tobą wydaje się jednocześnie solidna i nierealna, jakbyś był zawieszony między dwoma światami. Odległe echa życia docierają do twoich uszu, rozmazane i zniekształcone, podczas gdy ciemność kusi cię swoją cichą, duszącą aurą.",
+  "unconscious-quote-6": "Niegdyś znajomy rytm twojego serca staje się słaby, każdy puls to szept w ciszy. Cienie zbliżają się, ich zimne palce muskają twoją skórę, gdy twoje myśli rozsypują się jak liście na wietrze.",
+  "unconscious-quote-7": "Ciężar ziemi przygniata cię, unieruchamiając na zimnym, nieustępliwym gruncie. Czas płynie niespójnie, gdy walczysz o utrzymanie ulotnych chwil jasności. Świat wydaje się niewiarygodnie odległy, jego dźwięki przytłumione przez gęstą mgłę nieświadomości.",
+  "unconscious-quote-8": "Otula cię bezwładna cisza, jakby sam świat odwrócił się plecami. Cienie tańczą na krawędzi twojej świadomości, kusząc cię przebłyskami światła, które wydają się nieosiągalne. Blada pamięć ciepła pozostaje, słodko-gorzki ślad życia oddalający się coraz bardziej.",
+
+  "unconscious-button-suicide": "Zakończ cierpienie",
+  "unconscious-bleed-out": "Wykrwawisz się za",
+
+  "pickingup-progress": "Podnoszenie... ",
+  "pickingup-cancel": "Anulowano podnoszenie!",
+  "pickingup-success": "Podniesiono!"
+}
