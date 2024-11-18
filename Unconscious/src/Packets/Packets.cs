@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 using Vintagestory.API.Common;
 
-namespace NoticeBoard.Packets
+namespace Unconscious.src.Packets
 {
 
     [ProtoContract]
@@ -9,7 +9,7 @@ namespace NoticeBoard.Packets
     {
         [ProtoMember(1)]
         public bool shouldShow { get; set; }
-        [ProtoMember(1)]
+        [ProtoMember(2)]
         public int unconsciousTime { get; set; }
     }
 
@@ -31,6 +31,8 @@ namespace NoticeBoard.Packets
         public string victimPlayerUUID { get; set; }
         [ProtoMember(4)]
         public EnumDamageType damageType { get; set; }
+        [ProtoMember(5)]
+        public int finishTimer { get; set; }
     }
 
     [ProtoContract]
@@ -47,6 +49,6 @@ namespace NoticeBoard.Packets
     [ProtoContract]
     public class PlayerDeath
     {
-        
+
     }
 }

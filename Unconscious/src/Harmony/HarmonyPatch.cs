@@ -1,10 +1,10 @@
 ﻿using HarmonyLib;
-using NoticeBoard.Packets;
+using Unconscious.src.Packets;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 
-namespace Unconscious
+namespace Unconscious.src.Harmony
 {
     public class PlayerPatch
     {
@@ -23,13 +23,14 @@ namespace Unconscious
 
                     float currentHealth = health.GetFloat("currenthealth");
                     float resultingHealth = currentHealth - damage;
-                   
+
                     ShowPlayerFinishOffScreenPacket closeWindowPacket = new()
                     {
                         attackerPlayerUUID = serverPlayer.PlayerUID,
                         victimPlayerUUID = serverPlayer.PlayerUID,
                         damageType = damageSource.Type,
-                        shouldShow = false
+                        shouldShow = false,
+                        finishTimer = 0
                     };
                     sapi.Network.GetChannel("unconscious").SendPacket(closeWindowPacket, serverPlayer);
 
@@ -61,8 +62,9 @@ namespace Unconscious
                         }
                     }
 
-                    if (resultingHealth <= 1 && unconscious && serverPlayer.Entity.Alive) { 
-                        if  (
+                    if (resultingHealth <= 1 && unconscious && serverPlayer.Entity.Alive)
+                    {
+                        if (
                             damageSource.Type == EnumDamageType.BluntAttack ||
                             damageSource.Type == EnumDamageType.PiercingAttack ||
                             damageSource.Type == EnumDamageType.SlashingAttack
@@ -78,7 +80,8 @@ namespace Unconscious
                                     attackerPlayerUUID = attackingServerPlayer.PlayerUID,
                                     victimPlayerUUID = serverPlayer.PlayerUID,
                                     damageType = damageSource.Type,
-                                    shouldShow = true
+                                    shouldShow = true,
+                                    finishTimer = UnconsciousModSystem.getConfig().FinishingTimer
                                 };
                                 sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, attackingServerPlayer);
 

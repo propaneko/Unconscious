@@ -1,12 +1,12 @@
-﻿using NoticeBoard.Packets;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
+using Unconscious.src.Packets;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 
-namespace Unconscious
+namespace Unconscious.src.Player
 {
     public class PlayerBehavior : EntityBehavior
     {
@@ -56,7 +56,7 @@ namespace Unconscious
 
         private void HandleHold(EntityPlayer interactingPlayer)
         {
-            if (!isHolding) return; 
+            if (!isHolding) return;
 
             if (HasPlayerMoved(interactingPlayer))
             {
@@ -77,10 +77,10 @@ namespace Unconscious
             else
             {
                 string text = "SpeedCycle";
-                EntityPlayer entityPlayer = this.entity as EntityPlayer;
+                EntityPlayer entityPlayer = entity as EntityPlayer;
                 DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
                 defaultInterpolatedStringHandler.AppendLiteral("Pickin up... ");
-                defaultInterpolatedStringHandler.AppendFormatted<double>(Math.Truncate(((float)holdTime * 10f)));
+                defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdTime * 10f));
                 defaultInterpolatedStringHandler.AppendLiteral("%");
 
                 sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
@@ -107,7 +107,7 @@ namespace Unconscious
 
         private void RunLongPressAction(EntityPlayer interactingPlayer)
         {
-            var player = this.entity as EntityPlayer;
+            var player = entity as EntityPlayer;
             string text = "ReviveCycle";
             DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
             defaultInterpolatedStringHandler.AppendLiteral($"{player.Player.PlayerName} picked up!");

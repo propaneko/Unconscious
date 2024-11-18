@@ -1,7 +1,11 @@
 ﻿using HarmonyLib;
-using NoticeBoard.Configs;
-using NoticeBoard.Packets;
+using System;
 using System.Linq;
+using Unconscious.src.Config;
+using Unconscious.src.Gui;
+using Unconscious.src.Harmony;
+using Unconscious.src.Packets;
+using Unconscious.src.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -21,6 +25,7 @@ namespace Unconscious
         private FinishOffOverlay dialogFinishOff = null;
 
         public static ModConfig config;
+        private const string ConfigName = "unconscious.json";
 
         public UnconsciousModSystem()
         {
@@ -40,6 +45,27 @@ namespace Unconscious
         public static ModConfig getConfig()
         {
             return config;
+        }
+
+        private void LoadConfig()
+        {
+            try
+            {
+                config = sapi.LoadModConfig<ModConfig>(ConfigName);
+            }
+            catch (Exception)
+            {
+                sapi.Server.LogError("Unconscious: Failed to load mod config!");
+                return;
+            }
+
+            if (config == null)
+            {
+                sapi.Server.LogNotification("Unconscious: non-existant modconfig at '" + ConfigName +
+                                           "', creating default...");
+                config = new ModConfig();
+                sapi.StoreModConfig(config, ConfigName);
+            }
         }
 
         public override void Start(ICoreAPI api)
@@ -66,10 +92,13 @@ namespace Unconscious
             base.StartServerSide(api);
             sapi = api;
 
-            sapi.Network.GetChannel("unconscious").SetMessageHandler<SendUnconsciousPacket>(OnServerMessagesReceived);
-            sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerDeath>(OnPlayerDeathPacket);
-            sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerKill>(OnPlayerKill);
-
+            sapi.Event.ServerRunPhase(EnumServerRunPhase.ModsAndConfigReady, () =>
+            {
+                LoadConfig();
+                sapi.Network.GetChannel("unconscious").SetMessageHandler<SendUnconsciousPacket>(OnServerMessagesReceived);
+                sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerDeath>(OnPlayerDeathPacket);
+                sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerKill>(OnPlayerKill);
+            });
 
             sapi.Event.PlayerRespawn += (entity) =>
             {
@@ -100,7 +129,7 @@ namespace Unconscious
                .RequiresPrivilege("ban")
                .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
                .WithArgs(new StringArgParser("player", true))
-               .RequiresPrivilege(Privilege.chat)
+               .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
                .HandleWith((TextCommandCallingArgs args) =>
                {
                    var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
@@ -145,7 +174,7 @@ namespace Unconscious
             sapi.ChatCommands.GetOrCreate("revive")
                .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
                .WithArgs(new StringArgParser("player", true))
-               .RequiresPrivilege(Privilege.ban)
+               .RequiresPrivilege(UnconsciousModSystem.getConfig().ReviveCmdPrivilege)
                .HandleWith((TextCommandCallingArgs args) =>
                {
                    var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());

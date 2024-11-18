@@ -1,7 +1,6 @@
-﻿using NoticeBoard.Packets;
-using Vintagestory.API.Server;
+﻿using Vintagestory.API.Server;
 
-namespace Unconscious
+namespace Unconscious.src.Packets
 {
     public static class PacketMethods
     {

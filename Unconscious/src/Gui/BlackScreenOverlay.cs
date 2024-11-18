@@ -1,7 +1,9 @@
 ﻿using System;
+using Unconscious.src.Packets;
+using Unconscious.src.Player;
 using Vintagestory.API.Client;
 
-namespace Unconscious
+namespace Unconscious.src.Gui
 {
     public class BlackScreenOverlay : GuiDialog
     {
@@ -13,7 +15,7 @@ namespace Unconscious
 
         public BlackScreenOverlay(ICoreClientAPI capi, int durationInSeconds) : base(capi)
         {
-            this.remainingTime = durationInSeconds;
+            remainingTime = durationInSeconds;
             Compose();
         }
 

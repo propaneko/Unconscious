@@ -1,9 +1,9 @@
-﻿using NoticeBoard.Packets;
-using System;
+﻿using System;
+using Unconscious.src.Packets;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
 
-namespace Unconscious
+namespace Unconscious.src.Gui
 {
     public class FinishOffOverlay : GuiDialog
     {
@@ -64,7 +64,8 @@ namespace Unconscious
 
         public bool KillHim()
         {
-            PlayerKill playerKillPaacket = new() {
+            PlayerKill playerKillPaacket = new()
+            {
                 attackerPlayerUUID = packet.attackerPlayerUUID,
                 victimPlayerUUID = packet.victimPlayerUUID,
                 damageType = packet.damageType
@@ -106,7 +107,7 @@ namespace Unconscious
                     composer.ReCompose();
 
                     capi.World.UnregisterCallback(callbackId);
-                }, 3000);
+                }, packet.finishTimer);
 
                 return true;
             }
