@@ -9,6 +9,8 @@ namespace NoticeBoard.Packets
     {
         [ProtoMember(1)]
         public bool shouldShow { get; set; }
+        [ProtoMember(1)]
+        public int unconsciousTime { get; set; }
     }
 
     [ProtoContract]

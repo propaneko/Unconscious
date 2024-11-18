@@ -64,7 +64,7 @@ namespace Unconscious
                 return;
             }
 
-            holdTime += 0.2f; // Increment hold time (50ms = 0.05s)
+            holdTime += UnconsciousModSystem.getConfig().RevivePerTickDuration; ; // Increment hold time (50ms = 0.05s)
 
             if (holdTime > 10f)
             {
@@ -122,13 +122,14 @@ namespace Unconscious
 
             var health = player.WatchedAttributes.GetTreeAttribute("health");
             var maxHealth = health.GetFloat("maxhealth");
-            health.SetFloat("currenthealth", maxHealth * 0.25f);
+            health.SetFloat("currenthealth", maxHealth * UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
             ShowUnconciousScreen responsePacket = new()
             {
                 shouldShow = false,
+                unconsciousTime = 0,
             };
 
             UnconsciousModSystem.getSAPI().Network.GetChannel("unconscious").SendPacket(responsePacket, serverPlayer);

@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using NoticeBoard.Configs;
 using NoticeBoard.Packets;
 using System.Linq;
 using Vintagestory.API.Client;
@@ -19,6 +20,8 @@ namespace Unconscious
         private BlackScreenOverlay dialog = null;
         private FinishOffOverlay dialogFinishOff = null;
 
+        public static ModConfig config;
+
         public UnconsciousModSystem()
         {
             modInstance = this;
@@ -32,6 +35,11 @@ namespace Unconscious
         public static ICoreClientAPI getCAPI()
         {
             return capi;
+        }
+
+        public static ModConfig getConfig()
+        {
+            return config;
         }
 
         public override void Start(ICoreAPI api)
@@ -100,7 +108,7 @@ namespace Unconscious
                    {
                        if (targetPlayer.Entity.IsUnconscious())
                        {
-                           PacketMethods.SendShowUnconciousScreenPacket(true, targetPlayer as IServerPlayer);
+                           //PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
                            return new TextCommandResult
                            {
                                Status = EnumCommandStatus.Error,
@@ -110,7 +118,7 @@ namespace Unconscious
 
                        targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Clear();
                        targetPlayer.Entity.AnimManager.ActiveAnimationsByAnimCode.Foreach((code => targetPlayer.Entity.AnimManager.StopAnimation(code.Value.ToString())));
-                       targetPlayer.Entity.AnimManager.StartAnimation("die");
+                       targetPlayer.Entity.AnimManager.StartAnimation("sleep");
 
                        targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", true);
                        targetPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
@@ -118,7 +126,7 @@ namespace Unconscious
                        health.SetFloat("currenthealth", 1);
                        targetPlayer.Entity.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
 
-                       PacketMethods.SendShowUnconciousScreenPacket(true, targetPlayer as IServerPlayer);
+                       PacketMethods.SendShowUnconciousScreenPacket(true, config.UnconsciousDuration, targetPlayer as IServerPlayer);
 
                        return new TextCommandResult
                        {
@@ -137,7 +145,7 @@ namespace Unconscious
             sapi.ChatCommands.GetOrCreate("revive")
                .WithDescription(Lang.Get("edenvalrpessentials:countdown-command-description"))
                .WithArgs(new StringArgParser("player", true))
-               .RequiresPrivilege(Privilege.chat)
+               .RequiresPrivilege(Privilege.ban)
                .HandleWith((TextCommandCallingArgs args) =>
                {
                    var targetPlayer = api.World.AllPlayers.FirstOrDefault(player => player.PlayerName == (string)args.Parsers[0].GetValue());
@@ -160,9 +168,10 @@ namespace Unconscious
                            targetPlayer.Entity.Revive();
                            targetPlayer.Entity.WatchedAttributes.SetBool("unconscious", false);
                            targetPlayer.Entity.WatchedAttributes.MarkPathDirty("unconscious");
-                           health.SetFloat("currenthealth", 5);
+                           var maxHealth = health.GetFloat("maxhealth");
+                           health.SetFloat("currenthealth", maxHealth * UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
 
-                           PacketMethods.SendShowUnconciousScreenPacket(false, targetPlayer as IServerPlayer);
+                           PacketMethods.SendShowUnconciousScreenPacket(false, 0, targetPlayer as IServerPlayer);
 
                            return new TextCommandResult
                            {
@@ -244,6 +253,7 @@ namespace Unconscious
                 ShowUnconciousScreen responsePacket = new()
                 {
                     shouldShow = false,
+                    unconsciousTime = 0
                 };
 
                 sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, victimServerPlayer);
@@ -279,12 +289,21 @@ namespace Unconscious
 
         private void OnClientMessagesReceived(ShowUnconciousScreen packet)
         {
-            if (packet == null)
+            if (packet.shouldShow)
             {
+                dialog = new BlackScreenOverlay(capi, packet.unconsciousTime);
+                dialog.TryOpen();
+                dialog.StartTimer();
                 return;
             }
 
-            HandleUnsconscious(packet.shouldShow);
+            if (!packet.shouldShow && dialog != null)
+            {
+                dialog.StopTimer();
+                dialog.TryClose();
+                dialog = null;
+                return;
+            }
         }
 
         private void OnClientFinishedOffScreenReceived(ShowPlayerFinishOffScreenPacket packet)

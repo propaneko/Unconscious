@@ -44,6 +44,7 @@ namespace Unconscious
                             ShowUnconciousScreen responsePacket = new()
                             {
                                 shouldShow = true,
+                                unconsciousTime = UnconsciousModSystem.getConfig().UnconsciousDuration,
                             };
 
                             sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, serverPlayer);
