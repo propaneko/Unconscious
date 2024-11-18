@@ -14,7 +14,7 @@ namespace Unconscious
         private Vec3d initialPosition;  // Tracks the player's initial position when holding starts
 
         private float holdTime = 0;    // Track the duration of the hold
-        private ICoreServerAPI sapi;
+        private readonly ICoreServerAPI sapi;
         public PlayerBehavior(Entity entity) : base(entity)
         {
             sapi = entity.Api as ICoreServerAPI;
@@ -99,8 +99,7 @@ namespace Unconscious
             holdTime = 0;
             initialPosition = null;
 
-            string text = "SpeedCycle";
-            EntityPlayer entityPlayer = this.entity as EntityPlayer;
+            string text = "ReviveCycle";
             DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
             defaultInterpolatedStringHandler.AppendLiteral("Canceled pickin up!");
             sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
@@ -109,8 +108,7 @@ namespace Unconscious
         private void RunLongPressAction(EntityPlayer interactingPlayer)
         {
             var player = this.entity as EntityPlayer;
-            string text = "SpeedCycle";
-            EntityPlayer entityPlayer = this.entity as EntityPlayer;
+            string text = "ReviveCycle";
             DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
             defaultInterpolatedStringHandler.AppendLiteral($"{player.Player.PlayerName} picked up!");
             sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());

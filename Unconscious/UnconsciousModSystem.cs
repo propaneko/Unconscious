@@ -268,25 +268,6 @@ namespace Unconscious
             }
         }
 
-        private void HandleUnsconscious(bool isUnconscious)
-        {
-            if (isUnconscious)
-            {
-                dialog = new BlackScreenOverlay(capi, 300);
-                dialog.TryOpen();
-                dialog.StartTimer();
-                return;
-            }
-
-            if (!isUnconscious && dialog != null)
-            {
-                dialog.StopTimer();
-                dialog.TryClose();
-                dialog = null;
-                return;
-            }
-        }
-
         private void OnClientMessagesReceived(ShowUnconciousScreen packet)
         {
             if (packet.shouldShow)
