@@ -11,6 +11,10 @@ namespace Unconscious.src.Packets
         public bool shouldShow { get; set; }
         [ProtoMember(2)]
         public int unconsciousTime { get; set; }
+        [ProtoMember(3)]
+        public float chanceOfRevival { get; set; }
+        [ProtoMember(4)]
+        public bool enableSuicideButton { get; set; }
     }
 
     [ProtoContract]
@@ -32,7 +36,7 @@ namespace Unconscious.src.Packets
         [ProtoMember(4)]
         public EnumDamageType damageType { get; set; }
         [ProtoMember(5)]
-        public float finishTimer { get; set; }
+        public int finishTimer { get; set; }
     }
 
     [ProtoContract]
@@ -50,5 +54,20 @@ namespace Unconscious.src.Packets
     public class PlayerDeath
     {
 
+    }
+
+    [ProtoContract]
+    public class PlayerRevive
+    {
+
+    }
+
+    [ProtoContract]
+    public class PlayerAnimation
+    {
+        [ProtoMember(1)]
+        public bool shouldPlay { get; set; }
+        [ProtoMember(2)]
+        public string animationName { get; set; }
     }
 }

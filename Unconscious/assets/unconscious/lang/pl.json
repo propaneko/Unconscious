@@ -20,7 +20,18 @@
   "unconscious-button-suicide": "Zakończ cierpienie",
   "unconscious-bleed-out": "Wykrwawisz się za",
 
-  "pickingup-progress": "Podnoszenie... ",
-  "pickingup-cancel": "Anulowano podnoszenie!",
-  "pickingup-success": "Podniesiono!"
+  "reviving-progress": "Wskrzeszanie... ",
+  "reviving-cancel": "Anulowano wskrzeszanie!",
+  "reviving-success": "wskrzeszono!",
+
+  "pickup-progress": "Podnoszenie... ",
+  "pickup-error-drop": "Upuściłeś niesionego gracza.",
+  "pickup-error-toofar": "Jesteś za daleko, aby podnieść gracza.",
+  "pickup-error-distance": "Jesteś za daleko od niesionego gracza.",
+  "pickup-error-unconscious": "Jesteś nieprzytomny, upuściłeś niesionego gracza.",
+  "pickup-error-wokeup": "Gracz, którego niesiesz, właśnie się obudził.",
+
+  "pickup-cancel": "Anulowano podnoszenie!",
+  "pickup-putdown": "Odłożyłeś gracza.",
+  "pickup-success": "Zacząłeś nieść gracza."
 }

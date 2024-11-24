@@ -10,29 +10,38 @@ namespace Unconscious.src.Harmony
     {
 
         [HarmonyPrefix]
-        [HarmonyPatch(typeof(Entity), "ReceiveDamage")]
-        public static bool ReceiveDamage(Entity __instance, ref DamageSource damageSource, ref float damage)
+        [HarmonyPatch(typeof(EntityPlayer), "OnHurt")]
+        public static bool OnHurt(Entity __instance, ref DamageSource damageSource, ref float damage)
         {
             if (__instance.Api is ICoreServerAPI sapi)
             {
                 if (__instance is EntityPlayer player)
                 {
+
                     IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
+
+                    if (serverPlayer.WorldData.CurrentGameMode != EnumGameMode.Survival)
+                    {
+                        return true;
+                    }
                     var health = player.WatchedAttributes.GetTreeAttribute("health");
                     var unconscious = player.WatchedAttributes.GetBool("unconscious");
 
                     float currentHealth = health.GetFloat("currenthealth");
                     float resultingHealth = currentHealth - damage;
 
-                    ShowPlayerFinishOffScreenPacket closeWindowPacket = new()
+                    //sapi.Logger.Debug($"[unconscious] currentHealth: {currentHealth}, damage: {damage}, resultingHealth: {resultingHealth}");
+                   
+                    if (sapi != null)
                     {
-                        attackerPlayerUUID = serverPlayer.PlayerUID,
-                        victimPlayerUUID = serverPlayer.PlayerUID,
-                        damageType = damageSource.Type,
-                        shouldShow = false,
-                        finishTimer = 0
-                    };
-                    sapi.Network.GetChannel("unconscious").SendPacket(closeWindowPacket, serverPlayer);
+                        PacketMethods.SendShowFinishingOffPacket(serverPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, false, serverPlayer);
+                    }
+
+                    player.WatchedAttributes.SetBool("carryingUnconciousPlayer", false);
+                    player.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
+                    player.AnimManager.ActiveAnimationsByAnimCode.Clear();
+
+                    //sapi.Logger.Debug($"unconscious: {unconscious}, enityAlive?: {serverPlayer.Entity.Alive}");
 
                     if (resultingHealth <= 1 && !unconscious && serverPlayer.Entity.Alive)
                     {
@@ -42,49 +51,27 @@ namespace Unconscious.src.Harmony
                             damageSource.Type == EnumDamageType.SlashingAttack ||
                             damageSource.Type == EnumDamageType.Crushing)
                         {
-                            ShowUnconciousScreen responsePacket = new()
-                            {
-                                shouldShow = true,
-                                unconsciousTime = UnconsciousModSystem.getConfig().UnconsciousDuration,
-                            };
-
-                            sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, serverPlayer);
-
-                            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
-                            player.WatchedAttributes.SetBool("unconscious", true);
-                            health.SetFloat("currenthealth", 1);
-                            player.WatchedAttributes.MarkPathDirty("unconscious");
-
-                            serverPlayer.Entity.TryStopHandAction(forceStop: true, EnumItemUseCancelReason.Death);
-                            serverPlayer.Entity.AnimManager.StartAnimation("sleep");
-                            //serverPlayer.Entity.AnimManager.StartAnimation("sitflooridle");
+                            UnconsciousModSystem.HandlePlayerUnconscious(player);
                             return false;
                         }
                     }
 
-                    if (resultingHealth <= 1 && unconscious && serverPlayer.Entity.Alive)
+                    if (unconscious && serverPlayer.Entity.Alive)
                     {
+                        health.SetFloat("currenthealth", 1);
                         if (
                             damageSource.Type == EnumDamageType.BluntAttack ||
                             damageSource.Type == EnumDamageType.PiercingAttack ||
                             damageSource.Type == EnumDamageType.SlashingAttack
                             )
                         {
+                            serverPlayer.Entity.AnimManager.StartAnimation("sleep");
+                            PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
+
                             if (damageSource.SourceEntity is EntityPlayer attackingPlayer)
                             {
-                                serverPlayer.Entity.AnimManager.StartAnimation("sleep");
                                 IServerPlayer attackingServerPlayer = sapi.World.PlayerByUid(attackingPlayer.PlayerUID) as IServerPlayer;
-
-                                ShowPlayerFinishOffScreenPacket responsePacket = new()
-                                {
-                                    attackerPlayerUUID = attackingServerPlayer.PlayerUID,
-                                    victimPlayerUUID = serverPlayer.PlayerUID,
-                                    damageType = damageSource.Type,
-                                    shouldShow = true,
-                                    finishTimer = UnconsciousModSystem.getConfig().FinishingTimer
-                                };
-                                sapi.Network.GetChannel("unconscious").SendPacket(responsePacket, attackingServerPlayer);
-
+                                PacketMethods.SendShowFinishingOffPacket(attackingServerPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, true, attackingServerPlayer);
                                 return false;
                             }
                             return false;
