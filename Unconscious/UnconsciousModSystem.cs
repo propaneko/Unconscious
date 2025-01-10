@@ -190,8 +190,6 @@ namespace Unconscious
             player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
-            Vec3d vec3dPos = new Vec3d(player.Pos.X, player.Pos.Y, player.Pos.Z);
-            var nearbyEntities = sapi.World.GetEntitiesAround(vec3dPos, 20, 20);
 
             if (getConfig().DropWeaponOnUnconscious)
             {
