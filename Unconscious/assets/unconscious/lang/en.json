@@ -21,7 +21,18 @@
   "unconscious-button-suicide": "End the suffering",
   "unconscious-bleed-out": "You're going to bleed out in",
 
-  "pickingup-progress": "Picking up... ",
-  "pickingup-cancel": "Canceled picking up!",
-  "pickingup-success": "picked up!"
+  "reviving-progress": "Reviving... ",
+  "reviving-cancel": "Canceled reviving up!",
+  "reviving-success": "Revived!",
+
+  "pickup-progress": "Picking up... ",
+  "pickup-error-drop": "You dropped carried player.",
+  "pickup-error-toofar": "You are too far to pickup the player",
+  "pickup-error-distance": "You are too far from carried player.",
+  "pickup-error-unconscious": "You are unconscious you dropped carried player.",
+  "pickup-error-wokeup": "Player you carry just woke up.",
+
+  "pickup-cancel": "Canceled picking up!",
+  "pickup-putdown": "You put the player down.",
+  "pickup-success": "You started carrying"
 }

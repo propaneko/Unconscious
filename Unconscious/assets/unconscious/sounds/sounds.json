@@ -1,0 +1,50 @@
+{
+  "unconscious1": {
+    "location": "unconscious:sounds/unconscious1.ogg",
+    "type": "effect"
+  },
+  "unconscious2": {
+    "location": "unconscious:sounds/unconscious2.ogg",
+    "type": "effect"
+  },
+  "unconscious3": {
+    "location": "unconscious:sounds/unconscious3.ogg",
+    "type": "effect"
+  },
+  "unconscious4": {
+    "location": "unconscious:sounds/unconscious4.ogg",
+    "type": "effect"
+  },
+  "unconscious5": {
+    "location": "unconscious:sounds/unconscious5.ogg",
+    "type": "effect"
+  },
+  "unconscious6": {
+    "location": "unconscious:sounds/unconscious6.ogg",
+    "type": "effect"
+  },
+  "unconscious7": {
+    "location": "unconscious:sounds/unconscious7.ogg",
+    "type": "effect"
+  },
+  "unconscious8": {
+    "location": "unconscious:sounds/unconscious8.ogg",
+    "type": "effect"
+  },
+  "unconscious9": {
+    "location": "unconscious:sounds/unconscious9.ogg",
+    "type": "effect"
+  },
+  "unconscious10": {
+    "location": "unconscious:sounds/unconscious10.ogg",
+    "type": "effect"
+  },
+  "unconscious11": {
+    "location": "unconscious:sounds/unconscious11.ogg",
+    "type": "effect"
+  },
+  "finishingblow": {
+    "location": "unconscious:sounds/finishingblow.ogg",
+    "type": "effect"
+  }
+}
