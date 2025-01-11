@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Reference Include="BloodyStory">
+      <HintPath>lib\BloodyStory.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="VintagestoryAPI">
       <HintPath>$(VINTAGE_STORY)/VintagestoryAPI.dll</HintPath>
       <Private>false</Private>
@@ -64,6 +68,10 @@
   <Content Include="modinfo.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
   </Content>
+</ItemGroup>
+
+<ItemGroup>
+  <Folder Include="lib\" />
 </ItemGroup>
 
 </Project>

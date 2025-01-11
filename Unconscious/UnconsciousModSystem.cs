@@ -17,6 +17,8 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using VSEssentialsMod.Entity.AI.Task;
+using BloodyStory;
+using System;
 
 namespace Unconscious
 {
@@ -146,6 +148,14 @@ namespace Unconscious
                     if (entity.Entity is EntityPlayer player)
                     {
                         ApplyUnconsciousOnJoin(player);
+                        if (sapi.ModLoader.IsModEnabled("bloodystory"))
+                        {
+                            player.GetBehavior<EntityBehaviorBleed>().OnBleedout += (out bool shouldDie, DamageSource lastHit) =>
+                            {
+                                shouldDie = false;
+                                HandlePlayerUnconscious(player);
+                            };
+                        }
                     }
                 };
 
@@ -178,6 +188,12 @@ namespace Unconscious
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);
+
+            if (getSAPI().ModLoader.IsModEnabled("bloodystory"))
+            {
+                player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
+                player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
+            }
         }
 
         public static void HandlePlayerUnconscious(EntityPlayer player)
@@ -197,6 +213,12 @@ namespace Unconscious
             }
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer);
+
+            if (getSAPI().ModLoader.IsModEnabled("bloodystory"))
+            {
+                player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = true;
+                player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = true;
+            }
         }
 
         public static void PlayerDropActiveItemOnUnconscious(IPlayer serverPlayer)
