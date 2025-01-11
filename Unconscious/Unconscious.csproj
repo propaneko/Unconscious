@@ -70,8 +70,4 @@
   </Content>
 </ItemGroup>
 
-<ItemGroup>
-  <Folder Include="lib\" />
-</ItemGroup>
-
 </Project>
