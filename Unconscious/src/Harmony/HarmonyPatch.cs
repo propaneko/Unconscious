@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using System;
+using Unconscious.src.Compat;
 using Unconscious.src.Packets;
 using Unconscious.src.Player;
 using Vintagestory.API.Common;
@@ -22,6 +23,11 @@ namespace Unconscious.src.Harmony
                 {
 
                     IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
+
+                    if (player.Attributes.GetLong(BSCompat.ReviveCallbackAttr, -1) >= 0)
+                    {
+                        player.Api.Event.UnregisterCallback(player.Attributes.GetLong(BSCompat.ReviveCallbackAttr));
+                    }
 
                     if (serverPlayer.WorldData.CurrentGameMode != EnumGameMode.Survival)
                     {
