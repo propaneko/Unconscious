@@ -17,6 +17,8 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using VSEssentialsMod.Entity.AI.Task;
+using System;
+using Unconscious.src.Compat;
 
 namespace Unconscious
 {
@@ -146,6 +148,10 @@ namespace Unconscious
                     if (entity.Entity is EntityPlayer player)
                     {
                         ApplyUnconsciousOnJoin(player);
+                        if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+                        {
+                            BSCompat.AddOnBleedoutEH(player);
+                        }
                     }
                 };
 
@@ -178,6 +184,11 @@ namespace Unconscious
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);
+
+            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+            {
+                BSCompat.HandleRevive(player);
+            }
         }
 
         public static void HandlePlayerUnconscious(EntityPlayer player)
@@ -197,6 +208,11 @@ namespace Unconscious
             }
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer);
+
+            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+            {
+                BSCompat.HandleUnconscious(player);
+            }
         }
 
         public static void PlayerDropActiveItemOnUnconscious(IPlayer serverPlayer)
