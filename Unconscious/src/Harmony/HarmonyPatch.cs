@@ -27,6 +27,11 @@ namespace Unconscious.src.Harmony
                     if (player.Attributes.GetLong(BSCompat.ReviveCallbackAttr, -1) >= 0)
                     {
                         player.Api.Event.UnregisterCallback(player.Attributes.GetLong(BSCompat.ReviveCallbackAttr));
+                        if (player.Api.ModLoader.GetMod("bloodystory") != null)
+                        {
+                            BSCompat.RestartBleeding(player);
+                        }
+                        else player.Attributes.SetLong(BSCompat.ReviveCallbackAttr, -1);
                     }
 
                     if (serverPlayer.WorldData.CurrentGameMode != EnumGameMode.Survival)

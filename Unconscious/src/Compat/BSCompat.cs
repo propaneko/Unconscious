@@ -20,10 +20,14 @@ namespace Unconscious.src.Compat
             player.Attributes.SetLong(ReviveCallbackAttr,
             player.Api.Event.RegisterCallback((float obj) =>
             {
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
-                player.Attributes.SetLong(ReviveCallbackAttr, -1);
+                RestartBleeding(player);
             }, UnconsciousModSystem.getConfig().GracePeriod));
+        }
+        public static void RestartBleeding(EntityPlayer player)
+        {
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
+            player.Attributes.SetLong(ReviveCallbackAttr, -1);
         }
         public static void AddOnBleedoutEH(EntityPlayer player)
         {
