@@ -187,7 +187,7 @@ namespace Unconscious
 
             if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
-                BSCompat.ToggleBleeding(player, true);
+                BSCompat.HandleRevive(player);
             }
         }
 
@@ -211,7 +211,7 @@ namespace Unconscious
 
             if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
-                BSCompat.ToggleBleeding(player, false);
+                BSCompat.HandleUnconscious(player);
             }
         }
 

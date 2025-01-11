@@ -10,12 +10,16 @@ namespace Unconscious.src.Compat
 {
     internal static class BSCompat
     {
-        public static void ToggleBleeding(EntityPlayer player, bool toggle)
+        public static void HandleUnconscious(EntityPlayer player)
         {
-            player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = toggle;
-            player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = toggle;
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = true;
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = true;
         }
-
+        public static void HandleRevive(EntityPlayer player)
+        {
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
+            player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
+        }
         public static void AddOnBleedoutEH(EntityPlayer player)
         {
             player.GetBehavior<EntityBehaviorBleed>().OnBleedout += (out bool shouldDie, DamageSource lastHit) =>
