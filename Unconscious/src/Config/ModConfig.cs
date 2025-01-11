@@ -48,5 +48,8 @@ namespace Unconscious.src.Config
         public string ReviveCmdPrivilege = "ban";
 
         //public string EnabledDamageTypesDescription;
+
+        //public string GracePeriodDescription = "if using Bloody Story, this is the time after revive during which the bleeding is paused, in milliseconds"
+        public int GracePeriod = 10000;
     }
 }

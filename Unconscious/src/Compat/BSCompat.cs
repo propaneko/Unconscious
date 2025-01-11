@@ -1,9 +1,4 @@
 ﻿using BloodyStory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Vintagestory.API.Common;
 
 namespace Unconscious.src.Compat
@@ -28,7 +23,7 @@ namespace Unconscious.src.Compat
                 player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
                 player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
                 player.Attributes.SetLong(ReviveCallbackAttr, -1);
-            }, 15000));
+            }, UnconsciousModSystem.getConfig().GracePeriod));
         }
         public static void AddOnBleedoutEH(EntityPlayer player)
         {
