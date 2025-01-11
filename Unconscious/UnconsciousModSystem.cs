@@ -17,8 +17,8 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using VSEssentialsMod.Entity.AI.Task;
-using BloodyStory;
 using System;
+using Unconscious.src.Compat;
 
 namespace Unconscious
 {
@@ -148,13 +148,9 @@ namespace Unconscious
                     if (entity.Entity is EntityPlayer player)
                     {
                         ApplyUnconsciousOnJoin(player);
-                        if (sapi.ModLoader.IsModEnabled("bloodystory"))
+                        if (getSAPI().ModLoader.GetMod("bloodystory") != null)
                         {
-                            player.GetBehavior<EntityBehaviorBleed>().OnBleedout += (out bool shouldDie, DamageSource lastHit) =>
-                            {
-                                shouldDie = false;
-                                HandlePlayerUnconscious(player);
-                            };
+                            BSCompat.AddOnBleedoutEH(player);
                         }
                     }
                 };
@@ -189,10 +185,9 @@ namespace Unconscious
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);
 
-            if (getSAPI().ModLoader.IsModEnabled("bloodystory"))
+            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = false;
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = false;
+                BSCompat.ToggleBleeding(player, true);
             }
         }
 
@@ -214,10 +209,9 @@ namespace Unconscious
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer);
 
-            if (getSAPI().ModLoader.IsModEnabled("bloodystory"))
+            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedProcess = true;
-                player.GetBehavior<EntityBehaviorBleed>().pauseBleedParticles = true;
+                BSCompat.ToggleBleeding(player, false);
             }
         }
 
