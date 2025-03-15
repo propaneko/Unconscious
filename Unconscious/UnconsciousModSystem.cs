@@ -11,13 +11,10 @@ using Unconscious.src.Packets;
 using Unconscious.src.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
-using VSEssentialsMod.Entity.AI.Task;
-using System;
 using Unconscious.src.Compat;
 
 namespace Unconscious
@@ -28,8 +25,6 @@ namespace Unconscious
         public Harmony harmony;
         static ICoreServerAPI sapi;
         static ICoreClientAPI capi;
-        private BlackScreenOverlay dialogBlackScreen = null;
-        private FinishOffOverlay dialogFinishOff = null;
 
         public static ModConfig config;
         private const string ConfigName = "unconscious.json";
@@ -79,12 +74,14 @@ namespace Unconscious
                     }
                 };
 
-                File.WriteAllText(configPath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                //File.WriteAllText(configPath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                sapi.StoreModConfig(config, ConfigName);
             }
             else
             {
                 // Load the existing configuration
-                config = JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(configPath));
+                config = sapi.LoadModConfig<ModConfig>(ConfigName);
+                //config = JsonConvert.DeserializeObject<ModConfig>(File.ReadAllText(configPath));
             }
         }
 
@@ -171,7 +168,7 @@ namespace Unconscious
             });
         }
 
-        public static void HandlePlayerPickup(EntityPlayer player)
+        public static void HandlePlayerPickup(EntityPlayer player, float pickupPercentHealth)
         {
             player.AnimManager.StopAnimation("sleep");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
@@ -179,7 +176,7 @@ namespace Unconscious
             player.WatchedAttributes.SetBool("unconscious", false);
             player.WatchedAttributes.MarkPathDirty("unconscious");
             var maxHealth = health.GetFloat("maxhealth");
-            var maxHealthConfig = getConfig().MaxHealthPercentAfterRevive > 1.0f ? 1.0f : getConfig().MaxHealthPercentAfterRevive;
+            var maxHealthConfig = pickupPercentHealth > 1.0f ? 1.0f : pickupPercentHealth;
             health.SetFloat("currenthealth", maxHealth * maxHealthConfig);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;

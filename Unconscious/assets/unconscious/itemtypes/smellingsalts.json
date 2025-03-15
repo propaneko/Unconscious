@@ -1,0 +1,104 @@
+{
+    "code": "smellingsalts",
+    "class": "Item",
+    "variantgroups": [
+        {
+            "code": "potency",
+            "states": [ "weak", "strong" ]
+        }
+    ],
+    "maxstacksize": 16,
+    "shapeByType": {
+        "*-weak": {
+            "base": "unconscious:shapes/item/smellingsalts-weak"
+        },
+        "*-strong": {
+            "base": "unconscious:shapes/item/smellingsalts-strong"
+        }
+    },
+    "creativeinventory": {
+        "general": [ "*" ],
+        "items": [ "*" ]
+    },
+    "lightAbsorption": 0,
+    "sideopaque": { "all": false },
+    "sideao": { "all": true },
+    "emitsideao": { "all": false },
+    "sidesolid": { "all": false },
+    "renderpassByType": {
+        "*": "transparent"
+    },
+    "materialDensity": 600,
+    "guiTransform": {
+        "translation": {
+            "x": 3,
+            "y": 0,
+            "z": 0
+        },
+        "rotation": {
+            "x": 120,
+            "y": 41,
+            "z": 7
+        },
+        "origin": {
+            "x": 0.5,
+            "y": 0.11,
+            "z": 0.5
+        },
+        "scale": 2.15
+    },
+    "fpHandTransform": {
+        "translation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "rotation": {
+            "x": 40,
+            "y": 91,
+            "z": 15
+        },
+        "origin": {
+            "x": 0.8,
+            "y": 0.4,
+            "z": 0
+        },
+        "scale": 1.47
+    },
+    "groundTransform": {
+        "translation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "rotation": {
+            "x": 180,
+            "y": 33,
+            "z": -180
+        },
+        "origin": {
+            "x": 0.5,
+            "y": 0,
+            "z": 0.5
+        },
+        "scale": 2.5
+    },
+    "tpHandTransform": {
+        "translation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "rotation": {
+            "x": 5,
+            "y": 41,
+            "z": -31
+        },
+        "origin": {
+            "x": 0.16,
+            "y": 0.05,
+            "z": 0.08
+        },
+        "scale": 0.44
+    }
+}

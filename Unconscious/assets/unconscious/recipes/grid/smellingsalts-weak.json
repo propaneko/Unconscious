@@ -1,0 +1,6382 @@
+[
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-pinkbonnet-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-funeralbell-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-flyagaric-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-bitterbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-deathcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilstooth-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-devilbolete-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-earthball-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-elfinsaddle-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:cattailtops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    },
+    {
+        "ingredientPattern": "AB,KP",
+        "ingredients": {
+            "A": {
+                "type": "block",
+                "code": "game:mushroom-jackolantern-*"
+            },
+            "B": {
+                "type": "block",
+                "code": "game:mushroom-golddropmilkcap-*"
+            },
+            "K": {
+                "type": "item",
+                "code": "game:knife-*",
+                "isTool": true
+            },
+            "P": {
+                "type": "item",
+                "code": "game:papyrustops"
+            }
+        },
+        "width": 2,
+        "height": 2,
+        "output": {
+            "type": "item",
+            "code": "smellingsalts-weak",
+            "quantity": 1
+        }
+    }
+]

@@ -28,7 +28,7 @@ namespace Unconscious.src.Handlers
             player.Entity.SetUnconscious(false);
             player.Entity.WatchedAttributes.MarkPathDirty("unconscious");
 
-            UnconsciousModSystem.HandlePlayerPickup(player.Entity);
+            UnconsciousModSystem.HandlePlayerPickup(player.Entity, UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
         }
         private void OnPlayerDeathPacket(IServerPlayer player, PlayerDeath packet)
         {

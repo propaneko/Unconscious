@@ -1,11 +1,13 @@
 ﻿using Cairo;
 using System;
 using System.Runtime.CompilerServices;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 namespace Unconscious.src.Player
 {
@@ -20,7 +22,7 @@ namespace Unconscious.src.Player
         long pickupCancelcallbackId;
 
 
-        private float holdRevileTime = 0;    // Track the duration of the hold
+        private float holdReviveTime = 0;    // Track the duration of the hold
         private float holdCarryTime = 0;    // Track the duration of the hold
 
         private readonly ICoreServerAPI sapi;
@@ -247,11 +249,11 @@ namespace Unconscious.src.Player
 
             if (!isHolding) return;
 
-            if (UnconsciousModSystem.getConfig().RequireTemporalGearForRevive)
+            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive)
             {
                 var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
                 if (helditem == null) return;
-                if (helditem != null && helditem.Collectible.Code.Path != "gear-temporal") return;
+                if (helditem != null && !helditem.Collectible.Code.Path.Contains("smellingsalts")) return;
             }
 
             if (!IsWithinDistance(interactingPlayer, targetPlayer, 2))
@@ -267,14 +269,14 @@ namespace Unconscious.src.Player
                 return;
             }
 
-            holdRevileTime += UnconsciousModSystem.getConfig().RevivePerTickDuration; // Increment hold time (50ms = 0.05s)
+            holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration; // Increment hold time (50ms = 0.05s)
 
-            if (holdRevileTime > 10f)
+            if (holdReviveTime > 10f)
             {
-                RunLongPressAction(interactingPlayer);
+                FinishRunLongPressAction(interactingPlayer);
 
                 isHolding = false;
-                holdRevileTime = 0;
+                holdReviveTime = 0;
                 initialPosition = null;
             }
             else
@@ -284,7 +286,7 @@ namespace Unconscious.src.Player
                 DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
                 
                 defaultInterpolatedStringHandler.AppendLiteral(Lang.Get("unconscious:reviving-progress"));
-                defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdRevileTime * 10f));
+                defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdReviveTime * 10f));
                 defaultInterpolatedStringHandler.AppendLiteral("%");
 
                 sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
@@ -309,31 +311,36 @@ namespace Unconscious.src.Player
         private void CancelReviveHold(EntityPlayer interactingPlayer)
         {
             isHolding = false;
-            holdRevileTime = 0;
+            holdReviveTime = 0;
             initialPosition = null;
 
             SendErrorMessage(Lang.Get("unconscious:reviving-cancel"), interactingPlayer);
         }
 
-        private void RunLongPressAction(EntityPlayer interactingPlayer)
+        private void FinishRunLongPressAction(EntityPlayer interactingPlayer)
         {
             var player = entity as EntityPlayer;
 
             SendErrorMessage(($"{player.Player.PlayerName} {Lang.Get("unconscious:reviving-success")}"), interactingPlayer);
 
-            if (UnconsciousModSystem.getConfig().RequireTemporalGearForRevive)
+            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive)
             {
                 var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
-                if (helditem != null && helditem.Collectible.Code.Path == "gear-temporal")
+                if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts"))
                 {
                     var activeSlot = interactingPlayer.Player.InventoryManager.ActiveHotbarSlot;
 
                     activeSlot.TakeOut(1);
                     activeSlot.MarkDirty();
+
+                    float healingPotency = helditem.Collectible.Code.Path.Contains("smellingsalts-strong") ? UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive + 0.30f : UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive;
+
+                    UnconsciousModSystem.HandlePlayerPickup(player, healingPotency);
+                    return;
                 };
             }
 
-            UnconsciousModSystem.HandlePlayerPickup(player);
+            UnconsciousModSystem.HandlePlayerPickup(player, UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
         }
 
     }
