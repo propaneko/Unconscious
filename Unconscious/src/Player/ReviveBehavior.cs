@@ -1,17 +1,21 @@
-﻿using Cairo;
-using System;
+﻿using System;
+using System.Linq;
+using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
+using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Unconscious.src.Player
 {
-    public class PlayerBehavior : EntityBehavior
+    public class ReviveBehavior : EntityBehavior
     {
         private bool isHolding = false; // Track if the right-click is being held
         private bool isCarried = false; // Track if the right-click is being held
@@ -26,14 +30,134 @@ namespace Unconscious.src.Player
         private float holdCarryTime = 0;    // Track the duration of the hold
 
         private readonly ICoreServerAPI sapi;
-        public PlayerBehavior(Entity entity) : base(entity)
+
+        private Cuboidf originalCollisionBox;
+        private Cuboidf originalSelectionBox;
+
+        public ReviveBehavior(Entity entity) : base(entity)
         {
             sapi = entity.Api as ICoreServerAPI;
         }
 
         public override string PropertyName()
         {
-            return "reviveBehavior";
+            return "ReviveBehavior";
+        }
+
+        public override void Initialize(EntityProperties properties, JsonObject attributes)
+        {
+            base.Initialize(properties, attributes);
+
+            // Save the original collision and selection boxes when the entity is initialized
+            originalCollisionBox = entity.CollisionBox.Clone();
+            originalSelectionBox = entity.SelectionBox.Clone();
+        }
+
+        public override void GetInfoText(StringBuilder infotext)
+        {
+            base.GetInfoText(infotext);
+            if (entity.WatchedAttributes.GetBool("unconscious"))
+            {
+                infotext.AppendLine("Unconscious: Shift + Right Click to Revive");
+            }
+        }
+
+        public override WorldInteraction[] GetInteractionHelp(IClientWorldAccessor world, EntitySelection es, IClientPlayer player, ref EnumHandling handled)
+        {
+            if (es == null || !(es.Entity is EntityPlayer))
+            {
+                return base.GetInteractionHelp(world, es, player, ref handled);
+            }
+
+            if (!entity.WatchedAttributes.GetBool("unconscious"))
+                return base.GetInteractionHelp(world, es, player, ref handled);
+
+            // Define the items to display
+            ItemStack weakSalts = new ItemStack(world.GetItem(new AssetLocation("unconscious:smellingsalts-weak")));
+            ItemStack strongSalts = new ItemStack(world.GetItem(new AssetLocation("unconscious:smellingsalts-strong")));
+
+            if (weakSalts == null || strongSalts == null)
+            {
+                return base.GetInteractionHelp(world, es, player, ref handled);
+            }
+
+            return new WorldInteraction[]
+            {
+                new WorldInteraction
+                {
+                    ActionLangCode = "Pick Up",
+                    HotKeyCode = "sprint",
+                    MouseButton = EnumMouseButton.Right,
+                },
+                new WorldInteraction
+                {
+                    ActionLangCode = "Revive",
+                    HotKeyCode = "sneak",
+                    MouseButton = EnumMouseButton.Right,
+                    Itemstacks = new ItemStack[] { weakSalts, strongSalts },
+                },
+            };
+        }
+
+        public override void OnGameTick(float deltaTime)
+        {
+            base.OnGameTick(deltaTime);
+
+            // Example: Check if the player is unconscious (use your existing logic)
+            if (entity.WatchedAttributes.GetBool("unconscious"))
+            {
+                SetUnconsciousHitbox();
+            }
+            else if (!entity.WatchedAttributes.GetBool("unconscious"))
+            {
+                RestoreDefaultHitbox();
+            }
+        }
+
+        private void SetUnconsciousHitbox()
+        {
+           // Set collision box for side-lying posture (sleep animation), centered at X=0.3, Z=0.5
+            entity.CollisionBox.X1 = -0.55f; // Center: 0.3 - 0.15 = 0.15
+            entity.CollisionBox.Y1 = 0.0f;  // Bottom at ground level
+            entity.CollisionBox.Z1 = -0.65f; // Center: 0.5 - 1.15 = -0.65
+            entity.CollisionBox.X2 = 0.45f; // Width: 0.45 - 0.15 = 0.3 blocks
+            entity.CollisionBox.Y2 = 0.9f;  // Height: 0.6 blocks
+            entity.CollisionBox.Z2 = 0.15f; // Length: 1.15 - (-0.65) = 1.8 blocks
+
+            // Set selection box to match, slightly larger for targeting
+            entity.SelectionBox.X1 = -0.5f;  // Center: 0.3 - 0.2 = 0.1
+            entity.SelectionBox.Y1 = 0.0f;  // Bottom at ground level
+            entity.SelectionBox.Z1 = -0.75f; // Center: 0.5 - 1.25 = -0.75
+            entity.SelectionBox.X2 = 0.5f;  // Width: 0.5 - 0.1 = 0.4 blocks
+            entity.SelectionBox.Y2 = 0.7f;  // Height: 0.7 blocks
+            entity.SelectionBox.Z2 = 0.25f; // Length: 1.25 - (-0.75) = 2.0 blocks
+
+        }
+
+        private void RestoreDefaultHitbox()
+        {
+            entity.CollisionBox.X1 = originalCollisionBox.X1;
+            entity.CollisionBox.Y1 = originalCollisionBox.Y1;
+            entity.CollisionBox.Z1 = originalCollisionBox.Z1;
+            entity.CollisionBox.X2 = originalCollisionBox.X2;
+            entity.CollisionBox.Y2 = originalCollisionBox.Y2;
+            entity.CollisionBox.Z2 = originalCollisionBox.Z2;
+
+            entity.SelectionBox.X1 = originalSelectionBox.X1;
+            entity.SelectionBox.Y1 = originalSelectionBox.Y1;
+            entity.SelectionBox.Z1 = originalSelectionBox.Z1;
+            entity.SelectionBox.X2 = originalSelectionBox.X2;
+            entity.SelectionBox.Y2 = originalSelectionBox.Y2;
+            entity.SelectionBox.Z2 = originalSelectionBox.Z2;
+        }
+
+        public override void OnEntityLoaded()
+        {
+            base.OnEntityLoaded();
+            if (entity.WatchedAttributes.GetBool("unconscious"))
+            {
+                SetUnconsciousHitbox();
+            }
         }
 
         public override void OnInteract(EntityAgent byEntity, ItemSlot itemslot, Vec3d hitPosition, EnumInteractMode mode, ref EnumHandling handled)
@@ -62,7 +186,7 @@ namespace Unconscious.src.Player
                     HandleReviveHold(byEntity as EntityPlayer, targetPlayer);
 
                 }
-               
+
                 if (
                     entityPlayer != null &&
                     mode == EnumInteractMode.Interact &&
@@ -246,12 +370,21 @@ namespace Unconscious.src.Player
             {
                 CancelReviveHold(interactingPlayer);
             }, 2000);
-
             if (!isHolding) return;
 
-            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive)
+            var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
+
+            string characterClass;
+            SyncedTreeAttribute watchedAttributes = interactingPlayer.WatchedAttributes;
+            characterClass = ((watchedAttributes != null) ? watchedAttributes.GetAsString("characterClass", null) : null);
+
+            if (string.IsNullOrEmpty(characterClass))
             {
-                var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
+                return;
+            }
+
+            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive && !UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass))
+            {
                 if (helditem == null) return;
                 if (helditem != null && !helditem.Collectible.Code.Path.Contains("smellingsalts")) return;
             }
@@ -269,7 +402,21 @@ namespace Unconscious.src.Player
                 return;
             }
 
-            holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration; // Increment hold time (50ms = 0.05s)
+            if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts-strong"))
+            {
+                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
+                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration + 0.1f;
+            } 
+            else if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts-weak")) 
+            {
+                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
+                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration;
+            }
+            else
+            {
+                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
+                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration;
+            }
 
             if (holdReviveTime > 10f)
             {

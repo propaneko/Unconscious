@@ -60,10 +60,21 @@ namespace Unconscious.src.Handlers
             if (packet.shouldPlay == true && capi.World.Player != null)
             {
                 capi.World.Player.Entity.AnimManager.StartAnimation(packet.animationName);
+
+                if (packet.animationName == "sleep")
+                {
+                    capi.World.Player.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f);
+                }
+
             }
             else
             {
                 capi.World.Player.Entity.AnimManager.StopAnimation(packet.animationName);
+
+                if (packet.animationName == "sleep")
+                {
+                    capi.World.Player.Entity.CollisionBox.Set(-0.3f, 0f, -0.3f, 0.3f, 1.8f, 0.3f);
+                }
             }
         }
     }

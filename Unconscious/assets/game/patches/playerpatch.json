@@ -1,0 +1,18 @@
+[
+    {
+        "file": "game:entities/humanoid/player.json",
+        "path": "/client/behaviors/-",
+        "op": "addmerge",
+        "value": {
+            "code": "revivebehavior"
+        }
+    },
+    {
+        "file": "game:entities/humanoid/player.json",
+        "path": "/server/behaviors/-",
+        "op": "addmerge",
+        "value": {
+            "code": "revivebehavior"
+        }
+    }
+]

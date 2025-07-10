@@ -62,7 +62,7 @@ namespace Unconscious.src.Harmony
   
                         if (checkEnabledDamageTypes)
                         {
-                            UnconsciousModSystem.HandlePlayerUnconscious(player);
+                            UnconsciousModSystem.HandlePlayerUnconscious(player, damageSource);
                             return false;
                         }
                     }

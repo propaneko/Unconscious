@@ -24,6 +24,8 @@
     "reviving-cancel": "Anulowano wskrzeszanie!",
     "reviving-success": "wskrzeszono!",
 
+    "indicator": "Nieprzytomny...",
+
     "pickup-progress": "Podnoszenie... ",
     "pickup-error-drop": "Upuściłeś niesionego gracza.",
     "pickup-error-toofar": "Jesteś za daleko, aby podnieść gracza.",

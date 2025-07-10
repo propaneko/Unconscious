@@ -25,6 +25,8 @@
     "reviving-cancel": "Canceled reviving up!",
     "reviving-success": "Revived!",
 
+    "indicator": "Unconscious...",
+
     "pickup-progress": "Picking up... ",
     "pickup-error-drop": "You dropped carried player.",
     "pickup-error-toofar": "You are too far to pickup the player",

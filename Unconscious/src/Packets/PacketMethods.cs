@@ -2,17 +2,18 @@
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 using Vintagestory.Server;
+using static Unconscious.UnconsciousModSystem;
 
 namespace Unconscious.src.Packets
 {
     public static class PacketMethods
     {
-        public static void SendShowUnconciousScreenPacket(bool shouldShow, IServerPlayer targetPlayer)
+        public static void SendShowUnconciousScreenPacket(bool shouldShow, IServerPlayer targetPlayer, int unconsciousDuration = 0)
         {
             ShowUnconciousScreen responsePacket = new()
             {
                 shouldShow = shouldShow,
-                unconsciousTime = UnconsciousModSystem.getConfig().UnconsciousDuration,
+                unconsciousTime = unconsciousDuration != 0 ? unconsciousDuration : UnconsciousModSystem.getConfig().UnconsciousDuration,
                 chanceOfRevival = UnconsciousModSystem.getConfig().ChanceOfSelfRevival,
                 enableSuicideButton = UnconsciousModSystem.getConfig().EnableSuicideButton,
                 countdownSuicideButton = UnconsciousModSystem.getConfig().SuicideTimer,
@@ -62,6 +63,7 @@ namespace Unconscious.src.Packets
 
         public static void SendPlayerRevivePacket()
         {
+
             PlayerRevive playerRevivePaacket = new() { };
             UnconsciousModSystem.getCAPI().Network.GetChannel("unconscious").SendPacket(playerRevivePaacket);
         }

@@ -1,10 +1,8 @@
 ﻿using HarmonyLib;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using Unconscious.src.Commands;
 using Unconscious.src.Config;
-using Unconscious.src.Gui;
 using Unconscious.src.Handlers;
 using Unconscious.src.Harmony;
 using Unconscious.src.Packets;
@@ -16,6 +14,8 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using Unconscious.src.Compat;
+using TypingIndicator;
+using System;
 
 namespace Unconscious
 {
@@ -25,6 +25,14 @@ namespace Unconscious
         public Harmony harmony;
         static ICoreServerAPI sapi;
         static ICoreClientAPI capi;
+
+        public class UnconsciousTimer
+        {
+            public DateTime date;
+            public string PlayerUID;
+        }
+
+        public static List<UnconsciousTimer> unconsciousTimers = new List<UnconsciousTimer>();
 
         public static ModConfig config;
         private const string ConfigName = "unconscious.json";
@@ -71,6 +79,10 @@ namespace Unconscious
                         "Electricity",
                         "Heat",
                         "Injury"
+                    },
+                    ReviveClassWhitelist = new string[]
+                    {
+                        "medic",
                     }
                 };
 
@@ -87,6 +99,8 @@ namespace Unconscious
 
         public override void Start(ICoreAPI api)
         {
+            api.RegisterEntityBehaviorClass("revivebehavior", typeof(ReviveBehavior));
+
             harmony = new Harmony(Mod.Info.ModID);
             var originalOnHurt = AccessTools.Method(typeof(EntityPlayer), nameof(EntityPlayer.OnHurt));
             var postfixOnHurt = AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.OnHurt));
@@ -107,13 +121,23 @@ namespace Unconscious
            .RegisterMessageType(typeof(ShowPlayerFinishOffScreenPacket))
            .RegisterMessageType(typeof(ShowUnconciousScreen));
 
-            api.RegisterEntityBehaviorClass("reviveBehavior", typeof(PlayerBehavior));
         }
 
         public override void StartClientSide(ICoreClientAPI api)
         {
             base.StartClientSide(api);
             capi = api;
+
+            api.Event.PlayerEntitySpawn += delegate (IClientPlayer player)
+            {
+                api.Event.RegisterRenderer(new UnconsciousIndicatorRenderer(api, player.Entity), EnumRenderStage.Ortho , null);
+            };
+
+            api.Event.PlayerLeave += delegate (IClientPlayer player)
+            {
+                api.Event.UnregisterRenderer(new UnconsciousIndicatorRenderer(api, player.Entity), EnumRenderStage.Ortho);
+            };
+
 
             new ClientMessageHandler().SetMessageHandlers();
         }
@@ -128,39 +152,30 @@ namespace Unconscious
                 LoadConfig();
                 new ServerMessageHandler().SetMessageHandlers();
 
-                sapi.Event.PlayerRespawn += (entity) =>
-                {
-                    if (entity.Entity is EntityPlayer player)
-                    {
-                        if (!player.HasBehavior("reviveBehavior"))
-                        {
-                            sapi.Logger.Event($"{player.Player.PlayerName} got revive behavior");
-                            player.AddBehavior(new PlayerBehavior(player));
-                        }
-                    }
-                };
-
                 sapi.Event.PlayerNowPlaying += (entity) =>
                 {
                     if (entity.Entity is EntityPlayer player)
                     {
-                        ApplyUnconsciousOnJoin(player);
-                        if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+                        if(unconsciousTimers != null)
                         {
-                            BSCompat.AddOnBleedoutEH(player);
-                        }
-                    }
-                };
+                            var timerEntry = unconsciousTimers.Find(unconsciousTimers => unconsciousTimers.PlayerUID == player.PlayerUID);
+                            if (timerEntry != null && timerEntry.date != null)
+                            {
+                                DateTime unconsciousTime = (DateTime)timerEntry.date;
+                                double diffInSeconds = Math.Abs((DateTime.UtcNow - unconsciousTime).TotalSeconds - getConfig().UnconsciousDuration);
+                                if (diffInSeconds > getConfig().UnconsciousDuration)
+                                {
+                                    diffInSeconds = 0;
+                                }
+                                ApplyUnconsciousOnJoin(player, diffInSeconds <= 0 ? 0 : diffInSeconds);
+                            }
 
-                sapi.Event.PlayerJoin += (entity) =>
-                {
-                    if (entity.Entity is EntityPlayer player)
-                    {
-                        if (!player.HasBehavior("reviveBehavior"))
-                        {
-                            sapi.Logger.Event($"{player.Player.PlayerName} got revive behavior");
-                            player.AddBehavior(new PlayerBehavior(player));
+                            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+                            {
+                                BSCompat.AddOnBleedoutEH(player);
+                            }
                         }
+
                     }
                 };
 
@@ -182,13 +197,42 @@ namespace Unconscious
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);
 
+            UnconsciousModSystem.unconsciousTimers.RemoveAll(timer => timer.PlayerUID == player.PlayerUID);
+
             if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
                 BSCompat.HandleRevive(player);
             }
+
         }
 
-        public static void HandlePlayerUnconscious(EntityPlayer player)
+        public static void HandlePlayerUnconscious(EntityPlayer player, double timer = 0)
+        {
+            player.AnimManager.StartAnimation("sleep");
+            player.WatchedAttributes.SetBool("unconscious", true);
+            player.WatchedAttributes.MarkPathDirty("unconscious");
+            var health = player.WatchedAttributes.GetTreeAttribute("health");
+            health.SetFloat("currenthealth", 1);
+            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
+
+            IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
+
+            if (getConfig().DropWeaponOnUnconscious)
+            {
+                PlayerDropActiveItemOnUnconscious(serverPlayer);
+            }
+
+            PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
+            PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer, (int)timer);
+            serverPlayer.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f); // Adjust selection box to be lower when unconscious
+
+            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+            {
+                BSCompat.HandleUnconscious(player);
+            }
+        }
+
+        public static void HandlePlayerUnconscious(EntityPlayer player, DamageSource damageSource)
         {
             player.AnimManager.StartAnimation("sleep");
             player.WatchedAttributes.SetBool("unconscious", true);
@@ -205,6 +249,10 @@ namespace Unconscious
             }
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer);
+            serverPlayer.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f); // Adjust selection box to be lower when unconscious
+
+            unconsciousTimers.Add(new UnconsciousTimer { PlayerUID = serverPlayer.PlayerUID, date = DateTime.UtcNow });
+            sapi.Logger.Audit("Player {0} got unconscious by {1} at {2}", serverPlayer.Entity.GetName(), damageSource.SourceEntity, serverPlayer.Entity.Pos);
 
             if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
@@ -230,13 +278,13 @@ namespace Unconscious
             serverPlayer.InventoryManager.BroadcastHotbarSlot();
         }
 
-        private void ApplyUnconsciousOnJoin(EntityPlayer player)
+        private void ApplyUnconsciousOnJoin(EntityPlayer player, double diffInSeconds)
         {
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
             if (serverPlayer.Entity.IsUnconscious())
             {
-                HandlePlayerUnconscious(serverPlayer.Entity);
+                HandlePlayerUnconscious(serverPlayer.Entity, diffInSeconds);
             }
         }
 

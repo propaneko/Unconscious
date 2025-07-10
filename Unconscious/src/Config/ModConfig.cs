@@ -41,6 +41,9 @@ namespace Unconscious.src.Config
         //public string DropWeaponOnUnconsciousDescription = "enable or disable requirement of holding temporal gear when reviving";
         public bool RequireSmellingSaltsForRevive = true;
 
+        //public string DropWeaponOnUnconsciousDescription = "enable or disable requirement of holding temporal gear when reviving";
+        public string[] ReviveClassWhitelist;
+
         //public string UnconsciousCmdPrivilegeDescription = "needed privilage to use the /unconscious command";
         public string UnconsciousCmdPrivilege = "ban";
 

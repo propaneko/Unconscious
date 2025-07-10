@@ -28,12 +28,16 @@ namespace Unconscious.src.Handlers
             player.Entity.SetUnconscious(false);
             player.Entity.WatchedAttributes.MarkPathDirty("unconscious");
 
+            UnconsciousModSystem.unconsciousTimers.RemoveAll(timer => timer.PlayerUID == player.PlayerUID);
+
             UnconsciousModSystem.HandlePlayerPickup(player.Entity, UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
         }
         private void OnPlayerDeathPacket(IServerPlayer player, PlayerDeath packet)
         {
             player.Entity.SetUnconscious(false);
             player.Entity.WatchedAttributes.MarkPathDirty("unconscious");
+
+            UnconsciousModSystem.unconsciousTimers.RemoveAll(timer => timer.PlayerUID == player.PlayerUID);
 
             player.Entity.Die(EnumDespawnReason.Death, new DamageSource
             {
@@ -57,6 +61,7 @@ namespace Unconscious.src.Handlers
                 attackingServerPlayer.Entity.StartAnimation("finishingblow");
                 victimServerPlayer.Entity.World.PlaySoundAt(new AssetLocation($"unconscious:sounds/finishingblow"), victimServerPlayer.Entity, null, false, 8, 1f);
 
+                UnconsciousModSystem.unconsciousTimers.RemoveAll(timer => timer.PlayerUID == victimServerPlayer.PlayerUID);
 
                 ShowUnconciousScreen responsePacket = new()
                 {
