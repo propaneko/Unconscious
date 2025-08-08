@@ -76,7 +76,8 @@ namespace Unconscious.src.Handlers
                     Type = packet.damageType, // Set damage type
                     Source = EnumDamageSource.Entity,
                     SourceEntity = attackingServerPlayer.Entity,
-                    CauseEntity = attackingServerPlayer.Entity
+                    CauseEntity = attackingServerPlayer.Entity,
+                    
                 });
                 PacketMethods.SendAnimationPacketToClient(false, "sleep", victimServerPlayer);
             }

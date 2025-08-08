@@ -14,8 +14,11 @@ using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 using Unconscious.src.Compat;
-using TypingIndicator;
 using System;
+using Unconscious.src.Renderers;
+using Vintagestory.API.Datastructures;
+using System.Linq;
+using Vintagestory.Server;
 
 namespace Unconscious
 {
@@ -37,6 +40,7 @@ namespace Unconscious
         public static ModConfig config;
         private const string ConfigName = "unconscious.json";
 
+        private Dictionary<string, UnconsciousIndicatorRenderer> renderers = new Dictionary<string, UnconsciousIndicatorRenderer>();
         public UnconsciousModSystem()
         {
             modInstance = this;
@@ -130,12 +134,58 @@ namespace Unconscious
 
             api.Event.PlayerEntitySpawn += delegate (IClientPlayer player)
             {
-                api.Event.RegisterRenderer(new UnconsciousIndicatorRenderer(api, player.Entity), EnumRenderStage.Ortho , null);
+                if (player == null || player.Entity == null)
+                {
+                    capi.Logger.Warning($"PlayerEntitySpawn: Player or Player.Entity is null. PlayerUID: {player?.PlayerUID ?? "null"}");
+                    return;
+                }
+
+                try
+                {
+                    var renderer = new UnconsciousIndicatorRenderer(api, player.Entity);
+                    api.Event.RegisterRenderer(renderer, EnumRenderStage.Ortho, null);
+                    renderers[player.PlayerUID] = renderer;
+                    capi.Logger.Debug($"Registered renderer for player {player.PlayerUID} (EntityId: {player.Entity.EntityId})");
+                }
+                catch (Exception ex)
+                {
+                    capi.Logger.Error($"Failed to register renderer for player {player.PlayerUID}: {ex}");
+                }
             };
 
             api.Event.PlayerLeave += delegate (IClientPlayer player)
             {
-                api.Event.UnregisterRenderer(new UnconsciousIndicatorRenderer(api, player.Entity), EnumRenderStage.Ortho);
+                if (player == null)
+                {
+                    capi.Logger.Warning("PlayerLeave: Player is null.");
+                    return;
+                }
+
+                string playerUID = player.PlayerUID;
+                if (string.IsNullOrEmpty(playerUID))
+                {
+                    capi.Logger.Warning("PlayerLeave: PlayerUID is null or empty.");
+                    return;
+                }
+
+                if (renderers.TryGetValue(playerUID, out var renderer))
+                {
+                    try
+                    {
+                        api.Event.UnregisterRenderer(renderer, EnumRenderStage.Ortho);
+                        renderer.Dispose();
+                        renderers.Remove(playerUID);
+                        capi.Logger.Debug($"Unregistered renderer for player {playerUID}");
+                    }
+                    catch (Exception ex)
+                    {
+                        capi.Logger.Error($"Failed to unregister renderer for player {playerUID}: {ex}");
+                    }
+                }
+                else
+                {
+                    capi.Logger.Warning($"No renderer found for player {playerUID} in PlayerLeave event.");
+                }
             };
 
 
@@ -154,28 +204,58 @@ namespace Unconscious
 
                 sapi.Event.PlayerNowPlaying += (entity) =>
                 {
-                    if (entity.Entity is EntityPlayer player)
+                    if (!(entity.Entity is EntityPlayer player))
                     {
-                        if(unconsciousTimers != null)
-                        {
-                            var timerEntry = unconsciousTimers.Find(unconsciousTimers => unconsciousTimers.PlayerUID == player.PlayerUID);
-                            if (timerEntry != null && timerEntry.date != null)
-                            {
-                                DateTime unconsciousTime = (DateTime)timerEntry.date;
-                                double diffInSeconds = Math.Abs((DateTime.UtcNow - unconsciousTime).TotalSeconds - getConfig().UnconsciousDuration);
-                                if (diffInSeconds > getConfig().UnconsciousDuration)
-                                {
-                                    diffInSeconds = 0;
-                                }
-                                ApplyUnconsciousOnJoin(player, diffInSeconds <= 0 ? 0 : diffInSeconds);
-                            }
+                        return;
+                    }
 
-                            if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+                    if (string.IsNullOrEmpty(player.PlayerUID))
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        var timerEntry = unconsciousTimers?.Find(timer => timer.PlayerUID == player.PlayerUID);
+
+                        if (timerEntry == null)
+                        {
+                            ApplyUnconsciousOnJoin(player, 15);
+                        }
+
+                        if (timerEntry != null)
+                        {
+                            DateTime unconsciousTime = timerEntry.date;
+                            double elapsedSeconds = (DateTime.UtcNow - unconsciousTime).TotalSeconds;
+                            double remainingSeconds = Math.Max(0, getConfig().UnconsciousDuration - elapsedSeconds);
+
+                            if (remainingSeconds > 0)
                             {
-                                BSCompat.AddOnBleedoutEH(player);
+                                ApplyUnconsciousOnJoin(player, remainingSeconds);
+                            }
+                            else
+                            {
+                                // Timer expired; remove the entry
+                                unconsciousTimers.Remove(timerEntry);
                             }
                         }
 
+                        // Mod compatibility with "bloodystory"
+                        if (getSAPI().ModLoader.GetMod("bloodystory") != null)
+                        {
+                            try
+                            {
+                                BSCompat.AddOnBleedoutEH(player);
+                            }
+                            catch (Exception ex)
+                            {
+                                sapi.Logger.Error($"Failed to add bleed-out event handler for player {player.PlayerUID}: {ex}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        sapi.Logger.Error($"Error in PlayerNowPlaying for player {player.PlayerUID}: {ex}");
                     }
                 };
 
@@ -224,7 +304,6 @@ namespace Unconscious
 
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer, (int)timer);
-            serverPlayer.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f); // Adjust selection box to be lower when unconscious
 
             if (getSAPI().ModLoader.GetMod("bloodystory") != null)
             {
@@ -290,6 +369,19 @@ namespace Unconscious
 
         public override void Dispose()
         {
+            foreach (var renderer in renderers.Values)
+            {
+                try
+                {
+                    renderer.Dispose();
+                    capi.Event.UnregisterRenderer(renderer, EnumRenderStage.Ortho);
+                }
+                catch (Exception ex)
+                {
+                    capi.Logger.Error($"Error disposing renderer: {ex}");
+                }
+            }
+            renderers.Clear();
             harmony?.UnpatchAll(Mod.Info.ModID);
             base.Dispose();
         }

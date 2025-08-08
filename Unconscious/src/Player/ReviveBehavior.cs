@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
-using System.Text;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -11,144 +8,134 @@ using Vintagestory.API.Datastructures;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Unconscious.src.Player
 {
     public class ReviveBehavior : EntityBehavior
     {
-        private bool isHolding = false; // Track if the right-click is being held
-        private bool isCarried = false; // Track if the right-click is being held
-        private bool isCarriedCooldown = false; // Track if the right-click is being held
-
-        private Vec3d initialPosition;  // Tracks the player's initial position when holding starts
-        long reviveCancelcallbackId;
-        long pickupCancelcallbackId;
-
-
-        private float holdReviveTime = 0;    // Track the duration of the hold
-        private float holdCarryTime = 0;    // Track the duration of the hold
-
+        private bool isHoldingRevive; // Tracks if revive action is being held
+        private bool isCarrying;      // Tracks if player is being carried
+        private bool isCarryCooldown; // Tracks carry action cooldown
+        private Vec3d initialPosition; // Tracks player's initial position when holding starts
+        private float holdReviveTime; // Tracks duration of revive hold
+        private float holdCarryTime;  // Tracks duration of carry hold
+        private long reviveCancelCallbackId;
+        private long pickupCancelCallbackId;
+        private long carryTickListenerId;
+        private readonly Cuboidf originalCollisionBox;
+        private readonly Cuboidf originalSelectionBox;
         private readonly ICoreServerAPI sapi;
-
-        private Cuboidf originalCollisionBox;
-        private Cuboidf originalSelectionBox;
+        private readonly ICoreClientAPI capi; // Added for client-side rendering
+        private WorldInteraction[] interactions;
+        private MeshRef circleMeshRef;
+        private ProgressCircleRenderer progressRenderer; // Changed to concrete type for clarity
+        private bool wasUnconscious; // Tracks previous unconscious state
+        private string carriedPlayerUID; // Tracks the UID of the player being carried
 
         public ReviveBehavior(Entity entity) : base(entity)
         {
             sapi = entity.Api as ICoreServerAPI;
+            capi = entity.Api as ICoreClientAPI; // Initialize client API
+            originalCollisionBox = entity.CollisionBox.Clone();
+            originalSelectionBox = entity.SelectionBox.Clone();
         }
 
-        public override string PropertyName()
-        {
-            return "ReviveBehavior";
-        }
+        public override string PropertyName() => "ReviveBehavior";
 
         public override void Initialize(EntityProperties properties, JsonObject attributes)
         {
             base.Initialize(properties, attributes);
 
-            // Save the original collision and selection boxes when the entity is initialized
-            originalCollisionBox = entity.CollisionBox.Clone();
-            originalSelectionBox = entity.SelectionBox.Clone();
+            // Register client-side renderer for progress bar
+            if (entity.World.Side == EnumAppSide.Client && capi != null)
+            {
+                progressRenderer = new ProgressCircleRenderer(this, capi);
+                capi.Event.RegisterRenderer(progressRenderer, EnumRenderStage.Ortho);
+            }
+
+            if (entity.World.Side == EnumAppSide.Server && sapi != null)
+            {
+                sapi.Event.PlayerLeave += OnPlayerDisconnect;
+            }
+
+            bool isUnconscious = entity.WatchedAttributes.GetBool("unconscious");
+            if (isUnconscious != wasUnconscious)
+            {
+                if (isUnconscious)
+                {
+                    SetUnconsciousHitbox();
+                    if (sapi != null)
+                    {
+                        sapi.Logger.Debug("ReviveBehavior: Set unconscious hitbox for entity {0} on Initialize", entity.EntityId);
+                    }
+                }
+                wasUnconscious = isUnconscious;
+            }
         }
 
-        public override void GetInfoText(StringBuilder infotext)
+        private void OnPlayerDisconnect(IPlayer player)
         {
-            base.GetInfoText(infotext);
-            if (entity.WatchedAttributes.GetBool("unconscious"))
+            if (isCarrying && player.Entity.PlayerUID == carriedPlayerUID)
             {
-                infotext.AppendLine("Unconscious: Shift + Right Click to Revive");
-            }
-        }
-
-        public override WorldInteraction[] GetInteractionHelp(IClientWorldAccessor world, EntitySelection es, IClientPlayer player, ref EnumHandling handled)
-        {
-            if (es == null || !(es.Entity is EntityPlayer))
-            {
-                return base.GetInteractionHelp(world, es, player, ref handled);
-            }
-
-            if (!entity.WatchedAttributes.GetBool("unconscious"))
-                return base.GetInteractionHelp(world, es, player, ref handled);
-
-            // Define the items to display
-            ItemStack weakSalts = new ItemStack(world.GetItem(new AssetLocation("unconscious:smellingsalts-weak")));
-            ItemStack strongSalts = new ItemStack(world.GetItem(new AssetLocation("unconscious:smellingsalts-strong")));
-
-            if (weakSalts == null || strongSalts == null)
-            {
-                return base.GetInteractionHelp(world, es, player, ref handled);
-            }
-
-            return new WorldInteraction[]
-            {
-                new WorldInteraction
+                var interactingPlayer = entity as EntityPlayer;
+                var targetPlayer = sapi.World.PlayerByUid(carriedPlayerUID)?.Entity as EntityPlayer;
+                if (interactingPlayer != null && targetPlayer != null)
                 {
-                    ActionLangCode = "Pick Up",
-                    HotKeyCode = "sprint",
-                    MouseButton = EnumMouseButton.Right,
-                },
-                new WorldInteraction
-                {
-                    ActionLangCode = "Revive",
-                    HotKeyCode = "sneak",
-                    MouseButton = EnumMouseButton.Right,
-                    Itemstacks = new ItemStack[] { weakSalts, strongSalts },
-                },
-            };
+                    StopCarryingPlayer(interactingPlayer, targetPlayer, Lang.Get("unconscious:pickup-error-disconnect"));
+                    if (sapi != null)
+                    {
+                        sapi.Logger.Debug("ReviveBehavior: Stopped carrying player {0} due to disconnect for entity {1}", carriedPlayerUID, entity.EntityId);
+                    }
+                }
+                carriedPlayerUID = null;
+            }
         }
 
         public override void OnGameTick(float deltaTime)
         {
             base.OnGameTick(deltaTime);
 
-            // Example: Check if the player is unconscious (use your existing logic)
-            if (entity.WatchedAttributes.GetBool("unconscious"))
+            // Check for unconscious state changes
+            bool isUnconscious = entity.WatchedAttributes.GetBool("unconscious");
+            if (isUnconscious != wasUnconscious)
             {
-                SetUnconsciousHitbox();
-            }
-            else if (!entity.WatchedAttributes.GetBool("unconscious"))
-            {
-                RestoreDefaultHitbox();
+                if (isUnconscious)
+                {
+                    SetUnconsciousHitbox();
+                    if (sapi != null)
+                    {
+                        sapi.Logger.Debug("ReviveBehavior: Set unconscious hitbox for entity {0} on state change", entity.EntityId);
+                    }
+                }
+                else
+                {
+                    RestoreDefaultHitbox();
+                    if (sapi != null)
+                    {
+                        sapi.Logger.Debug("ReviveBehavior: Restored default hitbox for entity {0} on state change", entity.EntityId);
+                    }
+                }
+                wasUnconscious = isUnconscious; // Update state
             }
         }
 
         private void SetUnconsciousHitbox()
         {
-           // Set collision box for side-lying posture (sleep animation), centered at X=0.3, Z=0.5
-            entity.CollisionBox.X1 = -0.55f; // Center: 0.3 - 0.15 = 0.15
-            entity.CollisionBox.Y1 = 0.0f;  // Bottom at ground level
-            entity.CollisionBox.Z1 = -0.65f; // Center: 0.5 - 1.15 = -0.65
-            entity.CollisionBox.X2 = 0.45f; // Width: 0.45 - 0.15 = 0.3 blocks
-            entity.CollisionBox.Y2 = 0.9f;  // Height: 0.6 blocks
-            entity.CollisionBox.Z2 = 0.15f; // Length: 1.15 - (-0.65) = 1.8 blocks
+            entity.CollisionBox.Set(
+                x1: -0.55f, y1: 0.0f, z1: -0.65f,
+                x2: 0.45f, y2: 0.9f, z2: 0.15f
+            );
 
-            // Set selection box to match, slightly larger for targeting
-            entity.SelectionBox.X1 = -0.5f;  // Center: 0.3 - 0.2 = 0.1
-            entity.SelectionBox.Y1 = 0.0f;  // Bottom at ground level
-            entity.SelectionBox.Z1 = -0.75f; // Center: 0.5 - 1.25 = -0.75
-            entity.SelectionBox.X2 = 0.5f;  // Width: 0.5 - 0.1 = 0.4 blocks
-            entity.SelectionBox.Y2 = 0.7f;  // Height: 0.7 blocks
-            entity.SelectionBox.Z2 = 0.25f; // Length: 1.25 - (-0.75) = 2.0 blocks
-
+            entity.SelectionBox.Set(
+                x1: -0.5f, y1: 0.0f, z1: -0.75f,
+                x2: 0.5f, y2: 0.7f, z2: 0.25f
+            );
         }
 
         private void RestoreDefaultHitbox()
         {
-            entity.CollisionBox.X1 = originalCollisionBox.X1;
-            entity.CollisionBox.Y1 = originalCollisionBox.Y1;
-            entity.CollisionBox.Z1 = originalCollisionBox.Z1;
-            entity.CollisionBox.X2 = originalCollisionBox.X2;
-            entity.CollisionBox.Y2 = originalCollisionBox.Y2;
-            entity.CollisionBox.Z2 = originalCollisionBox.Z2;
-
-            entity.SelectionBox.X1 = originalSelectionBox.X1;
-            entity.SelectionBox.Y1 = originalSelectionBox.Y1;
-            entity.SelectionBox.Z1 = originalSelectionBox.Z1;
-            entity.SelectionBox.X2 = originalSelectionBox.X2;
-            entity.SelectionBox.Y2 = originalSelectionBox.Y2;
-            entity.SelectionBox.Z2 = originalSelectionBox.Z2;
+            entity.CollisionBox.Set(originalCollisionBox);
+            entity.SelectionBox.Set(originalSelectionBox);
         }
 
         public override void OnEntityLoaded()
@@ -164,103 +151,66 @@ namespace Unconscious.src.Player
         {
             base.OnInteract(byEntity, itemslot, hitPosition, mode, ref handled);
 
-
-            var targetPlayer = entity as EntityPlayer;
-
-            if (byEntity is EntityAgent interactingPlayer)
+            if (byEntity is not EntityPlayer interactingPlayer || entity is not EntityPlayer targetPlayer || mode != EnumInteractMode.Interact)
             {
-                var entityPlayer = byEntity as EntityAgent;
-                if (entityPlayer != null && mode == EnumInteractMode.Interact && byEntity.Controls.Sneak && byEntity.World.Side == EnumAppSide.Server)
+                return;
+            }
+
+            if (byEntity.World.Side != EnumAppSide.Server)
+            {
+                return;
+            }
+
+            if (byEntity.Controls.Sneak && targetPlayer.IsUnconscious())
+            {
+                isHoldingRevive = true;
+                initialPosition ??= interactingPlayer.Pos.AsBlockPos.ToVec3d();
+                sapi.Event.UnregisterCallback(reviveCancelCallbackId);
+                HandleReviveHold(interactingPlayer, targetPlayer);
+            }
+            else if (byEntity.Controls.CtrlKey && targetPlayer.IsUnconscious() && UnconsciousModSystem.getConfig().EnableCarryMechanic && !isCarryCooldown)
+            {
+                initialPosition ??= interactingPlayer.Pos.AsBlockPos.ToVec3d();
+                sapi.Event.UnregisterCallback(pickupCancelCallbackId);
+                if (isCarrying)
                 {
-                    if (!targetPlayer.IsUnconscious())
-                    {
-                        return;
-                    }
-
-                    isHolding = true;
-                    if (initialPosition == null)
-                    {
-                        initialPosition = interactingPlayer.Pos.AsBlockPos.ToVec3d();
-                    }
-                    sapi.Event.UnregisterCallback(reviveCancelcallbackId);
-                    HandleReviveHold(byEntity as EntityPlayer, targetPlayer);
-
+                    StopCarryingPlayer(interactingPlayer, targetPlayer, Lang.Get("unconscious:pickup-putdown"));
                 }
-
-                if (
-                    entityPlayer != null &&
-                    mode == EnumInteractMode.Interact &&
-                    byEntity.Controls.CtrlKey &&
-                    byEntity.World.Side == EnumAppSide.Server
-                    )
+                else
                 {
-                    if (!UnconsciousModSystem.getConfig().EnableCarryMechanic)
-                    {
-                        return;
-                    }
-
-                    if (!targetPlayer.IsUnconscious())
-                    {
-                        return;
-                    }
-
-                    if (initialPosition == null)
-                    {
-                        initialPosition = interactingPlayer.Pos.AsBlockPos.ToVec3d();
-                    }
-
-                    if (isCarriedCooldown)
-                    {
-                        return;
-                    }
-
-                    if (!isCarried)
-                    {
-                        sapi.Event.UnregisterCallback(pickupCancelcallbackId);
-                        HandleCarryHold(byEntity as EntityPlayer, targetPlayer);
-                    }
-                    else
-                    {
-                        StopCarryingPlayer(byEntity as EntityPlayer, targetPlayer, Lang.Get("unconscious:pickup-putdown"));
-                    }
-
+                    HandleCarryHold(interactingPlayer, targetPlayer);
                 }
             }
         }
 
-        private void SendErrorMessage(string text, EntityPlayer interactingPlayer)
+        private void SendErrorMessage(string message, EntityPlayer interactingPlayer)
         {
-            string mainText = "ReviveCycle";
-            DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-            defaultInterpolatedStringHandler.AppendLiteral(text);
-            sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, mainText, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
+            var serverPlayer = interactingPlayer.Player as IServerPlayer;
+            sapi.SendIngameError(serverPlayer, "ReviveCycle", message, Array.Empty<object>());
         }
 
-        long eventlistenerid;
         private void StartCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
-            sapi.Event.UnregisterCallback(pickupCancelcallbackId);
-            sapi.Event.UnregisterGameTickListener(eventlistenerid);
+            sapi.Event.UnregisterCallback(pickupCancelCallbackId);
+            sapi.Event.UnregisterGameTickListener(carryTickListenerId);
 
-            IServerPlayer interactingServerPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
+            var serverPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
 
             if (!IsWithinDistance(interactingPlayer, targetPlayer, 2))
             {
                 StopCarryingPlayer(interactingPlayer, targetPlayer, Lang.Get("unconscious:pickup-error-toofar"));
-                sapi.Event.UnregisterGameTickListener(eventlistenerid);
                 return;
             }
 
-            if (isCarried)
+            if (isCarrying)
             {
+                carriedPlayerUID = targetPlayer.PlayerUID;
                 SendErrorMessage($"{Lang.Get("unconscious:pickup-success")} {targetPlayer.Player.PlayerName}", interactingPlayer);
-                interactingServerPlayer.Entity.Stats.Remove("walkspeed", "unconsciousCarry");
-                interactingServerPlayer.Entity.Stats.Set("walkspeed", "unconsciousCarry", -0.60f, false);
+                serverPlayer.Entity.Stats.Set("walkspeed", "unconsciousCarry", -0.60f, false);
 
-                eventlistenerid = sapi.Event.RegisterGameTickListener((dt) =>
+                carryTickListenerId = sapi.Event.RegisterGameTickListener(dt =>
                 {
-                    interactingServerPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
-                    if (!isCarried && !interactingServerPlayer.Entity.WatchedAttributes.GetBool("carryingUnconciousPlayer", false))
+                    if (!isCarrying || !serverPlayer.Entity.WatchedAttributes.GetBool("carryingUnconciousPlayer"))
                     {
                         StopCarryingPlayer(interactingPlayer, targetPlayer, Lang.Get("unconscious:pickup-error-drop"));
                         return;
@@ -284,49 +234,39 @@ namespace Unconscious.src.Player
                         return;
                     }
 
-                    Vec3d carryPosition = interactingPlayer.ServerPos.XYZ.Add(-0.5, 0, -0.5);
-                    targetPlayer.Pos.SetPos(carryPosition);
 
-                    if(targetPlayer.ServerPos.XYZ != interactingPlayer.ServerPos.XYZ)
+                    var carryPosition = interactingPlayer.ServerPos.XYZ.Add(-0.5, 0, -0.5);
+                    targetPlayer.Pos.SetPos(carryPosition);
+                    if (!targetPlayer.ServerPos.XYZ.Equals(carryPosition))
                     {
                         targetPlayer.TeleportTo(carryPosition);
                     }
                 }, 200);
-            }    
+            }
         }
 
-        private void StopCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer, string errorMessage)
+        private void StopCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer, string message)
         {
-            isCarried = false;
-            IServerPlayer interactingServerPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
-            interactingServerPlayer.Entity.Stats.Remove("walkspeed", "unconsciousCarry");
+            isCarrying = false;
+            isCarryCooldown = true;
+            var serverPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
+            serverPlayer.Entity.Stats.Remove("walkspeed", "unconsciousCarry");
+            serverPlayer.Entity.WatchedAttributes.SetBool("carryingUnconciousPlayer", false);
+            serverPlayer.Entity.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
+            sapi.Event.UnregisterGameTickListener(carryTickListenerId);
+            SendErrorMessage(message, interactingPlayer);
 
-            interactingServerPlayer.Entity.WatchedAttributes.SetBool("carryingUnconciousPlayer", false);
-            interactingServerPlayer.Entity.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
-            sapi.Event.UnregisterGameTickListener(eventlistenerid);
-            SendErrorMessage(errorMessage, interactingPlayer);
+            sapi.Event.RegisterCallback(_ => isCarryCooldown = false, 2000);
         }
 
         private bool IsWithinDistance(EntityPlayer player1, EntityPlayer player2, double maxDistance)
         {
-            // Get the positions of the players
-            Vec3d pos1 = player1.ServerPos.XYZ;
-            Vec3d pos2 = player2.ServerPos.XYZ;
-
-            // Calculate the distance between them
-            double distance = pos1.DistanceTo(pos2);
-
-            // Check if the distance is less than the specified maxDistance
-            return distance < maxDistance;
+            return player1.ServerPos.XYZ.DistanceTo(player2.ServerPos.XYZ) < maxDistance;
         }
 
         private void HandleCarryHold(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
-
-            pickupCancelcallbackId = sapi.Event.RegisterCallback((dt) =>
-            {
-                CancelCarryHold(interactingPlayer);
-            }, 2000);
+            pickupCancelCallbackId = sapi.Event.RegisterCallback(_ => CancelCarryHold(interactingPlayer), 2000);
 
             if (HasPlayerMoved(interactingPlayer))
             {
@@ -334,65 +274,53 @@ namespace Unconscious.src.Player
                 return;
             }
 
-            holdCarryTime += UnconsciousModSystem.getConfig().PickupPerTickDuration; ; // Increment hold time (50ms = 0.05s)
+            entity.WatchedAttributes.SetLong("interactingPlayerId", interactingPlayer.EntityId);
+            entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
+
+            holdCarryTime += UnconsciousModSystem.getConfig().PickupPerTickDuration;
+            // Update entity attribute for client-side rendering
+            entity.WatchedAttributes.SetFloat("carryProgress", holdCarryTime / 10f);
+            entity.WatchedAttributes.MarkPathDirty("carryProgress");
 
             if (holdCarryTime > 10f)
             {
-                isCarried = true;
+                isCarrying = true;
                 interactingPlayer.WatchedAttributes.SetBool("carryingUnconciousPlayer", true);
                 interactingPlayer.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
+                entity.WatchedAttributes.SetFloat("carryProgress", 0f);
+                entity.WatchedAttributes.SetLong("interactingPlayerId", 0); // Clear ID
+                entity.WatchedAttributes.MarkPathDirty("carryProgress");
+                entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
                 StartCarryingPlayer(interactingPlayer, targetPlayer);
                 holdCarryTime = 0;
                 initialPosition = null;
-                isCarriedCooldown = true;
-                sapi.Event.RegisterCallback((dt) =>
-                {
-                    isCarriedCooldown = false;
-                }, 2000);
-            }
-            else
-            {
-                string text = "SpeedCycle";
-                EntityPlayer entityPlayer = entity as EntityPlayer;
-                DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-
-                defaultInterpolatedStringHandler.AppendLiteral(Lang.Get("unconscious:pickup-progress"));
-                defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdCarryTime * 10f));
-                defaultInterpolatedStringHandler.AppendLiteral("%");
-
-                sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
             }
         }
 
         private void HandleReviveHold(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
-            reviveCancelcallbackId = sapi.Event.RegisterCallback((dt) =>
+            reviveCancelCallbackId = sapi.Event.RegisterCallback(_ => CancelReviveHold(interactingPlayer), 2000);
+
+            if (!isHoldingRevive) return;
+
+            var heldItem = interactingPlayer.ActiveHandItemSlot.Itemstack;
+            var characterClass = interactingPlayer.WatchedAttributes?.GetAsString("characterClass");
+            var config = UnconsciousModSystem.getConfig();
+
+            if (string.IsNullOrEmpty(characterClass) ||
+                (config.RequireSmellingSaltsForRevive &&
+                 !config.ReviveClassWhitelist.Contains(characterClass) &&
+                 (heldItem == null || !heldItem.Collectible.Code.Path.Contains("smellingsalts"))))
             {
                 CancelReviveHold(interactingPlayer);
-            }, 2000);
-            if (!isHolding) return;
-
-            var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
-
-            string characterClass;
-            SyncedTreeAttribute watchedAttributes = interactingPlayer.WatchedAttributes;
-            characterClass = ((watchedAttributes != null) ? watchedAttributes.GetAsString("characterClass", null) : null);
-
-            if (string.IsNullOrEmpty(characterClass))
-            {
                 return;
-            }
-
-            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive && !UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass))
-            {
-                if (helditem == null) return;
-                if (helditem != null && !helditem.Collectible.Code.Path.Contains("smellingsalts")) return;
             }
 
             if (!IsWithinDistance(interactingPlayer, targetPlayer, 2))
             {
-                isCarried = false;
-                sapi.Event.UnregisterGameTickListener(eventlistenerid);
+                isCarrying = false;
+                sapi.Event.UnregisterGameTickListener(carryTickListenerId);
+                CancelReviveHold(interactingPlayer);
                 return;
             }
 
@@ -402,93 +330,193 @@ namespace Unconscious.src.Player
                 return;
             }
 
-            if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts-strong"))
+            entity.WatchedAttributes.SetLong("interactingPlayerId", interactingPlayer.EntityId);
+            entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
+
+            float reviveSpeed = config.RevivePerTickDuration;
+            if (config.ReviveClassWhitelist.Contains(characterClass))
             {
-                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
-                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration + 0.1f;
-            } 
-            else if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts-weak")) 
-            {
-                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
-                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration;
+                reviveSpeed += 0.2f;
             }
-            else
+            if (heldItem?.Collectible.Code.Path.Contains("smellingsalts-strong") == true)
             {
-                holdReviveTime += UnconsciousModSystem.getConfig().ReviveClassWhitelist.Contains(characterClass) ? +0.2f : 0f;
-                holdReviveTime += UnconsciousModSystem.getConfig().RevivePerTickDuration;
+                reviveSpeed += 0.1f;
             }
+
+            holdReviveTime += reviveSpeed;
+            // Update entity attribute for client-side rendering
+            entity.WatchedAttributes.SetFloat("reviveProgress", holdReviveTime / 10f);
+            entity.WatchedAttributes.MarkPathDirty("reviveProgress");
 
             if (holdReviveTime > 10f)
             {
-                FinishRunLongPressAction(interactingPlayer);
-
-                isHolding = false;
+                FinishRevive(interactingPlayer, targetPlayer);
+                entity.WatchedAttributes.SetFloat("reviveProgress", 0f); // Reset progress
+                entity.WatchedAttributes.SetLong("interactingPlayerId", 0); // Clear ID
+                entity.WatchedAttributes.MarkPathDirty("reviveProgress");
+                entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
+                isHoldingRevive = false;
                 holdReviveTime = 0;
                 initialPosition = null;
-            }
-            else
-            {
-                string text = "SpeedCycle";
-                EntityPlayer entityPlayer = entity as EntityPlayer;
-                DefaultInterpolatedStringHandler defaultInterpolatedStringHandler = new DefaultInterpolatedStringHandler(19, 1);
-                
-                defaultInterpolatedStringHandler.AppendLiteral(Lang.Get("unconscious:reviving-progress"));
-                defaultInterpolatedStringHandler.AppendFormatted(Math.Truncate(holdReviveTime * 10f));
-                defaultInterpolatedStringHandler.AppendLiteral("%");
-
-                sapi.SendIngameError(interactingPlayer.Player as IServerPlayer, text, defaultInterpolatedStringHandler.ToStringAndClear(), Array.Empty<object>());
             }
         }
 
         private bool HasPlayerMoved(EntityPlayer player)
         {
-            Vec3d currentPosition = player.Pos.AsBlockPos.ToVec3d();
-            return !currentPosition.Equals(initialPosition);
+            return initialPosition != null && !player.Pos.AsBlockPos.ToVec3d().Equals(initialPosition);
         }
 
         private void CancelCarryHold(EntityPlayer interactingPlayer)
         {
-            isCarried = false;
+            isCarrying = false;
             holdCarryTime = 0;
             initialPosition = null;
-
+            entity.WatchedAttributes.SetFloat("carryProgress", 0f);
+            entity.WatchedAttributes.SetLong("interactingPlayerId", 0);
+            entity.WatchedAttributes.MarkPathDirty("carryProgress");
+            entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
             SendErrorMessage(Lang.Get("unconscious:reviving-cancel"), interactingPlayer);
         }
 
         private void CancelReviveHold(EntityPlayer interactingPlayer)
         {
-            isHolding = false;
+            isHoldingRevive = false;
             holdReviveTime = 0;
             initialPosition = null;
-
+            entity.WatchedAttributes.SetFloat("reviveProgress", 0f);
+            entity.WatchedAttributes.SetLong("interactingPlayerId", 0);
+            entity.WatchedAttributes.MarkPathDirty("reviveProgress");
+            entity.WatchedAttributes.MarkPathDirty("interactingPlayerId");
             SendErrorMessage(Lang.Get("unconscious:reviving-cancel"), interactingPlayer);
         }
 
-        private void FinishRunLongPressAction(EntityPlayer interactingPlayer)
+        private void FinishRevive(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
-            var player = entity as EntityPlayer;
+            var config = UnconsciousModSystem.getConfig();
+            var heldItem = interactingPlayer.ActiveHandItemSlot.Itemstack;
+            float healingPotency = config.MaxHealthPercentAfterRevive;
 
-            SendErrorMessage(($"{player.Player.PlayerName} {Lang.Get("unconscious:reviving-success")}"), interactingPlayer);
+            SendErrorMessage($"{targetPlayer.Player.PlayerName} {Lang.Get("unconscious:reviving-success")}", interactingPlayer);
 
-            if (UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive)
+            if (config.RequireSmellingSaltsForRevive && heldItem?.Collectible.Code.Path.Contains("smellingsalts") == true)
             {
-                var helditem = interactingPlayer.ActiveHandItemSlot.Itemstack;
-                if (helditem != null && helditem.Collectible.Code.Path.Contains("smellingsalts"))
+                if (heldItem.Collectible.Code.Path.Contains("smellingsalts-strong"))
                 {
-                    var activeSlot = interactingPlayer.Player.InventoryManager.ActiveHotbarSlot;
-
-                    activeSlot.TakeOut(1);
-                    activeSlot.MarkDirty();
-
-                    float healingPotency = helditem.Collectible.Code.Path.Contains("smellingsalts-strong") ? UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive + 0.30f : UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive;
-
-                    UnconsciousModSystem.HandlePlayerPickup(player, healingPotency);
-                    return;
-                };
+                    healingPotency += 0.30f;
+                }
+                var activeSlot = interactingPlayer.Player.InventoryManager.ActiveHotbarSlot;
+                activeSlot.TakeOut(1);
+                activeSlot.MarkDirty();
             }
 
-            UnconsciousModSystem.HandlePlayerPickup(player, UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
+            UnconsciousModSystem.HandlePlayerPickup(targetPlayer, healingPotency);
         }
 
+        public void RenderProgressCircle(float progress)
+        {
+            var renderApi = capi.Render;
+            long interactingPlayerId = entity.WatchedAttributes.GetLong("interactingPlayerId", 0);
+            long localPlayerId = capi.World.Player.Entity.EntityId;
+            if (interactingPlayerId == 0 || interactingPlayerId != localPlayerId)
+            {
+                return; // Only render for the interacting player
+            }
+
+            float scaledProgress = progress;
+            float outerRadius = 40f;
+            float innerRadius = 30f;
+            int maxSteps = 32;
+            float circleAlpha = 1f;
+
+            Vec4f circleColor;
+            float reviveProgress = entity.WatchedAttributes.GetFloat("reviveProgress", 0f);
+            if (reviveProgress > 0)
+            {
+                circleColor = new Vec4f(0.596078431372549f, 0.8431372549019608f, 0.6888888888888889f, circleAlpha); // Green for revive
+            }
+            else
+            {
+                circleColor = new Vec4f(1f, 1f, 0f, circleAlpha); // Yellow for pickup
+            }
+
+            // Calculate number of segments based on progress
+            int numSegments = 1 + (int)Math.Ceiling(maxSteps * scaledProgress);
+
+            // Create mesh for progress circle
+            MeshData meshData = new MeshData(numSegments * 2, numSegments * 6, false, false, true, false);
+            for (int i = 0; i < numSegments; i++)
+            {
+                double angle = Math.Min(scaledProgress, (float)i / maxSteps) * 2.0 * Math.PI;
+                float sin = (float)Math.Sin(angle);
+                float cos = -(float)Math.Cos(angle);
+                meshData.AddVertexSkipTex(sin * outerRadius, cos * outerRadius, 0f, -1);
+                meshData.AddVertexSkipTex(sin * innerRadius, cos * innerRadius, 0f, -1);
+                if (i > 0)
+                {
+                    meshData.AddIndices(new int[] { i * 2 - 2, i * 2 - 1, i * 2 });
+                    meshData.AddIndices(new int[] { i * 2, i * 2 - 1, i * 2 + 1 });
+                }
+            }
+
+            // Update or create mesh
+            try
+            {
+                if (circleMeshRef != null)
+                {
+                    renderApi.UpdateMesh(circleMeshRef, meshData);
+                }
+                else
+                {
+                    circleMeshRef = renderApi.UploadMesh(meshData);
+                }
+
+                // Set up rendering
+                var shader = renderApi.CurrentActiveShader;
+                shader.Uniform("rgbaIn", circleColor); // Use dynamic color
+                shader.Uniform("extraGlow", 0);
+                shader.Uniform("applyColor", 0);
+                shader.Uniform("tex2d", 0);
+                shader.Uniform("noTexture", 1f);
+                shader.UniformMatrix("projectionMatrix", renderApi.CurrentProjectionMatrix);
+
+                // Center at cursor or screen center if mouse is grabbed
+                int centerX = capi.Input.MouseGrabbed ? renderApi.FrameWidth / 2 : capi.Input.MouseX;
+                int centerY = capi.Input.MouseGrabbed ? renderApi.FrameHeight / 2 : capi.Input.MouseY;
+
+                renderApi.GlPushMatrix();
+                renderApi.GlTranslate(centerX, centerY, 0f);
+                shader.UniformMatrix("modelViewMatrix", renderApi.CurrentModelviewMatrix);
+                renderApi.RenderMesh(circleMeshRef);
+                renderApi.GlPopMatrix();
+            }
+            finally
+            {
+                // Clean up mesh to avoid memory leaks
+                if (circleMeshRef != null)
+                {
+                    renderApi.DeleteMesh(circleMeshRef);
+                    circleMeshRef = null;
+                }
+            }
+        }
+
+        public override void OnEntityDespawn(EntityDespawnData despawn)
+        {
+            base.OnEntityDespawn(despawn);
+            if (capi != null)
+            {
+                if (progressRenderer != null)
+                {
+                    capi.Event.UnregisterRenderer(progressRenderer, EnumRenderStage.Ortho);
+                    progressRenderer.Dispose();
+                    progressRenderer = null;
+                }
+                if (circleMeshRef != null)
+                {
+                    capi.Render.DeleteMesh(circleMeshRef);
+                    circleMeshRef = null;
+                }
+            }
+        }
     }
 }
