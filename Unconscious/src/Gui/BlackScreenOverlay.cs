@@ -63,8 +63,8 @@ namespace Unconscious.src.Gui
             var rectH = capi.Render.FrameHeight;
             var rectW = capi.Render.FrameWidth;
 
-            string[] quotes = new string[]
-             {
+            string[] quotes =
+            [
                 Lang.Get("unconscious:unconscious-quote-1"),
                 Lang.Get("unconscious:unconscious-quote-2"),
                 Lang.Get("unconscious:unconscious-quote-3"),
@@ -73,7 +73,17 @@ namespace Unconscious.src.Gui
                 Lang.Get("unconscious:unconscious-quote-6"),
                 Lang.Get("unconscious:unconscious-quote-7"),
                 Lang.Get("unconscious:unconscious-quote-8"),
-             };
+                Lang.Get("unconscious:unconscious-quote-9"),
+                Lang.Get("unconscious:unconscious-quote-10"),
+                Lang.Get("unconscious:unconscious-quote-11"),
+                Lang.Get("unconscious:unconscious-quote-12"),
+                Lang.Get("unconscious:unconscious-quote-13"),
+                Lang.Get("unconscious:unconscious-quote-14"),
+                Lang.Get("unconscious:unconscious-quote-15"),
+                Lang.Get("unconscious:unconscious-quote-16"),
+                Lang.Get("unconscious:unconscious-quote-17"),
+                Lang.Get("unconscious:unconscious-quote-18"),
+            ];
 
             string randomQuote = GetRandomQuote(quotes);
 

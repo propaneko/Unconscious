@@ -1,18 +1,60 @@
 [
-    {
-        "file": "game:entities/humanoid/player.json",
-        "path": "/client/behaviors/-",
-        "op": "addmerge",
-        "value": {
-            "code": "revivebehavior"
-        }
-    },
-    {
-        "file": "game:entities/humanoid/player.json",
-        "path": "/server/behaviors/-",
-        "op": "addmerge",
-        "value": {
-            "code": "revivebehavior"
-        }
+  {
+    "file": "game:entities/humanoid/player.json",
+    "op": "remove",
+    "path": "/server/behaviors/7"
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "op": "remove",
+    "path": "/client/behaviors/4"
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousBehavior"
     }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/server/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousBehavior"
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousReviveBehavior"
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/server/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousReviveBehavior"
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/client/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousPickupBehavior"
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/server/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "UnconsciousPickupBehavior"
+    }
+  }
 ]

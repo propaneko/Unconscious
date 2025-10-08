@@ -48,26 +48,26 @@ namespace Unconscious.src.Commands
                     .HandleWith(OnSuicideTimerChange)
                     .EndSubCommand()
 
-                    .BeginSubCommand("reviveTick")
-                    .WithDescription("set how much value will increase per tick")
-                    .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
-                    .WithArgs(new FloatArgParser("value", 0.1f, 10f, false))
-                    .HandleWith(OnReviveTickChange)
-                    .EndSubCommand()
+                    //.BeginSubCommand("reviveTick")
+                    //.WithDescription("set how much value will increase per tick")
+                    //.RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
+                    //.WithArgs(new FloatArgParser("value", 0.1f, 10f, false))
+                    //.HandleWith(OnReviveTickChange)
+                    //.EndSubCommand()
 
-                    .BeginSubCommand("pickupTick")
-                    .WithDescription("set how much value will increase per tick")
-                    .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
-                    .WithArgs(new FloatArgParser("value", 0.1f, 10f, false))
-                    .HandleWith(OnPickupTickChange)
-                    .EndSubCommand()
+                    //.BeginSubCommand("pickupTick")
+                    //.WithDescription("set how much value will increase per tick")
+                    //.RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
+                    //.WithArgs(new FloatArgParser("value", 0.1f, 10f, false))
+                    //.HandleWith(OnPickupTickChange)
+                    //.EndSubCommand()
 
-                    .BeginSubCommand("maxHealthAfteRrevive")
-                    .WithDescription("set how much health will be regenerated after revive (0.0f is 0%)")
-                    .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
-                    .WithArgs(new FloatArgParser("value", 0.0f, 1.0f, false))
-                    .HandleWith(OnMaxHealthAfteRreviveChange)
-                    .EndSubCommand()
+                    //.BeginSubCommand("maxHealthAfteRrevive")
+                    //.WithDescription("set how much health will be regenerated after revive (0.0f is 0%)")
+                    //.RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
+                    //.WithArgs(new FloatArgParser("value", 0.0f, 1.0f, false))
+                    //.HandleWith(OnMaxHealthAfteRreviveChange)
+                    //.EndSubCommand()
 
                     .BeginSubCommand("chanceOfSelfRevival")
                     .WithDescription("set chance of self revival after timer runs out (0.0f is 0% %)")
@@ -95,13 +95,6 @@ namespace Unconscious.src.Commands
                     .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
                     .WithArgs(new BoolArgParser("enable", "enable", false))
                     .HandleWith(OnDropWeaponOnUnconsciousChange)
-                    .EndSubCommand()
-
-                    .BeginSubCommand("requireSmellingSaltsForRevive")
-                    .WithDescription("enable or disable the need of smelling salts for reviving")
-                    .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
-                    .WithArgs(new BoolArgParser("enable", "enable", false))
-                    .HandleWith(OnRequireSmellingSaltsForReviveChange)
                     .EndSubCommand()
 
                     .BeginSubCommand("gracePeriodBS")
@@ -135,18 +128,6 @@ namespace Unconscious.src.Commands
             UnconsciousModSystem.getConfig().GracePeriod = (int)args[0];
             sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
             return TextCommandResult.Success($"Grace Period time in ms: {UnconsciousModSystem.getConfig().GracePeriod}");
-        }
-
-        private TextCommandResult OnRequireSmellingSaltsForReviveChange(TextCommandCallingArgs args)
-        {
-            if (args.Parsers[0].IsMissing)
-            {
-                return TextCommandResult.Success($"Require smelling salts: {UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive}");
-            }
-
-            UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive = (bool)args[0];
-            sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
-            return TextCommandResult.Success($"Require smelling salts: {UnconsciousModSystem.getConfig().RequireSmellingSaltsForRevive}");
         }
 
         private TextCommandResult OnDropWeaponOnUnconsciousChange(TextCommandCallingArgs args)
@@ -196,42 +177,42 @@ namespace Unconscious.src.Commands
             return TextCommandResult.Success($"Chance of self revival: {UnconsciousModSystem.getConfig().ChanceOfSelfRevival}");
         }
 
-        private TextCommandResult OnMaxHealthAfteRreviveChange(TextCommandCallingArgs args)
-        {
-            if (args.Parsers[0].IsMissing)
-            {
-                return TextCommandResult.Success($"Health after revive: {UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive}");
-            }
+        //private TextCommandResult OnMaxHealthAfteRreviveChange(TextCommandCallingArgs args)
+        //{
+        //    if (args.Parsers[0].IsMissing)
+        //    {
+        //        return TextCommandResult.Success($"Health after revive: {UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive}");
+        //    }
 
-            UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive = (float)args[0];
-            sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
-            return TextCommandResult.Success($"Health after revive: {UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive}");
-        }
+        //    UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive = (float)args[0];
+        //    sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
+        //    return TextCommandResult.Success($"Health after revive: {UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive}");
+        //}
 
-        private TextCommandResult OnPickupTickChange(TextCommandCallingArgs args)
-        {
-            if (args.Parsers[0].IsMissing)
-            {
-                return TextCommandResult.Success($"Pickup tick value: {UnconsciousModSystem.getConfig().PickupPerTickDuration}");
-            }
+        //private TextCommandResult OnPickupTickChange(TextCommandCallingArgs args)
+        //{
+        //    if (args.Parsers[0].IsMissing)
+        //    {
+        //        return TextCommandResult.Success($"Pickup tick value: {UnconsciousModSystem.getConfig().PickupDuration}");
+        //    }
 
-            UnconsciousModSystem.getConfig().PickupPerTickDuration = (float)args[0];
-            sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
-            return TextCommandResult.Success($"Suicide timer duration: {UnconsciousModSystem.getConfig().PickupPerTickDuration}");
-        }
+        //    UnconsciousModSystem.getConfig().PickupDuration = (float)args[0];
+        //    sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
+        //    return TextCommandResult.Success($"Suicide timer duration: {UnconsciousModSystem.getConfig().PickupDuration}");
+        //}
 
 
-        private TextCommandResult OnReviveTickChange(TextCommandCallingArgs args)
-        {
-            if (args.Parsers[0].IsMissing)
-            {
-                return TextCommandResult.Success($"Revive tick value: {UnconsciousModSystem.getConfig().RevivePerTickDuration}");
-            }
+        //private TextCommandResult OnReviveTickChange(TextCommandCallingArgs args)
+        //{
+        //    if (args.Parsers[0].IsMissing)
+        //    {
+        //        return TextCommandResult.Success($"Revive tick value: {UnconsciousModSystem.getConfig().ReviveDuration}");
+        //    }
 
-            UnconsciousModSystem.getConfig().RevivePerTickDuration = (float)args[0];
-            sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
-            return TextCommandResult.Success($"Revive tick value: {UnconsciousModSystem.getConfig().RevivePerTickDuration}");
-        }
+        //    UnconsciousModSystem.getConfig().ReviveDuration = (float)args[0];
+        //    sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
+        //    return TextCommandResult.Success($"Revive tick value: {UnconsciousModSystem.getConfig().ReviveDuration}");
+        //}
 
         private TextCommandResult OnSuicideTimerChange(TextCommandCallingArgs args)
         {

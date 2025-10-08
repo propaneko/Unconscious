@@ -1,0 +1,32 @@
+[
+  {
+    "file": "game:itemtypes/bandage.json",
+    "op": "replace",
+    "path": "/behaviors/0",
+    "value": {
+      "name": "UnconsciousRevivingItem",
+      "propertiesByType": {
+        "*-alcoholed": {
+          "health": 7,
+          "applicationtimesec": 3,
+          "maxapplicationtimesec": 10,
+          "effectdurationsec": 10,
+          "ticks": 4,
+          "cancelinair": false,
+          "cancelwhileswimming": false,
+          "delaytocancelsec": 0.5
+        },
+        "*-clean": {
+          "health": 3,
+          "applicationtimesec": 3,
+          "maxapplicationtimesec": 10,
+          "effectdurationsec": 10,
+          "ticks": 4,
+          "cancelinair": false,
+          "cancelwhileswimming": false,
+          "delaytocancelsec": 0.5
+        }
+      }
+    }
+  },
+]

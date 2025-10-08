@@ -1,24 +1,25 @@
-﻿using HarmonyLib;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using HarmonyLib;
+using Unconscious.src.Behaviors.Items;
+using Unconscious.src.Behaviors.Player;
 using Unconscious.src.Commands;
+using Unconscious.src.Compat;
 using Unconscious.src.Config;
 using Unconscious.src.Handlers;
 using Unconscious.src.Harmony;
+using Unconscious.src.Items;
 using Unconscious.src.Packets;
 using Unconscious.src.Player;
+using Unconscious.src.Renderers;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
-using Unconscious.src.Compat;
-using System;
-using Unconscious.src.Renderers;
-using Vintagestory.API.Datastructures;
-using System.Linq;
-using Vintagestory.Server;
 
 namespace Unconscious
 {
@@ -83,10 +84,6 @@ namespace Unconscious
                         "Electricity",
                         "Heat",
                         "Injury"
-                    },
-                    ReviveClassWhitelist = new string[]
-                    {
-                        "medic",
                     }
                 };
 
@@ -103,27 +100,43 @@ namespace Unconscious
 
         public override void Start(ICoreAPI api)
         {
-            api.RegisterEntityBehaviorClass("revivebehavior", typeof(ReviveBehavior));
+
+            api.RegisterEntityBehaviorClass("UnconsciousBehavior", typeof(BehaviorUnconsciousPlayer));
+            api.RegisterEntityBehaviorClass("UnconsciousReviveBehavior", typeof(BehaviorRevivePlayer));
+            api.RegisterEntityBehaviorClass("UnconsciousPickupBehavior", typeof(BehaviorPickupPlayer));
+
+            api.RegisterCollectibleBehaviorClass("UnconsciousRevivingItem", typeof(BehaviorRevivingItem));
+            api.RegisterCollectibleBehaviorClass("UnconsciousPickupItem", typeof(BehaviorPickupItem));
+
+            api.RegisterItemClass("ItemSmellingSalts", typeof(ItemSmellingSalts));
+
 
             harmony = new Harmony(Mod.Info.ModID);
-            var originalOnHurt = AccessTools.Method(typeof(EntityPlayer), nameof(EntityPlayer.OnHurt));
-            var postfixOnHurt = AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.OnHurt));
-            harmony.Patch(originalOnHurt, new HarmonyMethod(postfixOnHurt));
+            harmony.Patch(
+                AccessTools.Method(typeof(EntityPlayer), nameof(EntityPlayer.OnHurt)), 
+                new HarmonyMethod(AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.OnHurt)))
+            );
 
-            var originalIsTargetableEntity = AccessTools.Method(typeof(AiTaskBaseTargetable), nameof(AiTaskBaseTargetable.IsTargetableEntity));
-            var postfixIsTargetableEntity = AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.ShouldCancelTarget));
-            harmony.Patch(originalIsTargetableEntity, new HarmonyMethod(postfixIsTargetableEntity));
+            harmony.Patch(
+                AccessTools.Method(typeof(AiTaskBaseTargetable), nameof(AiTaskBaseTargetable.IsTargetableEntity)), 
+                new HarmonyMethod(AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.ShouldCancelTarget)))
+            );
+
+            harmony.Patch(
+                AccessTools.Method(typeof(EntityBehaviorPlayerRevivable),nameof(EntityBehaviorPlayerRevivable.AttemptRevive)),
+                new HarmonyMethod(AccessTools.Method(typeof(PlayerPatch), nameof(PlayerPatch.AttemptRevive)))
+             );
 
             base.Start(api);
 
             api.Network.RegisterChannel(Mod.Info.ModID)
-           .RegisterMessageType(typeof(SendUnconsciousPacket))
-           .RegisterMessageType(typeof(PlayerDeath))
-           .RegisterMessageType(typeof(PlayerKill))
-           .RegisterMessageType(typeof(PlayerRevive))
-           .RegisterMessageType(typeof(PlayerAnimation))
-           .RegisterMessageType(typeof(ShowPlayerFinishOffScreenPacket))
-           .RegisterMessageType(typeof(ShowUnconciousScreen));
+               .RegisterMessageType(typeof(SendUnconsciousPacket))
+               .RegisterMessageType(typeof(PlayerDeath))
+               .RegisterMessageType(typeof(PlayerKill))
+               .RegisterMessageType(typeof(PlayerRevive))
+               .RegisterMessageType(typeof(PlayerAnimation))
+               .RegisterMessageType(typeof(ShowPlayerFinishOffScreenPacket))
+               .RegisterMessageType(typeof(ShowUnconciousScreen));
 
         }
 
@@ -134,23 +147,13 @@ namespace Unconscious
 
             api.Event.PlayerEntitySpawn += delegate (IClientPlayer player)
             {
+
                 if (player == null || player.Entity == null)
                 {
                     capi.Logger.Warning($"PlayerEntitySpawn: Player or Player.Entity is null. PlayerUID: {player?.PlayerUID ?? "null"}");
                     return;
                 }
 
-                try
-                {
-                    var renderer = new UnconsciousIndicatorRenderer(api, player.Entity);
-                    api.Event.RegisterRenderer(renderer, EnumRenderStage.Ortho, null);
-                    renderers[player.PlayerUID] = renderer;
-                    capi.Logger.Debug($"Registered renderer for player {player.PlayerUID} (EntityId: {player.Entity.EntityId})");
-                }
-                catch (Exception ex)
-                {
-                    capi.Logger.Error($"Failed to register renderer for player {player.PlayerUID}: {ex}");
-                }
             };
 
             api.Event.PlayerLeave += delegate (IClientPlayer player)
@@ -263,16 +266,14 @@ namespace Unconscious
             });
         }
 
-        public static void HandlePlayerPickup(EntityPlayer player, float pickupPercentHealth)
+        public static void HandlePlayerPickup(EntityPlayer player, float healAmount)
         {
             player.AnimManager.StopAnimation("sleep");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
 
             player.WatchedAttributes.SetBool("unconscious", false);
             player.WatchedAttributes.MarkPathDirty("unconscious");
-            var maxHealth = health.GetFloat("maxhealth");
-            var maxHealthConfig = pickupPercentHealth > 1.0f ? 1.0f : pickupPercentHealth;
-            health.SetFloat("currenthealth", maxHealth * maxHealthConfig);
+            health.SetFloat("currenthealth", healAmount);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);

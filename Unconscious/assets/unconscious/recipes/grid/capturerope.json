@@ -1,0 +1,19 @@
+[
+  {
+    "ingredientPattern": "AAA",
+    "ingredients": {
+      "A": {
+        "type": "item",
+        "code": "game:flaxtwine",
+        "quantity": 3
+      }
+    },
+    "width": 3,
+    "height": 1,
+    "output": {
+      "type": "item",
+      "code": "capturerope",
+      "quantity": 1
+    }
+  }
+]

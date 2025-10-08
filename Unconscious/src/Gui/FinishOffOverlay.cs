@@ -39,7 +39,6 @@ namespace Unconscious.src.Gui
             ElementBounds buttonKillBound = ElementBounds.Fixed(EnumDialogArea.CenterMiddle, 150, 0, 200, 50);
             ElementBounds buttonSpareBound = ElementBounds.Fixed(EnumDialogArea.CenterMiddle, -150, 0, 200, 50);
 
-
             ElementBounds bounds = ElementBounds.Fill.WithFixedPadding(0);
 
             string[] finishingQuotes = new string[]

@@ -119,5 +119,12 @@ namespace Unconscious.src.Harmony
             }
             return true;
         }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(EntityBehaviorPlayerRevivable), "AttemptRevive")]
+        public static bool AttemptRevive(Entity __instance)
+        {
+            return false;
+        }
     }
 }

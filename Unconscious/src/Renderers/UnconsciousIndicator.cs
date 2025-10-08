@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using Unconscious.src.Player;
+using Unconscious.src.Behaviors.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -41,7 +41,7 @@ namespace Unconscious.src.Renderers
 
         public LoadedTexture GenerateTypingTexture(ICoreClientAPI capi, Entity entity)
         {
-            ReviveBehavior behavior = entity.GetBehavior<ReviveBehavior>();
+            BehaviorRevivePlayer behavior = entity.GetBehavior<BehaviorRevivePlayer>();
             if (behavior == null || !entity.WatchedAttributes.GetAsBool("unconscious"))
             {
                 texture?.Dispose();
