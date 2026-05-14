@@ -1,0 +1,11 @@
+[
+  {
+    "file": "wildcraftfruit:itemtypes/poultice.json",
+    "op": "replace",
+    "path": "/behaviors/0/name",
+    "value": "UnconsciousRevivingItem",
+    "dependsOn": [
+      { "modid": "wildcraftfruit" }
+    ]
+  }
+]

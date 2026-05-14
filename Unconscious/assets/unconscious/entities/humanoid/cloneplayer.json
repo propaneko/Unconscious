@@ -1,0 +1,930 @@
+{
+  "code": "cloneplayer",
+  "class": "UnconsciousClonePlayer",
+  "canClimb": true,
+  "climbTouchDistance": 0.5,
+  "hitboxSize": {
+    "x": 0.6,
+    "y": 1.85
+  },
+  "eyeHeight": 1.7,
+  "attributes": {
+    "glitchAffected": true,
+    "skinnableParts": [
+      {
+        "code": "baseskin",
+        "type": "texture",
+        "variants": [
+          {
+            "code": "skin1",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin1"
+          },
+          {
+            "code": "skin2",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin2"
+          },
+          {
+            "code": "skin3",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin3"
+          },
+          {
+            "code": "skin4",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin4"
+          },
+          {
+            "code": "skin5",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin5"
+          },
+          {
+            "code": "skin6",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin6"
+          },
+          {
+            "code": "skin7",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin7"
+          },
+          {
+            "code": "skin8",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin8"
+          },
+          {
+            "code": "skin9",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin9"
+          },
+          {
+            "code": "skin10",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin10"
+          },
+          {
+            "code": "skin11",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin11"
+          },
+          {
+            "code": "skin12",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin12"
+          },
+          {
+            "code": "skin13",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin13"
+          },
+          {
+            "code": "skin14",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin14"
+          },
+          {
+            "code": "skin15",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin15"
+          },
+          {
+            "code": "skin16",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin16"
+          },
+          {
+            "code": "skin17",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin17"
+          },
+          {
+            "code": "skin18",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin18"
+          },
+          {
+            "code": "skin19",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin19"
+          },
+          {
+            "code": "skin20",
+            "texture": "game:entity/humanoid/seraphskinparts/body/skin20"
+          }
+        ]
+      },
+      {
+        "code": "facialexpression",
+        "type": "shape",
+        "variants": [
+          {
+            "code": "angry",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/angry" }
+          },
+          {
+            "code": "grin",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/grin" }
+          },
+          {
+            "code": "smirk",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/smirk" }
+          },
+          {
+            "code": "kind",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/kind" }
+          },
+          {
+            "code": "upset",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/upset" }
+          },
+          {
+            "code": "neutral",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/neutral" }
+          },
+          {
+            "code": "sad",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/sad" }
+          },
+          {
+            "code": "serious",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/serious" }
+          },
+          {
+            "code": "tired",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/tired" }
+          },
+          {
+            "code": "very-sad",
+            "shape": { "base": "game:entity/humanoid/seraphskinparts/face/very-sad" }
+          }
+        ]
+      },
+      {
+        "code": "eyecolor",
+        "type": "texture",
+        "textureRenderTo": {
+          "x": 109,
+          "y": 0
+        },
+        "variants": [
+          {
+            "code": "acid-green",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/acid-green"
+          },
+          {
+            "code": "aquamarine",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/aquamarine"
+          },
+          {
+            "code": "azure",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/azure"
+          },
+          {
+            "code": "bitter-lemon",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/bitter-lemon"
+          },
+          {
+            "code": "cadmium-orange",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/cadmium-orange"
+          },
+          {
+            "code": "citron",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/citron"
+          },
+          {
+            "code": "dark-green",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/dark-green"
+          },
+          {
+            "code": "forest-green",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/forest-green"
+          },
+          {
+            "code": "goldenrod",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/goldenrod"
+          },
+          {
+            "code": "jade",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/jade"
+          },
+          {
+            "code": "lavander",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/lavander"
+          },
+          {
+            "code": "malachite",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/malachite"
+          },
+          {
+            "code": "mantis",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/mantis"
+          },
+          {
+            "code": "midnight",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/midnight"
+          },
+          {
+            "code": "phthalo-blue",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/phthalo-blue"
+          },
+          {
+            "code": "purple",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/purple"
+          },
+          {
+            "code": "sand",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/sand"
+          },
+          {
+            "code": "sapphire",
+            "texture": "game:entity/humanoid/seraphskinparts/eyes/sapphire"
+          }
+        ]
+      },
+      {
+        "code": "underwear",
+        "type": "texture",
+        "colbreak": true,
+        "useDropDown": true,
+        "textureRenderTo": {
+          "x": 0,
+          "y": 0
+        },
+        "variants": [
+          {
+            "code": "twopiece",
+            "texture": "game:entity/humanoid/seraphskinparts/underwear/twopiece"
+          },
+          {
+            "code": "leotard",
+            "texture": "game:entity/humanoid/seraphskinparts/underwear/leotard"
+          },
+          {
+            "code": "breeches",
+            "texture": "game:entity/humanoid/seraphskinparts/underwear/breeches"
+          }
+        ]
+      },
+      {
+        "code": "hairbase",
+        "type": "shape",
+        "shapeTemplate": { "base": "game:entity/humanoid/seraphskinparts/hair-base/{code}" },
+        "variants": [
+          { "code": "bald" },
+          { "code": "balding" },
+          { "code": "afro" },
+          { "code": "combed" },
+          { "code": "dreadlocks" },
+          { "code": "indigenousbalding" },
+          { "code": "iroquois" },
+          { "code": "kniaz" },
+          { "code": "layered" },
+          { "code": "longflowing" },
+          { "code": "longwithstrands" },
+          { "code": "mediumlength-bangs" },
+          { "code": "messy" },
+          { "code": "messy2" },
+          { "code": "classic" },
+          { "code": "short" },
+          { "code": "short-parted" },
+          { "code": "shortspiky" },
+          { "code": "short-trimmed" },
+          { "code": "tonsure" }
+        ]
+      },
+      {
+        "code": "hairextra",
+        "type": "shape",
+        "shapeTemplate": { "base": "game:entity/humanoid/seraphskinparts/hair-extra/{code}" },
+        "variants": [
+          { "code": "none" },
+          { "code": "backbun" },
+          { "code": "braidedup" },
+          { "code": "elaboratestickbun" },
+          { "code": "headsidebraid" },
+          { "code": "largestickbun" },
+          { "code": "neatbraid" },
+          { "code": "classicponytail" },
+          { "code": "ponytail" },
+          { "code": "rolledbraidwithbun" },
+          { "code": "shortmessybraid" },
+          { "code": "sidebraids" },
+          { "code": "sidebuns" },
+          { "code": "siderolls" },
+          { "code": "snood" },
+          { "code": "thicklongfrenchbraid" },
+          { "code": "tiedback" },
+          { "code": "tieddreads" },
+          { "code": "tiedtopknot" },
+          { "code": "topbun" },
+          { "code": "topknot" },
+          { "code": "unkempt" },
+          { "code": "vikingtopbraid" }
+        ]
+      },
+      {
+        "code": "mustache",
+        "type": "shape",
+        "shapeTemplate": { "base": "game:entity/humanoid/seraphskinparts/hair-face/{code}" },
+        "variants": [
+          { "code": "none" },
+          { "code": "mst-line01-pencil" },
+          { "code": "mst-line05-seargent" },
+          { "code": "mst-line10-sheriff" },
+          { "code": "mst-line15-eccentric" },
+          { "code": "mst-line20-seagull" },
+          { "code": "mst-u01-horseshoe" },
+          { "code": "mst-u05-stirrups" },
+          { "code": "mst-walrus05-neat" },
+          { "code": "mst-walrus30-fat" },
+          { "code": "mst-whiskbroom" }
+        ]
+      },
+      {
+        "code": "beard",
+        "type": "shape",
+        "shapeTemplate": { "base": "game:entity/humanoid/seraphskinparts/hair-face/{code}" },
+        "variants": [
+          { "code": "none" },
+          { "code": "brd-stubble" },
+          { "code": "brd-box05-anchor" },
+          { "code": "brd-box01-chincurtain" },
+          { "code": "brd-box07-ducktail" },
+          { "code": "brd-box10-short" },
+          { "code": "brd-box20-full" },
+          { "code": "brd-chin01-mouche" },
+          { "code": "brd-chin05-chinpatch" },
+          { "code": "brd-chin10-chinpuff" },
+          { "code": "brd-chin15-goatee" },
+          { "code": "brd-chin20-goateehorns" },
+          { "code": "brd-full01-trimmedfull" },
+          { "code": "brd-full05-cleanfull" },
+          { "code": "brd-full10-shaggy" },
+          { "code": "brd-mut05-friendly" },
+          { "code": "brd-mut10-muttonchops" },
+          { "code": "brd-mut15-wildchops" },
+          { "code": "brd-side05-sideburns" },
+          { "code": "brd-side15-sidewhiskers" },
+          { "code": "brd-wisp10-wiseman" }
+        ]
+      },
+      {
+        "code": "haircolor",
+        "type": "texture",
+        "textureTarget": "hair",
+        "textureTemplate": "entity/humanoid/seraphskinparts/hair/{code}",
+        "variants": [
+          { "code": "lightgray" },
+          { "code": "silverchalice" },
+          { "code": "slategray" },
+          { "code": "eerieblack" },
+          { "code": "mossgreen" },
+          { "code": "seagreen" },
+          { "code": "wintergreendream" },
+          { "code": "steelblue" },
+          { "code": "queenblue" },
+          { "code": "indigodye" },
+          { "code": "heliotropegray" },
+          { "code": "palatinatepurple" },
+          { "code": "darkpurple" },
+          { "code": "wheat" },
+          { "code": "ecru" },
+          { "code": "sanddune" },
+          { "code": "harvestgold" },
+          { "code": "cordovan" },
+          { "code": "rosewood" },
+          { "code": "russet" },
+          { "code": "liver" },
+          { "code": "oldburgundy" }
+        ]
+      }
+    ]
+  },
+  "client": {
+    "renderer": "Shape",
+    "shape": { "base": "game:entity/humanoid/seraph-faceless" },
+    "texture": { "base": "game:entity/humanoid/seraph-naked-hairless" },
+    "behaviors": [
+      { "code": "repulseagents" },
+      {
+        "code": "controlledphysics",
+        "stepHeight": 1.1
+      },
+      {
+        "code": "ropetieable",
+        "minGeneration": 0
+      },
+      { "code": "UnconsciousPickupBehavior" },
+      { "code": "interpolateposition" },
+      { "code": "aimingaccuracy" },
+      { "code": "extraskinnable" },
+      { "code": "cloneinventory" },
+      {
+        "code": "nametag",
+        "showtagonlywhentargeted": false
+      }
+    ],
+    "animations": [
+      {
+        "code": "walk",
+        "animation": "walk",
+        "blendMode": "Average",
+        "mulWithWalkSpeed": true,
+        "animationSpeed": 1.1,
+        "triggeredBy": {
+          "onControls": [ "Move" ],
+          "matchExact": true
+        }
+      },
+      {
+        "code": "idle",
+        "animation": "idle1",
+        "blendMode": "Average",
+        "triggeredBy": {
+          "onControls": [ "Idle" ],
+          "matchExact": true,
+          "defaultAnim": true
+        }
+      },
+      {
+        "code": "sitflooridle",
+        "animation": "sitflooridle",
+        "blendMode": "Average",
+        "triggeredBy": {
+          "onControls": [ "Idle", "FloorSitting" ],
+          "matchExact": true
+        }
+      },
+      {
+        "code": "sprint",
+        "animation": "sprint",
+        "animationSpeed": 0.6,
+        "mulWithWalkSpeed": true,
+        "triggeredBy": {
+          "onControls": [ "Move", "SprintMode" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "sneakwalk",
+        "animation": "sneakwalk",
+        "animationSpeed": 3,
+        "mulWithWalkSpeed": true,
+        "triggeredBy": {
+          "onControls": [ "Move", "SneakMode" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "sneakidle",
+        "animation": "sneakidle",
+        "triggeredBy": {
+          "onControls": [ "Idle", "SneakMode" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "glide",
+        "animation": "glide",
+        "triggeredBy": { "onControls": [ "Fly" ] },
+        "blendMode": "Average"
+      },
+      {
+        "code": "swim",
+        "animation": "swim",
+        "triggeredBy": {
+          "onControls": [ "Move", "Swim" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "swimidle",
+        "animation": "swimidle",
+        "triggeredBy": {
+          "onControls": [ "Idle", "Swim" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "land",
+        "animation": "land",
+        "triggeredBy": { "onControls": [ "Fall" ] },
+        "blendMode": "Average"
+      },
+      {
+        "code": "die",
+        "animation": "die",
+        "blendMode": "Average",
+        "triggeredBy": { "onControls": [ "Dead" ] },
+        "animationSpeed": 1.5
+      },
+      {
+        "code": "heavyimpact",
+        "animation": "heavyimpact",
+        "blendMode": "Average"
+      },
+      {
+        "code": "jump",
+        "animation": "newjump",
+        "triggeredBy": {
+          "onControls": [ "Idle", "Jump" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "climbup",
+        "animation": "ladderup",
+        "triggeredBy": {
+          "onControls": [ "Move", "Climb" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "climbidle",
+        "animation": "LadderIdle",
+        "triggeredBy": {
+          "onControls": [ "Idle", "Climb" ],
+          "matchExact": true
+        },
+        "blendMode": "Average"
+      },
+      {
+        "code": "sleep",
+        "animation": "lie",
+        "blendMode": "Add"
+      },
+      {
+        "code": "holdunderarm",
+        "animation": "holdunderarm",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage"
+        }
+      },
+      {
+        "code": "hurt",
+        "animation": "hurt",
+        "blendMode": "Average"
+      },
+      {
+        "code": "holdbothhands",
+        "animation": "holdbothhands",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 12,
+          "LowerArmL": 12
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "bowaim",
+        "animation": "bowaim",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "bowhit",
+        "animation": "bowhit",
+        "easeInSpeed": 999,
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "aim",
+        "animation": "throwaim",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "throw",
+        "animation": "throw",
+        "blendMode": "Add",
+        "easeInSpeed": 999,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "hit",
+        "animation": "hit",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "breaktool",
+        "animation": "breaktool",
+        "animationSpeed": 2.5,
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "breakhand",
+        "animation": "breakhand",
+        "animationSpeed": 2.5,
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "swordhit",
+        "animation": "swordhit",
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "axechop",
+        "animation": "axechop",
+        "blendMode": "Add",
+        "animationSpeed": 1.75,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+
+
+      {
+        "code": "shoveldig",
+        "animation": "shoveldig",
+        "blendMode": "Add",
+        "animationSpeed": 1.5,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "spearhit",
+        "animation": "spearhit",
+        "blendMode": "Add",
+        "animationSpeed": 1,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "scythe",
+        "animation": "scythe",
+        "blendMode": "Add",
+        "animationSpeed": 1.5,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "shears",
+        "animation": "shears",
+        "blendMode": "Add",
+        "animationSpeed": 1.5,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+
+      {
+        "code": "knapstanding",
+        "animation": "knap",
+        "blendMode": "Add",
+        "animationSpeed": 1.5,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+
+      {
+        "code": "knapsitting",
+        "animation": "knap",
+        "blendMode": "Average",
+        "animationSpeed": 1.5,
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4,
+          "UpperFootL": 0,
+          "LowerFootL": 0,
+          "UpperFootR": 0,
+          "LowerFootR": 0,
+          "LowerTorso": 0
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+
+
+
+      {
+        "code": "placeblock",
+        "animation": "placeblock",
+        "animationSpeed": 2,
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4,
+          "UpperArmL": 4,
+          "LowerArmL": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage",
+          "UpperArmL": "AddAverage",
+          "LowerArmL": "AddAverage"
+        }
+      },
+      {
+        "code": "eat",
+        "animation": "eat",
+        "animationSpeed": 1,
+        "blendMode": "Add",
+        "elementWeight": {
+          "UpperArmR": 4,
+          "LowerArmR": 4
+        },
+        "elementBlendMode": {
+          "UpperArmR": "AddAverage",
+          "LowerArmR": "AddAverage"
+        }
+      }
+
+    ]
+  },
+  "server": {
+    "behaviors": [
+      { "code": "repulseagents" },
+      {
+        "code": "controlledphysics",
+        "stepHeight": 1.1
+      },
+      {
+        "code": "ropetieable",
+        "minGeneration": 0
+      },
+      { "code": "collectitems" },
+      {
+        "code": "health",
+        "currenthealth": 500.0,
+        "maxhealth": 500.0
+      },
+      { "code": "extraskinnable" },
+      { "code": "cloneinventory" },
+      { "code": "UnconsciousPickupBehavior" },
+      {
+        "code": "nametag",
+        "showtagonlywhentargeted": false,
+        "selectFromRandomName": [ "Test Dummy" ]
+      },
+      { "code": "breathe" }
+    ]
+
+  },
+  "sounds": {
+    "hurt": "game:player/hurt",
+    "death": "game:player/death",
+    "swim": "game:player/swim",
+    "eat": "game:player/eat"
+  }
+}

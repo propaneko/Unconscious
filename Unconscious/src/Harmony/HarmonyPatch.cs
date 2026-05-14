@@ -55,7 +55,7 @@ namespace Unconscious.src.Harmony
 
                     //sapi.Logger.Debug($"unconscious: {unconscious}, enityAlive?: {serverPlayer.Entity.Alive}");
 
-                    if (currentHealth <= 1 && !unconscious && serverPlayer.Entity.Alive)
+                    if (currentHealth <= 0.1f && !unconscious && serverPlayer.Entity.Alive)
                     {
                         Enum.TryParse(damageSource.Type.ToString(), out EnumDamageType damageType);
                         var checkEnabledDamageTypes =  UnconsciousModSystem.getConfig().EnabledDamageTypes.Contains(damageType.ToString());
@@ -69,7 +69,7 @@ namespace Unconscious.src.Harmony
 
                     if (unconscious && serverPlayer.Entity.Alive)
                     {
-                        health.SetFloat("currenthealth", 1);
+                        health.SetFloat("currenthealth", 0.1f);
                         if (
                             damageSource.Type == EnumDamageType.BluntAttack ||
                             damageSource.Type == EnumDamageType.PiercingAttack ||

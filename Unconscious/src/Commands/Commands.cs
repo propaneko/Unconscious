@@ -1,9 +1,10 @@
-﻿using Vintagestory.API.Server;
+﻿using System;
+using System.Linq;
+using Unconscious.src.Packets;
 using Unconscious.src.Player;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
-using System.Linq;
-using Unconscious.src.Packets;
+using Vintagestory.API.Server;
 
 namespace Unconscious.src.Commands
 {
@@ -287,7 +288,15 @@ namespace Unconscious.src.Commands
 
                 if (targetPlayer.Entity.IsUnconscious())
                 {
-                    UnconsciousModSystem.HandlePlayerPickup(targetPlayer.Entity, 1.0f);
+                    DamageSource damageSource = new DamageSource
+                    {
+                        Source = EnumDamageSource.Internal,
+                        Type = EnumDamageType.Heal,
+                        DamageTier = 0,
+                        Duration = TimeSpan.FromSeconds(1),
+                        TicksPerDuration = 10
+                    };
+                    UnconsciousModSystem.HandlePlayerPickup(targetPlayer.Entity, damageSource, 30f);
                     return new TextCommandResult
                     {
                         Status = EnumCommandStatus.Success,

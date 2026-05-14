@@ -102,18 +102,10 @@ namespace Unconscious.src.Behaviors.Player
             sapi.SendIngameError(serverPlayer, "ReviveCycle", message, Array.Empty<object>());
         }
 
-        public void FinishRevive(EntityPlayer interactingPlayer, EntityPlayer targetPlayer, float healAmount)
+        public void FinishRevive(EntityPlayer interactingPlayer, EntityPlayer targetPlayer, DamageSource damageSource, float healAmount)
         {
-            var config = UnconsciousModSystem.getConfig();
-            var heldItem = interactingPlayer.ActiveHandItemSlot.Itemstack;
-
             SendErrorMessage($"{targetPlayer.Player.PlayerName} {Lang.Get("unconscious:reviving-success")}", interactingPlayer);
-
-            var activeSlot = interactingPlayer.Player.InventoryManager.ActiveHotbarSlot;
-            activeSlot.TakeOut(1);
-            activeSlot.MarkDirty();
-
-            UnconsciousModSystem.HandlePlayerPickup(targetPlayer, healAmount);
+            UnconsciousModSystem.HandlePlayerPickup(targetPlayer, damageSource, healAmount);
         }
 
         public override void OnEntityDespawn(EntityDespawnData despawn)

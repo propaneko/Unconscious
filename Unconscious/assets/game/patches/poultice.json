@@ -2,52 +2,7 @@
   {
     "file": "game:itemtypes/utility/poultice.json",
     "op": "replace",
-    "path": "/behaviors/0",
-    "value": {
-      "name": "UnconsciousRevivingItem",
-      "propertiesByType": {
-        "*-reed-honey-sulfur": {
-          "health": 4,
-          "applicationtimesec": 3,
-          "maxapplicationtimesec": 10,
-          "effectdurationsec": 10,
-          "ticks": 10,
-          "cancelinair": false,
-          "cancelwhileswimming": false,
-          "delaytocancelsec": 0.5
-        },
-        "*-reed-horsetail": {
-          "health": 2,
-          "applicationtimesec": 3,
-          "maxapplicationtimesec": 10,
-          "effectdurationsec": 10,
-          "ticks": 10,
-          "cancelinair": false,
-          "cancelwhileswimming": false,
-          "delaytocancelsec": 0.5
-        },
-
-        "*-linen-honey-sulfur": {
-          "health": 7,
-          "applicationtimesec": 3,
-          "maxapplicationtimesec": 10,
-          "effectdurationsec": 10,
-          "ticks": 10,
-          "cancelinair": false,
-          "cancelwhileswimming": false,
-          "delaytocancelsec": 0.5
-        },
-        "*-linen-horsetail": {
-          "health": 4,
-          "applicationtimesec": 3,
-          "maxapplicationtimesec": 10,
-          "effectdurationsec": 10,
-          "ticks": 10,
-          "cancelinair": false,
-          "cancelwhileswimming": false,
-          "delaytocancelsec": 0.5
-        }
-      }
-    }
-  },
+    "path": "/behaviors/0/name",
+    "value": "UnconsciousRevivingItem"
+  }
 ]

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using HarmonyLib;
+using Unconscious.src.Behavior.Player;
 using Unconscious.src.Behaviors.Items;
 using Unconscious.src.Behaviors.Player;
 using Unconscious.src.Commands;
 using Unconscious.src.Compat;
 using Unconscious.src.Config;
+using Unconscious.src.Entities;
 using Unconscious.src.Handlers;
 using Unconscious.src.Harmony;
 using Unconscious.src.Items;
@@ -37,6 +39,8 @@ namespace Unconscious
         }
 
         public static List<UnconsciousTimer> unconsciousTimers = new List<UnconsciousTimer>();
+
+        public static Dictionary<string, EntityClonePlayer> playersClones;
 
         public static ModConfig config;
         private const string ConfigName = "unconscious.json";
@@ -107,6 +111,9 @@ namespace Unconscious
 
             api.RegisterCollectibleBehaviorClass("UnconsciousRevivingItem", typeof(BehaviorRevivingItem));
             api.RegisterCollectibleBehaviorClass("UnconsciousPickupItem", typeof(BehaviorPickupItem));
+
+            api.RegisterEntity("UnconsciousClonePlayer", typeof(EntityClonePlayer));
+            api.RegisterEntityBehaviorClass("cloneinventory", typeof(EntityBehaviorCloneInventory));
 
             api.RegisterItemClass("ItemSmellingSalts", typeof(ItemSmellingSalts));
 
@@ -200,6 +207,8 @@ namespace Unconscious
             base.StartServerSide(api);
             sapi = api;
 
+            playersClones = new Dictionary<string, EntityClonePlayer>();
+
             sapi.Event.ServerRunPhase(EnumServerRunPhase.ModsAndConfigReady, () =>
             {
                 LoadConfig();
@@ -266,14 +275,16 @@ namespace Unconscious
             });
         }
 
-        public static void HandlePlayerPickup(EntityPlayer player, float healAmount)
+        public static void HandlePlayerPickup(EntityPlayer player, DamageSource damageSource, float healAmount)
         {
             player.AnimManager.StopAnimation("sleep");
-            var health = player.WatchedAttributes.GetTreeAttribute("health");
+            //var health = player.WatchedAttributes.GetTreeAttribute("health");
 
             player.WatchedAttributes.SetBool("unconscious", false);
             player.WatchedAttributes.MarkPathDirty("unconscious");
-            health.SetFloat("currenthealth", healAmount);
+
+            player.ReceiveDamage(damageSource, healAmount);
+            //health.SetFloat("currenthealth", healAmount);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
             PacketMethods.SendShowUnconciousScreenPacket(false, serverPlayer);
@@ -294,7 +305,7 @@ namespace Unconscious
             player.WatchedAttributes.MarkPathDirty("unconscious");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
             health.SetFloat("currenthealth", 1);
-            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
+            player.PlayEntitySound("hurt", null, 24f);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
@@ -318,8 +329,8 @@ namespace Unconscious
             player.WatchedAttributes.SetBool("unconscious", true);
             player.WatchedAttributes.MarkPathDirty("unconscious");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
-            health.SetFloat("currenthealth", 1);
-            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
+            health.SetFloat("currenthealth", 0.1f);
+            player.PlayEntitySound("hurt", null, true, 24f);
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
@@ -329,7 +340,7 @@ namespace Unconscious
             }
             PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
             PacketMethods.SendShowUnconciousScreenPacket(true, serverPlayer);
-            serverPlayer.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f); // Adjust selection box to be lower when unconscious
+            serverPlayer.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f);
 
             unconsciousTimers.Add(new UnconsciousTimer { PlayerUID = serverPlayer.PlayerUID, date = DateTime.UtcNow });
             sapi.Logger.Audit("Player {0} got unconscious by {1} at {2}", serverPlayer.Entity.GetName(), damageSource.SourceEntity, serverPlayer.Entity.Pos);
@@ -343,7 +354,7 @@ namespace Unconscious
         public static void PlayerDropActiveItemOnUnconscious(IPlayer serverPlayer)
         {
             ItemSlot activeSlot = serverPlayer.InventoryManager.ActiveHotbarSlot;
-            if (activeSlot?.Itemstack == null) return; // No item to drop\
+            if (activeSlot?.Itemstack == null) return;
 
     
             ItemStack itemToDrop = activeSlot.Itemstack.Clone();
@@ -352,9 +363,9 @@ namespace Unconscious
             activeSlot.MarkDirty();
 
             Vec3d forwardDirection = serverPlayer.Entity.SidedPos.AheadCopy(1).XYZ.Normalize();
-            Vec3d throwVelocity = forwardDirection * 2.5; // Increase this value for further throws
+            Vec3d throwVelocity = forwardDirection * 2.5;
             serverPlayer.Entity.World.SpawnItemEntity(itemToDrop, serverPlayer.Entity.Pos.XYZ, throwVelocity);
-            activeSlot.Itemstack = null; // Clear the slot
+            activeSlot.Itemstack = null;
             serverPlayer.InventoryManager.BroadcastHotbarSlot();
         }
 

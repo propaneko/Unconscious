@@ -1,4 +1,5 @@
-﻿using Unconscious.src.Behaviors.Player;
+﻿using System;
+using Unconscious.src.Behaviors.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -32,17 +33,74 @@ public class BehaviorRevivingItem : BehaviorHealingItem, ICanHealCreature
     public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandling handling)
     {
 
+        //base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel, ref handling);
+
+        ICoreAPI coreAPI = api;
+        applicationSound?.Stop();
+        api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
+        handling = EnumHandling.Handled;
+
+        if (secondsUsed < GetPickupApplicationTime(byEntity) || byEntity.World.Side != EnumAppSide.Server)
+        {
+            return;
+        }
+
         Entity targetEntity = GetTargetEntityToRevive(slot, byEntity, entitySel);
         BehaviorRevivePlayer behaviorRevivePlayer = targetEntity.GetBehavior<BehaviorRevivePlayer>();
 
         if (behaviorRevivePlayer != null && targetEntity.WatchedAttributes.GetAsBool("unconscious"))
         {
-            behaviorRevivePlayer.FinishRevive(byEntity as EntityPlayer, targetEntity as EntityPlayer, Config.Health);
-            return;
+            DamageSource damageSource = new DamageSource
+            {
+                Source = EnumDamageSource.Internal,
+                Type = EnumDamageType.Heal,
+                DamageTier = 0,
+                Duration = TimeSpan.FromSeconds(Config.EffectDurationSec),
+                TicksPerDuration = Config.Ticks
+            };
+            behaviorRevivePlayer.FinishRevive(byEntity as EntityPlayer, targetEntity as EntityPlayer, damageSource, Config.Health);
+            handling = EnumHandling.PreventDefault;
+        }
+        else
+        {
+            DamageSource damageSource = new DamageSource
+            {
+                Source = EnumDamageSource.Internal,
+                Type = EnumDamageType.Heal,
+                DamageTier = 0,
+                Duration = TimeSpan.FromSeconds(Config.EffectDurationSec),
+                TicksPerDuration = Config.Ticks
+            };
+            targetEntity.ReceiveDamage(damageSource, Config.Health);
         }
 
-        base.OnHeldInteractStop(secondsUsed, slot, byEntity, blockSel, entitySel, ref handling);
+        if (Config.AppliedSound != null)
+        {
+            byEntity.World.PlaySoundAt(Config.AppliedSound, byEntity, null, false, Config.SoundRange, 1f);
+        }
+        slot.TakeOut(1);
+        slot.MarkDirty();
 
+
+    }
+
+    protected virtual float GetPickupApplicationTime(Entity byEntity)
+    {
+        float healingEffectiveness = 0f;
+        if (Config.AffectedByArmor)
+        {
+            healingEffectiveness = byEntity.Stats.GetBlended("healingeffectivness");
+            healingEffectiveness = Math.Clamp(healingEffectiveness, 0f, 2f) - 1f;
+        }
+        if (healingEffectiveness < 0f)
+        {
+            return Config.ApplicationTimeSec + (Config.ApplicationTimeSec - Config.MaxApplicationTimeSec) * healingEffectiveness;
+        }
+        if (healingEffectiveness > 0f)
+        {
+            return Config.ApplicationTimeSec * (1f - healingEffectiveness);
+        }
+        return Config.ApplicationTimeSec;
     }
 
     protected virtual Entity GetTargetEntityToRevive(ItemSlot slot, EntityAgent byEntity, EntitySelection entitySelection)

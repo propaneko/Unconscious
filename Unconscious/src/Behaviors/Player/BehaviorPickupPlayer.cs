@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unconscious.src.Behaviors.Items;
+using Unconscious.src.Entities;
 using Unconscious.src.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -25,6 +26,11 @@ namespace Unconscious.src.Behaviors.Player
         private readonly ICoreAPI api; // Added for client-side rendering
         public string carriedPlayerUID; // Tracks the UID of the player being carried
 
+        ClothManager cm;
+
+        ClothSystem sys = null;
+
+
         protected IProgressBar progressBarRender;
 
         public BehaviorPickupPlayer(Entity entity) : base(entity)
@@ -38,12 +44,15 @@ namespace Unconscious.src.Behaviors.Player
         {
             base.Initialize(properties, attributes);
 
+            cm = api.ModLoader.GetModSystem<ClothManager>();
+
             if (entity.World.Side == EnumAppSide.Server && api.Side == EnumAppSide.Server)
             {
                 ICoreServerAPI sapi = api as ICoreServerAPI;
                 sapi.Event.PlayerLeave += OnPlayerDisconnect;
             }
         }
+
 
         private void OnPlayerDisconnect(IPlayer player)
         {
@@ -120,6 +129,16 @@ namespace Unconscious.src.Behaviors.Player
 
             else if (byEntity.Controls.CtrlKey && targetPlayer.IsUnconscious() && UnconsciousModSystem.getConfig().EnableCarryMechanic && !isCarryCooldown)
             {
+                bool hasFreeHand = interactingPlayer.RightHandItemSlot.Empty;
+
+                if (!hasFreeHand)
+                {
+                    var sapi = api as ICoreServerAPI;
+                    var iPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
+                    sapi.SendIngameError(iPlayer, "CarryError", Lang.Get("unconscious:pickup-error-no-free-hand"), Array.Empty<object>());
+                    return;
+                }
+
                 initialPosition ??= interactingPlayer.Pos.AsBlockPos.ToVec3d();
                 api.Event.UnregisterCallback(pickupCancelCallbackId);
                 if (isCarrying)
@@ -140,7 +159,6 @@ namespace Unconscious.src.Behaviors.Player
         public void StartCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
 
-
             isCarrying = true;
             interactingPlayer.WatchedAttributes.SetBool("carryingUnconciousPlayer", true);
             interactingPlayer.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
@@ -149,7 +167,8 @@ namespace Unconscious.src.Behaviors.Player
             sapi.Event.UnregisterCallback(pickupCancelCallbackId);
             sapi.Event.UnregisterGameTickListener(carryTickListenerId);
 
-            var serverPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
+            IServerPlayer serverPlayer = sapi.World.PlayerByUid(interactingPlayer.PlayerUID) as IServerPlayer;
+            IServerPlayer targetServerPlayer = targetPlayer.Player as IServerPlayer;
 
             if (!IsWithinDistance(interactingPlayer, targetPlayer, 2))
             {

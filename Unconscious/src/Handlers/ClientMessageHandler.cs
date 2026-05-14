@@ -64,6 +64,8 @@ namespace Unconscious.src.Handlers
                 if (packet.animationName == "sleep")
                 {
                     capi.World.Player.Entity.CollisionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f);
+                    capi.World.Player.Entity.SelectionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f);
+
                 }
 
             }
@@ -74,6 +76,8 @@ namespace Unconscious.src.Handlers
                 if (packet.animationName == "sleep")
                 {
                     capi.World.Player.Entity.CollisionBox.Set(-0.3f, 0f, -0.3f, 0.3f, 1.8f, 0.3f);
+                    capi.World.Player.Entity.SelectionBox.Set(-0.3f, 0f, -0.9f, 0.3f, 0.3f, 0.9f);
+
                 }
             }
         }

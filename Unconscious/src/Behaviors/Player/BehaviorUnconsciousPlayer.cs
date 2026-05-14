@@ -17,8 +17,8 @@ namespace Unconscious.src.Behaviors.Player
         private readonly Cuboidf originalCollisionBox;
         private readonly Cuboidf originalSelectionBox;
         private EntityPlayer entityPlayer;
-        private readonly ICoreAPI api; // Added for client-side rendering
-        private bool wasUnconscious; // Tracks previous unconscious state
+        private readonly ICoreAPI api;
+        private bool wasUnconscious;
 
         protected IProgressBar progressBarRender;
 
@@ -65,14 +65,18 @@ namespace Unconscious.src.Behaviors.Player
         public override void OnGameTick(float deltaTime)
         {
             base.OnGameTick(deltaTime);
-
             bool isUnconscious = entity.WatchedAttributes.GetBool("unconscious");
-            if (isUnconscious != wasUnconscious)
+
+            if (isUnconscious)
             {
-                if (isUnconscious) SetUnconsciousHitbox();
-                else RestoreDefaultHitbox();
-                wasUnconscious = isUnconscious;
+                SetUnconsciousHitbox();
             }
+            else if (wasUnconscious)
+            {
+                RestoreDefaultHitbox();
+            }
+
+            wasUnconscious = isUnconscious;
         }
 
         private void SetUnconsciousHitbox()
