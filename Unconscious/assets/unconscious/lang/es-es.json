@@ -1,0 +1,46 @@
+{
+    "_comentarios-1": "Unconscious v1.10.3 || Enlace de VS ModDB: https://mods.vintagestory.at/unconscious ",
+    "_comentarios-2": "Traducido por C4BR3R4 || Última Modificación: 01/05/2025 || Registro de Cambios: https://c4br3r4.es/index.php?topic=1356.0 ",
+
+    "finishing-quote-1": "Tu oponente yace ante ti, maltrecho y roto. Su respiración es entrecortada, sus ojos parpadean con los últimos rescoldos de su desafío. La elección es tuya: asestar el golpe final o dejar que el destino decida su final.",
+    "finishing-quote-2": "Te alzas sobre tu enemigo, sus fuerzas agotadas y su voluntad destrozada. El peso de tu próxima acción pesa sobre tu alma. Misericordia o sentencia, tu decisión quedará grabada en los anales de este mundo.",
+    "finishing-quote-3": "El fragor de la batalla ha dejado a tu oponente a tu merced. Su sangre mancha el suelo, su cuerpo tiembla derrotado. En este fugaz momento, tienes en tus manos el poder de la vida y la muerte.",
+    "finishing-quote-4": "Tu adversario se arrodilla ante ti, el fuego de sus ojos es ahora una brasa agonizante. El tiempo parece ralentizarse mientras el golpe final pende de un hilo. ¿Golpearás certeramente o lo abandonarás a su suerte?",
+    "finishing-quote-5": "El campo de batalla queda en silencio, salvo por la respiración agitada de quien cayó antes que tú. El peso del momento se abate sobre ti: este es el punto de inflexión en el que los caminos se bifurcan y los destinos se escriben con sangre.",
+
+    "finishing-button-spare": "Perdonar",
+    "finishing-button-kill": "Rematar",
+
+
+    "unconscious-quote-1": "Tu visión se desvanece en la oscuridad, el mundo gira en un lejano zumbido. Sientes el frío abrazo de la tierra bajo tus pies y el peso de tu propia debilidad. El tiempo se escapa y quedas a la deriva en el vacío, indefenso pero no del todo perdido. ¿Te levantarás de nuevo o seguirás siendo una sombra en esta tierra implacable?",
+    "unconscious-quote-2": "La oscuridad te envuelve como un pesado sudario. Los sonidos del mundo se vuelven distantes, amortiguados como si estuvieras sumergido en aguas profundas. Tu cuerpo se siente pesado, insensible, pero tenues susurros de vida perduran en tu interior. ¿Es este el final... o simplemente una breve pausa en tu viaje?",
+    "unconscious-quote-3": "Un vacío te envuelve, vasto e interminable, tragándose todo rastro de tus sentidos. Te esfuerzas por aferrarte a algo familiar, pero todo lo que queda es un silencio profundo y doloroso que amenaza con arrastrarte aún más hacia su abrazo.",
+    "unconscious-quote-4": "Tus extremidades pesan, como si estuvieran atadas por cadenas invisibles. El aire es denso y cada respiración es una lucha contra la oscuridad. Sin embargo, en algún lugar del abismo, una débil luz parpadea: un frágil rayo de esperanza.",
+    "unconscious-quote-5": "El suelo bajo tus pies se siente a la vez sólido e irreal, como si estuvieras atrapado entre dos mundos. Ecos lejanos de vida llegan a tus oídos, borrosos y distorsionados, mientras la oscuridad se burla de ti con su encanto silencioso y sofocante.",
+    "unconscious-quote-6": "El ritmo de los latidos de tu corazón, antaño familiar, se debilita, cada latido es un susurro en el silencio. Las sombras se acercan, sus dedos fríos rozan tu piel mientras tus pensamientos se dispersan como hojas al viento.",
+    "unconscious-quote-7": "El peso de la tierra presiona contra ti, clavándote en el frío e inflexible suelo. El tiempo transcurre a la deriva, inconexo, mientras luchas por aferrarte a fugaces momentos de claridad. El mundo parece imposiblemente distante, sus sonidos amortiguados por la espesa niebla de la inconsciencia.",
+    "unconscious-quote-8": "Una quietud adormecida se apodera de ti, como si el propio mundo te hubiera dado la espalda. Las sombras danzan al borde de tu conciencia, tentándote con destellos de luz que parecen estar fuera de tu alcance. Persiste el débil recuerdo del calor, un eco agridulce de la vida que se escapa de tus manos.",
+
+    "unconscious-button-suicide": "Desistir",
+    "unconscious-bleed-out": "Te Desangrarás en",
+
+    "reviving-progress": "Reanimando... ",
+    "reviving-cancel": "¡Cancelada la reanimación!",
+    "reviving-success": "¡Reanimado!",
+
+    "pickup-progress": "Recogiendo... ",
+    "pickup-error-drop": "Se te ha caído el jugador.",
+    "pickup-error-toofar": "Estás demasiado lejos para recoger al jugador",
+    "pickup-error-distance": "Estás demasiado lejos de jugador transportado.",
+    "pickup-error-unconscious": "Estás inconsciente y se te ha caído el jugador transportado.",
+    "pickup-error-wokeup": "El jugador que llevas acaba de despertar.",
+
+    "pickup-cancel": "¡Recogida cancelada!",
+    "pickup-putdown": "Soltar al Jugador.",
+    "pickup-success": "Has comenzado a transportar",
+
+    "item-smellingsalts-weak": "Sales Aromáticas (débil)",
+    "item-smellingsalts-strong": "Sales Aromáticas (fuerte)",
+
+    "itemdesc-smellingsalts-*": "Las Sales Aromáticas están impregnadas de la esencia en polvo de unos cuantos hongos empapados en veneno y maldiciones susurradas. Su acre hedor fúngico despierta incluso a los inconscientes, pero tiene un precio. Una sola bocanada acelera el corazón, los nervios se crispan y zarcillos sombríos se arrastran por los bordes de la visión. Su uso excesivo produce delirio, como si esporas invisibles hubieran echado raíces bajo la piel. Como último recurso, estas sales despiertan, pero nunca con delicadeza."
+}
