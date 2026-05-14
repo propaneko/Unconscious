@@ -17,13 +17,13 @@ namespace Unconscious.src.Behaviors.Player
 {
     public class BehaviorPickupPlayer : EntityBehavior
     {
-        public bool isCarrying;      // Tracks if player is being carried
-        public bool isCarryCooldown; // Tracks carry action cooldown
-        public Vec3d initialPosition; // Tracks player's initial position when holding starts
+        public bool isCarrying;
+        public bool isCarryCooldown;
+        public Vec3d initialPosition;
         public long pickupCancelCallbackId;
         public long carryTickListenerId;
-        private readonly ICoreAPI api; // Added for client-side rendering
-        public string carriedPlayerUID; // Tracks the UID of the player being carried
+        private readonly ICoreAPI api;
+        public string carriedPlayerUID;
 
         protected IProgressBar progressBarRender;
 
@@ -69,7 +69,7 @@ namespace Unconscious.src.Behaviors.Player
                 List<ItemStack> list = new List<ItemStack>();
                 foreach (Item item in api.World.Items)
                 {
-                    if (item.HasBehavior<BehaviorPickupItem>())
+                    if (item.HasBehavior<CollectibleBehaviorPickupItem>())
                     {
                         list.Add(new ItemStack(item));
                     }
@@ -139,8 +139,6 @@ namespace Unconscious.src.Behaviors.Player
 
         public void StartCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
-
-
             isCarrying = true;
             interactingPlayer.WatchedAttributes.SetBool("carryingUnconciousPlayer", true);
             interactingPlayer.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
@@ -190,12 +188,8 @@ namespace Unconscious.src.Behaviors.Player
                     }
 
 
-                    var carryPosition = interactingPlayer.ServerPos.XYZ.Add(-0.5, 0, -0.5);
-                    targetPlayer.Pos.SetPos(carryPosition);
-                    if (!targetPlayer.ServerPos.XYZ.Equals(carryPosition))
-                    {
-                        targetPlayer.TeleportTo(carryPosition);
-                    }
+                    var carryPosition = interactingPlayer.Pos.XYZ.Add(-0.5, 0, -0.5);
+                    targetPlayer.TeleportTo(carryPosition);
                 }, 1000);
             }
         }
@@ -219,7 +213,7 @@ namespace Unconscious.src.Behaviors.Player
 
         private bool IsWithinDistance(EntityPlayer player1, EntityPlayer player2, double maxDistance)
         {
-            return player1.ServerPos.XYZ.DistanceTo(player2.ServerPos.XYZ) < maxDistance;
+            return player1.Pos.XYZ.DistanceTo(player2.Pos.XYZ) < maxDistance;
         }
 
         public override void OnEntityDespawn(EntityDespawnData despawn)

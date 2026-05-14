@@ -44,7 +44,7 @@ namespace Unconscious.src.Behaviors.Player
                 List<ItemStack> list = new List<ItemStack>();
                 foreach (Item item in api.World.Items)
                 {
-                    if (item.HasBehavior<BehaviorRevivingItem>() || item is ItemSmellingSalts)
+                    if (item.HasBehavior<CollectibleBehaviorRevivingItem>() || item is ItemSmellingSalts)
                     {
                         list.Add(new ItemStack(item));
                     }
@@ -104,14 +104,7 @@ namespace Unconscious.src.Behaviors.Player
 
         public void FinishRevive(EntityPlayer interactingPlayer, EntityPlayer targetPlayer, float healAmount)
         {
-            var config = UnconsciousModSystem.getConfig();
-            var heldItem = interactingPlayer.ActiveHandItemSlot.Itemstack;
-
             SendErrorMessage($"{targetPlayer.Player.PlayerName} {Lang.Get("unconscious:reviving-success")}", interactingPlayer);
-
-            var activeSlot = interactingPlayer.Player.InventoryManager.ActiveHotbarSlot;
-            activeSlot.TakeOut(1);
-            activeSlot.MarkDirty();
 
             UnconsciousModSystem.HandlePlayerPickup(targetPlayer, healAmount);
         }

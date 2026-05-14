@@ -1,0 +1,11 @@
+[
+  {
+    "file": "charcoalreforged:itemtypes/ashhoneypoultice-linen.json",
+    "op": "replace",
+    "path": "/behaviors/0/name",
+    "value": "UnconsciousRevivingItem",
+    "dependsOn": [
+      { "modid": "charcoalreforged" }
+    ]
+  }
+]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Newtonsoft.Json;
 using Unconscious.src.Behaviors.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -10,8 +11,36 @@ using Vintagestory.GameContent;
 
 namespace Unconscious.src.Behaviors.Items
 {
-    public class BehaviorPickupItem : BehaviorHealingItem, ICanHealCreature
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+    public class CollectibleBehaviorPickupItem : CollectibleBehaviorHealingItem, ICanHealCreature
     {
+        [JsonProperty]
+        public float Health { get; set; } = 1;
+        [JsonProperty]
+        public float ApplicationTimeSec { get; set; } = 2;
+        [JsonProperty]
+        public float MaxApplicationTimeSec { get; set; } = 10;
+        [JsonProperty]
+        public int Ticks { get; set; } = 10;
+        [JsonProperty]
+        public float EffectDurationSec { get; set; } = 10;
+        [JsonProperty]
+        public bool CancelInAir { get; set; } = true;
+        [JsonProperty]
+        public bool CancelWhileSwimming { get; set; } = false;
+        [JsonProperty]
+        public AssetLocation? Sound { get; set; } = new AssetLocation("game:sounds/player/poultice");
+        [JsonProperty]
+        public AssetLocation? AppliedSound { get; set; } = new AssetLocation("game:sounds/player/poultice-applied");
+        [JsonProperty]
+        public float SoundRange { get; set; } = 8;
+        [JsonProperty]
+        public bool CanRevive { get; set; } = true;
+        [JsonProperty]
+        public bool AffectedByArmor { get; set; } = true;
+        [JsonProperty]
+        public float DelayToCancelSec { get; set; } = 0.5f;
+
         protected new IProgressBar progressBarRender;
 
         protected new ILoadedSound applicationSound;
@@ -19,31 +48,28 @@ namespace Unconscious.src.Behaviors.Items
         protected new ICoreAPI api;
 
         protected new float secondsUsedToCancel;
-        public new HealOverTimeConfig Config { get; set; } = new HealOverTimeConfig();
 
-        public BehaviorPickupItem(CollectibleObject collectable) : base(collectable)
+        public CollectibleBehaviorPickupItem(CollectibleObject collectable) : base(collectable)
         {
         }
 
         public override void Initialize(JsonObject properties)
         {
             base.Initialize(properties);
-            Config = properties.AsObject<HealOverTimeConfig>(null);
+
+            if (properties.Exists)
+            {
+                JsonUtil.Populate<CollectibleBehaviorHealingItem>(properties.Token, this);
+            }
         }
 
         public override void OnLoaded(ICoreAPI api)
         {
-            if (Config.Sound != null)
+            if (Sound != null)
             {
-                ICoreClientAPI coreClientAPI = api as ICoreClientAPI;
-                applicationSound = coreClientAPI != null ? coreClientAPI.World.LoadSound(new SoundParams
-                {
-                    DisposeOnFinish = false,
-                    Location = Config.Sound,
-                    ShouldLoop = true,
-                    Range = Config.SoundRange
-                }) : null;
+                applicationSound = (api as ICoreClientAPI)?.World.LoadSound(new SoundParams() { DisposeOnFinish = false, Location = Sound, ShouldLoop = true, Range = SoundRange });
             }
+
             this.api = api;
         }
 
@@ -169,41 +195,17 @@ namespace Unconscious.src.Behaviors.Items
 
         public override void OnHeldInteractStop(float secondsUsed, ItemSlot slot, EntityAgent byEntity, BlockSelection blockSel, EntitySelection entitySel, ref EnumHandling handling)
         {
+            applicationSound?.Stop();
+            api?.ModLoader.GetModSystem<ModSystemProgressBar>()?.RemoveProgressbar(progressBarRender);
 
+            handling = EnumHandling.Handled;
             ICoreAPI coreAPI = api;
 
-            if (entitySel == null)
+            if (secondsUsed < GetApplicationTime(byEntity) || byEntity.World.Side != EnumAppSide.Server)
             {
-                if (coreAPI != null && !byEntity.Controls.CtrlKey)
-                {
-                    ModSystemProgressBar modSystem = coreAPI.ModLoader.GetModSystem<ModSystemProgressBar>(true);
-                    if (modSystem != null)
-                    {
-                        modSystem.RemoveProgressbar(progressBarRender);
-                    }
-                }
                 return;
             }
 
-            ILoadedSound loadedSound = applicationSound;
-            if (loadedSound != null)
-            {
-                loadedSound.Stop();
-            }
-           
-            if (coreAPI != null)
-            {
-                ModSystemProgressBar modSystem = coreAPI.ModLoader.GetModSystem<ModSystemProgressBar>(true);
-                if (modSystem != null)
-                {
-                    modSystem.RemoveProgressbar(progressBarRender);
-                }
-            }
-            handling = (EnumHandling)1;
-            if (secondsUsed < GetPickupApplicationTime(byEntity) || byEntity.World.Side != EnumAppSide.Server)
-            {
-                return;
-            }
             Entity targetEntity = GetTargetToPickupEntity(slot, byEntity, entitySel);
             if (targetEntity != null)
             {
@@ -216,9 +218,9 @@ namespace Unconscious.src.Behaviors.Items
             }
            
          
-            if (Config.AppliedSound != null)
+            if (AppliedSound != null)
             {
-                byEntity.World.PlaySoundAt(Config.AppliedSound, byEntity, null, false, Config.SoundRange, 1f);
+                byEntity.World.PlaySoundAt(AppliedSound, byEntity, null, false, SoundRange, 1f);
             }
             slot.TakeOut(1);
             slot.MarkDirty();
@@ -243,32 +245,38 @@ namespace Unconscious.src.Behaviors.Items
         protected virtual float GetPickupApplicationTime(Entity byEntity)
         {
             float healingEffectiveness = 0f;
-            if (Config.AffectedByArmor)
+            if (AffectedByArmor)
             {
                 healingEffectiveness = byEntity.Stats.GetBlended("healingeffectivness");
                 healingEffectiveness = Math.Clamp(healingEffectiveness, 0f, 2f) - 1f;
             }
             if (healingEffectiveness < 0f)
             {
-                return Config.ApplicationTimeSec + (Config.ApplicationTimeSec - Config.MaxApplicationTimeSec) * healingEffectiveness;
+                return ApplicationTimeSec + (ApplicationTimeSec - MaxApplicationTimeSec) * healingEffectiveness;
             }
             if (healingEffectiveness > 0f)
             {
-                return Config.ApplicationTimeSec * (1f - healingEffectiveness);
+                return ApplicationTimeSec * (1f - healingEffectiveness);
             }
-            return Config.ApplicationTimeSec;
+            return ApplicationTimeSec;
         }
 
         protected virtual Entity GetTargetToPickupEntity(ItemSlot slot, EntityAgent byEntity, EntitySelection entitySelection)
         {
             Entity targetEntity = null;
-            Entity selectedEntity = entitySelection != null ? entitySelection.Entity : null;
+            Entity? selectedEntity = entitySelection?.Entity;
             if (selectedEntity == null)
             {
                 return targetEntity;
             }
-            EntityBehaviorHealth selectedEntityHealthBehavior = selectedEntity.GetBehavior<EntityBehaviorHealth>();
-            if (byEntity.Controls.CtrlKey && !byEntity.Controls.Forward && !byEntity.Controls.Backward && !byEntity.Controls.Left && !byEntity.Controls.Right && selectedEntityHealthBehavior != null && selectedEntityHealthBehavior.IsHealable(byEntity, slot))
+            //EntityBehaviorHealth? healthBehavior = selectedEntity.GetBehavior<EntityBehaviorHealth>();
+            if (
+                byEntity.Controls.CtrlKey && 
+                !byEntity.Controls.Forward && 
+                !byEntity.Controls.Backward && 
+                !byEntity.Controls.Left &&
+                !byEntity.Controls.Right
+                )
             {
                 targetEntity = selectedEntity;
             }

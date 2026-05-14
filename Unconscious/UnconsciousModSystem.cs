@@ -105,8 +105,8 @@ namespace Unconscious
             api.RegisterEntityBehaviorClass("UnconsciousReviveBehavior", typeof(BehaviorRevivePlayer));
             api.RegisterEntityBehaviorClass("UnconsciousPickupBehavior", typeof(BehaviorPickupPlayer));
 
-            api.RegisterCollectibleBehaviorClass("UnconsciousRevivingItem", typeof(BehaviorRevivingItem));
-            api.RegisterCollectibleBehaviorClass("UnconsciousPickupItem", typeof(BehaviorPickupItem));
+            api.RegisterCollectibleBehaviorClass("UnconsciousRevivingItem", typeof(CollectibleBehaviorRevivingItem));
+            api.RegisterCollectibleBehaviorClass("UnconsciousPickupItem", typeof(CollectibleBehaviorPickupItem));
 
             api.RegisterItemClass("ItemSmellingSalts", typeof(ItemSmellingSalts));
 
@@ -294,7 +294,7 @@ namespace Unconscious
             player.WatchedAttributes.MarkPathDirty("unconscious");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
             health.SetFloat("currenthealth", 1);
-            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
+            player.PlayEntitySound("hurt");
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
@@ -319,7 +319,7 @@ namespace Unconscious
             player.WatchedAttributes.MarkPathDirty("unconscious");
             var health = player.WatchedAttributes.GetTreeAttribute("health");
             health.SetFloat("currenthealth", 1);
-            player.PlayEntitySound("hurt", null, randomizePitch: true, 24f);
+            player.PlayEntitySound("hurt");
 
             IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
 
