@@ -1,20 +1,19 @@
 ﻿using Vintagestory.API.Server;
-using Unconscious.src.Packets;
-using Unconscious.src.Player;
+using Unconscious.Packets;
+using Unconscious.Player;
 using Vintagestory.API.Common;
 
-namespace Unconscious.src.Handlers
+namespace Unconscious.Handlers
 {
     internal class ServerMessageHandler
     {
-        private ICoreServerAPI sapi = UnconsciousModSystem.getSAPI();
+        private readonly ICoreServerAPI sapi = UnconsciousModSystem.getSAPI();
 
         public void SetMessageHandlers()
         {
             sapi.Network.GetChannel("unconscious").SetMessageHandler<SendUnconsciousPacket>(OnUnconsciousPacket);
             sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerDeath>(OnPlayerDeathPacket);
             sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerKill>(OnPlayerKill);
-            //sapi.Network.GetChannel("unconscious").SetMessageHandler<PlayerRevive>(OnPlayerRevivePacket);
         }
 
         private void OnUnconsciousPacket(IServerPlayer player, SendUnconsciousPacket packet)
@@ -23,15 +22,6 @@ namespace Unconscious.src.Handlers
             player.Entity.WatchedAttributes.MarkPathDirty("unconscious");
         }
 
-        //private void OnPlayerRevivePacket(IServerPlayer player, PlayerRevive packet)
-        //{
-        //    player.Entity.SetUnconscious(false);
-        //    player.Entity.WatchedAttributes.MarkPathDirty("unconscious");
-
-        //    UnconsciousModSystem.unconsciousTimers.RemoveAll(timer => timer.PlayerUID == player.PlayerUID);
-
-        //    UnconsciousModSystem.HandlePlayerPickup(player.Entity, UnconsciousModSystem.getConfig().MaxHealthPercentAfterRevive);
-        //}
         private void OnPlayerDeathPacket(IServerPlayer player, PlayerDeath packet)
         {
             player.Entity.SetUnconscious(false);

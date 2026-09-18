@@ -56,5 +56,23 @@
     "value": {
       "code": "UnconsciousPickupBehavior"
     }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/server/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "ropetieable",
+      "minGeneration": 0
+    }
+  },
+  {
+    "file": "game:entities/humanoid/player.json",
+    "path": "/server/behaviors/-",
+    "op": "addmerge",
+    "value": {
+      "code": "ropetieable",
+      "minGeneration": 0
+    }
   }
 ]

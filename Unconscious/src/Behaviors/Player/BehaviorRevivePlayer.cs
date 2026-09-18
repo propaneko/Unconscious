@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Unconscious.src.Behaviors.Items;
-using Unconscious.src.Items;
-using Unconscious.src.Player;
+using Unconscious.Behaviors.Items;
+using Unconscious.Items;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -15,7 +13,7 @@ using Vintagestory.API.Server;
 using Vintagestory.API.Util;
 using Vintagestory.GameContent;
 
-namespace Unconscious.src.Behaviors.Player
+namespace Unconscious.Behaviors.Player
 {
     public class BehaviorRevivePlayer : EntityBehavior
     {
@@ -111,7 +109,6 @@ namespace Unconscious.src.Behaviors.Player
 
         public override void OnEntityDespawn(EntityDespawnData despawn)
         {
-            ICoreClientAPI capi = api as ICoreClientAPI;
             base.OnEntityDespawn(despawn);
         }
     }

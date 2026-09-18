@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Vintagestory.API.Common;
 
-namespace Unconscious.src.Config
+namespace Unconscious.Config
 {
     public class ModConfig
     { 

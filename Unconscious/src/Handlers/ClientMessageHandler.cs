@@ -1,9 +1,9 @@
-﻿using Unconscious.src.Gui;
-using Unconscious.src.Packets;
+﻿using Unconscious.Gui;
+using Unconscious.Packets;
 using Vintagestory.API.Client;
 using Vintagestory.Server;
 
-namespace Unconscious.src.Handlers
+namespace Unconscious.Handlers
 {
     internal class ClientMessageHandler
     {

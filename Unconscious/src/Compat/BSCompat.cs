@@ -1,7 +1,7 @@
 ﻿using BloodyStory;
 using Vintagestory.API.Common;
 
-namespace Unconscious.src.Compat
+namespace Unconscious.Compat
 {
     internal static class BSCompat
     {

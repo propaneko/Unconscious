@@ -1,8 +1,8 @@
-﻿using System;
+﻿ using System;
 using ProtoBuf;
 using Vintagestory.API.Common;
 
-namespace Unconscious.src.Packets
+namespace Unconscious.Packets
 {
 
     [ProtoContract]

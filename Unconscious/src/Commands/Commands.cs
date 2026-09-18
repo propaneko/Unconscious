@@ -1,11 +1,11 @@
 ﻿using Vintagestory.API.Server;
-using Unconscious.src.Player;
+using Unconscious.Player;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using System.Linq;
-using Unconscious.src.Packets;
+using Unconscious.Packets;
 
-namespace Unconscious.src.Commands
+namespace Unconscious.CommandSystem
 {
     internal class Commands
     {

@@ -1,97 +1,83 @@
 ﻿using HarmonyLib;
 using System;
-using Unconscious.src.Compat;
-using Unconscious.src.Packets;
-using Unconscious.src.Player;
+using Unconscious.Compat;
+using Unconscious.Packets;
+using Unconscious.Player;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
-namespace Unconscious.src.Harmony
+namespace Unconscious.HarmonyPatches
 {
     public class PlayerPatch
     {
-
         [HarmonyPrefix]
         [HarmonyPatch(typeof(EntityPlayer), "OnHurt")]
-        public static bool OnHurt(Entity __instance, ref DamageSource damageSource, ref float damage)
+        public static bool OnHurt(EntityPlayer __instance, ref DamageSource damageSource, ref float damage)
         {
-            if (__instance.Api is ICoreServerAPI sapi)
+            if (__instance.Api is not ICoreServerAPI sapi) return true;
+            if (__instance.Player is not IServerPlayer serverPlayer) return true;
+
+            if (__instance.Attributes.GetLong(BSCompat.ReviveCallbackAttr, -1) >= 0)
             {
-                if (__instance is EntityPlayer player)
+                __instance.Api.Event.UnregisterCallback(__instance.Attributes.GetLong(BSCompat.ReviveCallbackAttr));
+                if (__instance.Api.ModLoader.GetMod("bloodystory") != null)
                 {
+                    BSCompat.RestartBleeding(__instance);
+                }
+                else
+                {
+                    __instance.Attributes.SetLong(BSCompat.ReviveCallbackAttr, -1);
+                }
+            }
 
-                    IServerPlayer serverPlayer = sapi.World.PlayerByUid(player.PlayerUID) as IServerPlayer;
+            if (serverPlayer.WorldData.CurrentGameMode != EnumGameMode.Survival) return true;
 
-                    if (player.Attributes.GetLong(BSCompat.ReviveCallbackAttr, -1) >= 0)
+            var healthTree = __instance.WatchedAttributes.GetTreeAttribute("health");
+            var isUnconscious = __instance.WatchedAttributes.GetBool("unconscious");
+            float currentHealth = healthTree.GetFloat("currenthealth");
+
+            PacketMethods.SendShowFinishingOffPacket(serverPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, false, serverPlayer);
+
+            __instance.WatchedAttributes.SetBool("carryingUnconciousPlayer", false);
+            __instance.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
+
+            if ((currentHealth - damage) <= 0 && !isUnconscious && __instance.Alive)
+            {
+                bool isEnabledDamageType = UnconsciousModSystem.getConfig().EnabledDamageTypes.Contains(damageSource.Type.ToString());
+
+                if (isEnabledDamageType)
+                {
+                    long draggerId = damageSource.SourceEntity?.EntityId ?? 0;
+                    __instance.WatchedAttributes.SetLong("draggerEntityId", draggerId);
+                    __instance.WatchedAttributes.MarkPathDirty("draggerEntityId");
+
+                    UnconsciousModSystem.HandlePlayerUnconscious(__instance, damageSource);
+                    return false;
+                }
+            }
+
+            if (isUnconscious && __instance.Alive)
+            {
+                healthTree.SetFloat("currenthealth", 1);
+
+                if (damageSource.Type == EnumDamageType.BluntAttack ||
+                    damageSource.Type == EnumDamageType.PiercingAttack ||
+                    damageSource.Type == EnumDamageType.SlashingAttack)
+                {
+                    __instance.AnimManager.StartAnimation("sleep");
+                    PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
+
+                    if (damageSource.SourceEntity is EntityPlayer attackingPlayer &&
+                        sapi.World.PlayerByUid(attackingPlayer.PlayerUID) is IServerPlayer attackingServerPlayer)
                     {
-                        player.Api.Event.UnregisterCallback(player.Attributes.GetLong(BSCompat.ReviveCallbackAttr));
-                        if (player.Api.ModLoader.GetMod("bloodystory") != null)
-                        {
-                            BSCompat.RestartBleeding(player);
-                        }
-                        else player.Attributes.SetLong(BSCompat.ReviveCallbackAttr, -1);
-                    }
-
-                    if (serverPlayer.WorldData.CurrentGameMode != EnumGameMode.Survival)
-                    {
-                        return true;
-                    }
-                    var health = player.WatchedAttributes.GetTreeAttribute("health");
-                    var unconscious = player.WatchedAttributes.GetBool("unconscious");
-
-                    float currentHealth = health.GetFloat("currenthealth");
-
-                    //sapi.Logger.Debug($"[unconscious] damage: {damage}, resultingHealth: {currentHealth}");
-                   
-                    if (sapi != null) 
-                    {
-                        PacketMethods.SendShowFinishingOffPacket(serverPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, false, serverPlayer);
-                    }
-
-                    player.WatchedAttributes.SetBool("carryingUnconciousPlayer", false);
-                    player.WatchedAttributes.MarkPathDirty("carryingUnconciousPlayer");
-
-                    //sapi.Logger.Debug($"unconscious: {unconscious}, enityAlive?: {serverPlayer.Entity.Alive}");
-
-                    if (currentHealth <= 1 && !unconscious && serverPlayer.Entity.Alive)
-                    {
-                        Enum.TryParse(damageSource.Type.ToString(), out EnumDamageType damageType);
-                        var checkEnabledDamageTypes =  UnconsciousModSystem.getConfig().EnabledDamageTypes.Contains(damageType.ToString());
-  
-                        if (checkEnabledDamageTypes)
-                        {
-                            UnconsciousModSystem.HandlePlayerUnconscious(player, damageSource);
-                            return false;
-                        }
-                    }
-
-                    if (unconscious && serverPlayer.Entity.Alive)
-                    {
-                        health.SetFloat("currenthealth", 1);
-                        if (
-                            damageSource.Type == EnumDamageType.BluntAttack ||
-                            damageSource.Type == EnumDamageType.PiercingAttack ||
-                            damageSource.Type == EnumDamageType.SlashingAttack
-                            )
-                        {
-                            serverPlayer.Entity.AnimManager.StartAnimation("sleep");
-                            PacketMethods.SendAnimationPacketToClient(true, "sleep", serverPlayer);
-
-                            if (damageSource.SourceEntity is EntityPlayer attackingPlayer)
-                            {
-                                IServerPlayer attackingServerPlayer = sapi.World.PlayerByUid(attackingPlayer.PlayerUID) as IServerPlayer;
-                                PacketMethods.SendShowFinishingOffPacket(attackingServerPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, true, attackingServerPlayer);
-                                return false;
-                            }
-                            return false;
-                        }
-                        return false;
+                        PacketMethods.SendShowFinishingOffPacket(attackingServerPlayer.PlayerUID, serverPlayer.PlayerUID, damageSource.Type, true, attackingServerPlayer);
                     }
                 }
-                return true;
+                return false;
             }
+
             return true;
         }
 
@@ -99,23 +85,22 @@ namespace Unconscious.src.Harmony
         [HarmonyPatch(typeof(AiTaskBaseTargetable), "IsTargetableEntity")]
         public static bool ShouldCancelTarget(Entity e, ref bool __result)
         {
-            if (e != null && e is EntityPlayer && e.Code != null && e.Code.Path != null && e.Code.Path.StartsWith("player"))
+            if (e is EntityPlayer player && player.IsUnconscious())
             {
-                EntityPlayer entityPlayer = (EntityPlayer)e;
-                if (entityPlayer != null)
-                {
-                    IServerPlayer serverPlayer = entityPlayer.Player as IServerPlayer;
-                    if (serverPlayer != null)
-                    {
-                            
-                        if (serverPlayer.Entity.IsUnconscious())
-                        {
-                            __result = false;
-                            return false;
-                        }
-                        return true;
-                    }
-                }
+                __result = false;
+                return false;
+            }
+            return true;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(AiTaskBaseTargetable), "CanSensePlayer")]
+        public static bool CanSensePlayer(EntityPlayer eplr, ref bool __result)
+        {
+            if (eplr != null && eplr.IsUnconscious())
+            {
+                __result = false;
+                return false;
             }
             return true;
         }

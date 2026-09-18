@@ -1,8 +1,6 @@
 ﻿using Vintagestory.API.Common;
-using Vintagestory.API.Server;
-using Vintagestory.GameContent;
 
-namespace Unconscious.src.Player
+namespace Unconscious.Player
 {
     public static class PlayerExtensions
     {

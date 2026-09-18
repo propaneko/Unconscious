@@ -1,14 +1,14 @@
 ﻿using Cairo;
 using System;
-using Unconscious.src.Packets;
-using Unconscious.src.Player;
+using Unconscious.Packets;
+using Unconscious.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.Client.NoObf;
 
-namespace Unconscious.src.Gui
+namespace Unconscious.Gui
 {
     public class BlackScreenOverlay : GuiDialog
     {
@@ -161,7 +161,9 @@ namespace Unconscious.src.Gui
         {
             isMovementDisabled = true;
             updateTimerId = capi.Event.RegisterGameTickListener(UpdateTimer, 1000); // Tick every second
-            disablePlayerMovementId = capi.Event.RegisterGameTickListener(DisablePlayerMovement, 1); // Enforce movement disable every tick
+
+            disablePlayerMovementId = capi.Event.RegisterGameTickListener(DisablePlayerMovement, 20);
+
             soundTimerId = capi.Event.RegisterGameTickListener(SoundTimer, 750);
         }
 
@@ -180,6 +182,8 @@ namespace Unconscious.src.Gui
             capi.Event.UnregisterGameTickListener(updateTimerId);
             capi.Event.UnregisterGameTickListener(disablePlayerMovementId);
             capi.Event.UnregisterGameTickListener(soundTimerId);
+
+            player?.Entity?.AnimManager?.StopAnimation("sleep");
 
             PacketMethods.SendUnconsciousPacket(false);
 
@@ -279,29 +283,27 @@ namespace Unconscious.src.Gui
             if (!isMovementDisabled) return;
 
             var player = capi.World.Player;
-            ClientPlayer cplayer = (player.Entity as EntityPlayer).Player as ClientPlayer;
+            if (player?.Entity == null) return;
 
+            var controls = player.Entity.Controls;
+            controls.Forward = false;
+            controls.Backward = false;
+            controls.Left = false;
+            controls.Right = false;
+            controls.Jump = false;
+            controls.Sneak = false;
+            controls.Up = false;
+            controls.Down = false;
 
-            if (player?.Entity != null)
+            var animManager = player.Entity.AnimManager;
+            animManager.StopAnimation("walk");
+            animManager.StopAnimation("run");
+            animManager.StopAnimation("sprint");
+            animManager.StopAnimation("sneakwalk");
+
+            if (!animManager.IsAnimationActive("sleep"))
             {
-                // Stop all input controls
-                var controls = player.Entity.Controls;
-                controls.Forward = false;
-                controls.Backward = false;
-                controls.Left = false;
-                controls.Right = false;
-                controls.Jump = false;
-                controls.Sneak = false;
-                controls.Up = false;
-                controls.Down = false;
-
-
-                // Completely halt motion
-                player.Entity.Pos.Motion.Set(0, 0, 0);
-                player.Entity.ServerPos.Motion.Set(0, 0, 0);
-                cplayer.CameraYaw = 0;
-                //player.Entity.LocalEyePos.Set(0, 0.5, 0);
-                player.Entity.AnimManager.StartAnimation("sleep");
+                animManager.StartAnimation("sleep");
             }
         }
 

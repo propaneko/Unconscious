@@ -1,13 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Unconscious.src.Behaviors.Player;
+using Unconscious.Behaviors.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace Unconscious.src.Behaviors.Items;
+namespace Unconscious.Behaviors.Items;
 
 [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 public class CollectibleBehaviorRevivingItem : CollectibleBehaviorHealingItem, ICanHealCreature
@@ -46,7 +46,7 @@ public class CollectibleBehaviorRevivingItem : CollectibleBehaviorHealingItem, I
 
     protected new ICoreAPI api;
 
-    protected float secondsUsedToCancel = 0;
+    protected new float secondsUsedToCancel = 0;
 
     public CollectibleBehaviorRevivingItem(CollectibleObject collectable) : base(collectable) { }
 
@@ -55,7 +55,7 @@ public class CollectibleBehaviorRevivingItem : CollectibleBehaviorHealingItem, I
         base.Initialize(properties);
         if (properties.Exists)
         {
-            JsonUtil.Populate<CollectibleBehaviorHealingItem>(properties.Token, this);
+            JsonUtil.Populate<CollectibleBehaviorRevivingItem>(properties.Token, this);
         }
     }
 
@@ -116,7 +116,7 @@ public class CollectibleBehaviorRevivingItem : CollectibleBehaviorHealingItem, I
 
         handling = EnumHandling.Handled;
 
-        float progress = secondsUsed / (GetApplicationTime(byEntity)); // + (byEntity.World.Side == EnumAppSide.Client ? 0.3f : 0) - i am not sure for what purpose, we already make sure XXXStop() gets called server side. And it causes github bug #6719
+        float progress = secondsUsed / (GetApplicationTime(byEntity));
         if (progressBarRender != null)
         {
             progressBarRender.Progress = progress;
@@ -150,8 +150,6 @@ public class CollectibleBehaviorRevivingItem : CollectibleBehaviorHealingItem, I
                 Duration = TimeSpan.FromSeconds(EffectDurationSec),
                 TicksPerDuration = Ticks
             };
-
-            //targetEntity.ReceiveDamage(damageSource, Health);
 
             behaviorRevivePlayer.FinishRevive(byEntity as EntityPlayer, targetEntity as EntityPlayer, Health);
             return;

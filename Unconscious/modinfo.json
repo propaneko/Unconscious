@@ -6,7 +6,7 @@
     "propaneko"
   ],
   "description": "New system which adds an unconscious system. Preferable added to multiplayer servers.",
-  "version": "2.1.0-rc.2",
+  "version": "2.1.1",
   "dependencies": {
     "game": ""
   }

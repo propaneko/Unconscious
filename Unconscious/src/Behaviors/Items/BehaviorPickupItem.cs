@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using Newtonsoft.Json;
-using Unconscious.src.Behaviors.Player;
+using Unconscious.Behaviors.Player;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -9,7 +9,7 @@ using Vintagestory.API.Config;
 using Vintagestory.API.Datastructures;
 using Vintagestory.GameContent;
 
-namespace Unconscious.src.Behaviors.Items
+namespace Unconscious.Behaviors.Items
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class CollectibleBehaviorPickupItem : CollectibleBehaviorHealingItem, ICanHealCreature
@@ -59,7 +59,7 @@ namespace Unconscious.src.Behaviors.Items
 
             if (properties.Exists)
             {
-                JsonUtil.Populate<CollectibleBehaviorHealingItem>(properties.Token, this);
+                JsonUtil.Populate<CollectibleBehaviorPickupItem>(properties.Token, this);
             }
         }
 

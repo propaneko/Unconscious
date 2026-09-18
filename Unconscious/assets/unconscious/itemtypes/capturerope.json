@@ -19,11 +19,8 @@
       "name": "UnconsciousPickupItem",
       "propertiesByType": {
         "*": {
-          "health": 0,
           "applicationtimesec": 5,
           "maxapplicationtimesec": 5,
-          "effectdurationsec": 0,
-          "ticks": 10,
           "cancelinair": false,
           "cancelwhileswimming": false,
           "delaytocancelsec": 0.5

@@ -1,10 +1,7 @@
-﻿using CompactExifLib;
-using Vintagestory.API.Common;
+﻿using Vintagestory.API.Common;
 using Vintagestory.API.Server;
-using Vintagestory.Server;
-using static Unconscious.UnconsciousModSystem;
 
-namespace Unconscious.src.Packets
+namespace Unconscious.Packets
 {
     public static class PacketMethods
     {

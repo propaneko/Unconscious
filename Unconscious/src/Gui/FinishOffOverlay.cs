@@ -1,10 +1,10 @@
 ﻿using Cairo;
 using System;
-using Unconscious.src.Packets;
+using Unconscious.Packets;
 using Vintagestory.API.Client;
 using Vintagestory.API.Config;
 
-namespace Unconscious.src.Gui
+namespace Unconscious.Gui
 {
     public class FinishOffOverlay : GuiDialog
     {
