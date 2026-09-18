@@ -76,11 +76,11 @@ namespace Unconscious.CommandSystem
                     .HandleWith(OnChanceOfSelfRevivalChange)
                     .EndSubCommand()
 
-                    .BeginSubCommand("enableCarryMechanic")
-                    .WithDescription("enable or disable the carry mechanic")
+                    .BeginSubCommand("enableTeleportCarry")
+                    .WithDescription("enable or disable the legacy teleport carry, dragging with a rope is the default way")
                     .RequiresPrivilege(UnconsciousModSystem.getConfig().UnconsciousCmdPrivilege)
                     .WithArgs(new BoolArgParser("enable", "enable", false))
-                    .HandleWith(OneEnableCarryMechanicChange)
+                    .HandleWith(OnEnableTeleportCarryChange)
                     .EndSubCommand()
 
                     .BeginSubCommand("enableSuicideButton")
@@ -153,16 +153,16 @@ namespace Unconscious.CommandSystem
             return TextCommandResult.Success($"Suicide button enabled: {UnconsciousModSystem.getConfig().EnableSuicideButton}");
         }
 
-        private TextCommandResult OneEnableCarryMechanicChange(TextCommandCallingArgs args)
+        private TextCommandResult OnEnableTeleportCarryChange(TextCommandCallingArgs args)
         {
             if (args.Parsers[0].IsMissing)
             {
-                return TextCommandResult.Success($"Carry mechanic enabled: {UnconsciousModSystem.getConfig().EnableCarryMechanic}");
+                return TextCommandResult.Success($"Teleport carry enabled: {UnconsciousModSystem.getConfig().EnableTeleportCarry}");
             }
 
-            UnconsciousModSystem.getConfig().EnableCarryMechanic = (bool)args[0];
+            UnconsciousModSystem.getConfig().EnableTeleportCarry = (bool)args[0];
             sapi.StoreModConfig(UnconsciousModSystem.getConfig(), ConfigName);
-            return TextCommandResult.Success($"Carry mechanic enabled: {UnconsciousModSystem.getConfig().EnableCarryMechanic}");
+            return TextCommandResult.Success($"Teleport carry enabled: {UnconsciousModSystem.getConfig().EnableTeleportCarry}");
         }
 
         private TextCommandResult OnChanceOfSelfRevivalChange(TextCommandCallingArgs args)

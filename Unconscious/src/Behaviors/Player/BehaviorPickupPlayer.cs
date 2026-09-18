@@ -91,7 +91,7 @@ namespace Unconscious.Behaviors.Player
         {
             WorldInteraction[] array = base.GetInteractionHelp(world, es, player, ref handled);
             bool isUnconscious = entity.WatchedAttributes.GetAsBool("unconscious", false);
-            if (isUnconscious)
+            if (isUnconscious && UnconsciousModSystem.getConfig().EnableTeleportCarry)
             {
                 if (array == null)
                 {
@@ -118,7 +118,7 @@ namespace Unconscious.Behaviors.Player
                 return;
             }
 
-            else if (byEntity.Controls.CtrlKey && targetPlayer.IsUnconscious() && UnconsciousModSystem.getConfig().EnableCarryMechanic && !isCarryCooldown)
+            else if (byEntity.Controls.CtrlKey && targetPlayer.IsUnconscious() && UnconsciousModSystem.getConfig().EnableTeleportCarry && !isCarryCooldown)
             {
                 initialPosition ??= interactingPlayer.Pos.AsBlockPos.ToVec3d();
                 api.Event.UnregisterCallback(pickupCancelCallbackId);
@@ -137,6 +137,7 @@ namespace Unconscious.Behaviors.Player
             sapi.SendIngameError(serverPlayer, "ReviveCycle", message, Array.Empty<object>());
         }
 
+        // Legacy path, kept behind EnableTeleportCarry. Dragging with a rope (ItemRope plus the ropetieable behavior) is the default way now.
         public void StartCarryingPlayer(EntityPlayer interactingPlayer, EntityPlayer targetPlayer)
         {
             isCarrying = true;

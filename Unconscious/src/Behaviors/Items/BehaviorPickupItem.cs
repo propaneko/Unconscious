@@ -210,7 +210,7 @@ namespace Unconscious.Behaviors.Items
             if (targetEntity != null)
             {
                 BehaviorPickupPlayer behaviorRevivePlayer = targetEntity.GetBehavior<BehaviorPickupPlayer>();
-                if (behaviorRevivePlayer != null && targetEntity.WatchedAttributes.GetAsBool("unconscious") && UnconsciousModSystem.getConfig().EnableCarryMechanic)
+                if (behaviorRevivePlayer != null && targetEntity.WatchedAttributes.GetAsBool("unconscious") && UnconsciousModSystem.getConfig().EnableTeleportCarry)
                 {
                     behaviorRevivePlayer.StartCarryingPlayer(byEntity as EntityPlayer, targetEntity as EntityPlayer);
                     handling = EnumHandling.PreventDefault;

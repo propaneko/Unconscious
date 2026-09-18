@@ -20,8 +20,8 @@ namespace Unconscious.Config
         //public string ChanceOfSelfRevivalDescription = "chance of self revive in percent value. 1 = 100%, 0.5 = 50%, 0.15 = 15% etc...";
         public float ChanceOfSelfRevival = 0.0f;
 
-        //public string EnableCarryMechanicDescription = "enable or disable the carry mechanic of other player";
-        public bool EnableCarryMechanic = true;
+        //public string EnableTeleportCarryDescription = "legacy carry mechanic, it teleports the unconscious player onto the carrier. Disabled by default, dragging with a rope is the intended way";
+        public bool EnableTeleportCarry = false;
 
         //public string EnableSuicideButtonDescription = "enable or disable the displaying of suicide button";
         public bool EnableSuicideButton = true;
