@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using Unconscious.Player;
+using Unconscious.src.Renderers;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.Config;
@@ -16,6 +18,7 @@ namespace Unconscious.Behaviors.Player
         private Cuboidf originalSelectionBox;
         private double originalEyeHeight;
         private EntityPlayer entityPlayer;
+        private UnconsciousIndicatorRenderer indicatorRenderer;
 
         public BehaviorUnconsciousPlayer(Entity entity) : base(entity)
         {
@@ -43,6 +46,7 @@ namespace Unconscious.Behaviors.Player
 
             entity.WatchedAttributes.RegisterModifiedListener("unconscious", OnUnconsciousStateChanged);
             OnUnconsciousStateChanged();
+            RegisterIndicator();
         }
 
         private void OnUnconsciousStateChanged()
@@ -81,6 +85,33 @@ namespace Unconscious.Behaviors.Player
                 entity.SelectionBox.Set(originalSelectionBox);
                 entity.LocalEyePos.Y = originalEyeHeight;
             }
+        }
+
+        private void RegisterIndicator()
+        {
+            if (indicatorRenderer != null || entity.Api is not ICoreClientAPI capi) return;
+
+            indicatorRenderer = new UnconsciousIndicatorRenderer(capi, entity);
+            capi.Event.RegisterRenderer(indicatorRenderer, EnumRenderStage.Ortho);
+        }
+
+        private void UnregisterIndicator()
+        {
+            if (indicatorRenderer == null) return;
+
+            if (entity.Api is ICoreClientAPI capi)
+            {
+                capi.Event.UnregisterRenderer(indicatorRenderer, EnumRenderStage.Ortho);
+            }
+
+            indicatorRenderer.Dispose();
+            indicatorRenderer = null;
+        }
+
+        public override void OnEntityDespawn(EntityDespawnData despawn)
+        {
+            UnregisterIndicator();
+            base.OnEntityDespawn(despawn);
         }
 
         public void SendErrorMessage(string message, EntityPlayer interactingPlayer)

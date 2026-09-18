@@ -42,5 +42,7 @@
     "item-smellingsalts-weak": "Sales Aromáticas (débil)",
     "item-smellingsalts-strong": "Sales Aromáticas (fuerte)",
 
-    "itemdesc-smellingsalts-*": "Las Sales Aromáticas están impregnadas de la esencia en polvo de unos cuantos hongos empapados en veneno y maldiciones susurradas. Su acre hedor fúngico despierta incluso a los inconscientes, pero tiene un precio. Una sola bocanada acelera el corazón, los nervios se crispan y zarcillos sombríos se arrastran por los bordes de la visión. Su uso excesivo produce delirio, como si esporas invisibles hubieran echado raíces bajo la piel. Como último recurso, estas sales despiertan, pero nunca con delicadeza."
+    "itemdesc-smellingsalts-*": "Las Sales Aromáticas están impregnadas de la esencia en polvo de unos cuantos hongos empapados en veneno y maldiciones susurradas. Su acre hedor fúngico despierta incluso a los inconscientes, pero tiene un precio. Una sola bocanada acelera el corazón, los nervios se crispan y zarcillos sombríos se arrastran por los bordes de la visión. Su uso excesivo produce delirio, como si esporas invisibles hubieran echado raíces bajo la piel. Como último recurso, estas sales despiertan, pero nunca con delicadeza.",
+
+  "indicator": "Inconsciente..."
 }

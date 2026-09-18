@@ -125,18 +125,6 @@ namespace Unconscious
 
             harmony = new Harmony(Mod.Info.ModID);
 
-            //harmony.Patch(
-            //    AccessTools.Method(typeof(EntityPlayer), nameof(EntityPlayer.OnGameTick)),
-            //    prefix: new HarmonyMethod(
-            //        typeof(PlayerControlAndBoxPatch),
-            //        nameof(PlayerControlAndBoxPatch.Prefix)
-            //    ),
-            //    postfix: new HarmonyMethod(
-            //        typeof(PlayerControlAndBoxPatch),
-            //        nameof(PlayerControlAndBoxPatch.Postfix)
-            //    )
-            //);
-
             harmony.Patch(
                 AccessTools.Method(typeof(EntityPlayer), nameof(EntityPlayer.OnHurt)),
                 new HarmonyMethod(

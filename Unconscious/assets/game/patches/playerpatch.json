@@ -68,7 +68,7 @@
   },
   {
     "file": "game:entities/humanoid/player.json",
-    "path": "/server/behaviors/-",
+    "path": "/client/behaviors/-",
     "op": "addmerge",
     "value": {
       "code": "ropetieable",
